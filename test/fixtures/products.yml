@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  view: false
+  body: MyText
+  img: MyString
+  phone: 1
+  email: MyString
+  address: MyString
+  facebook: MyString
+  twitter: MyString
+  articles: one
+  info: MyString
+  horaA: 1
+  minA: 1
+  horaC: 1
+  minC: 1
+  tiempoEspera: MyString
+
+two:
+  title: MyString
+  view: false
+  body: MyText
+  img: MyString
+  phone: 1
+  email: MyString
+  address: MyString
+  facebook: MyString
+  twitter: MyString
+  articles: two
+  info: MyString
+  horaA: 1
+  minA: 1
+  horaC: 1
+  minC: 1
+  tiempoEspera: MyString

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :products
+  resources :products do
+    resources :articles
+  end
   resources :articles do
     resources :products
     resources :users

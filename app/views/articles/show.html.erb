@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<div class="container">
 <p>
   <strong>Title:</strong>
   <%= @article.title %>
@@ -8,29 +7,24 @@
 <%= render @article.products %>
 
   <%= form_for([@article, @article.products.build]) do |f| %>
-    <div class="ui pink form segment center aligned">
-      <div class="ui purple icon header">
-        <i class="ui image icon"></i>
-        <h3>Subir foto:</h3>
-      </div>
-        <div class="ui two fields">
+    <form>
 
-              <div class="field">
-                <%= f.text_field :title, :placeholder=>'Nombre negocio', :autofocus=>'off' %>
+
+              <div class="form-group">
+                <%= f.label :title, class:'exampleInputEmail1' %>
+                <%= f.text_field :title, :placeholder=>'Nombre negocio', :autofocus=>'off', class:'form-control' %>
               </div>
 
-              <div class="field">
-                <%= f.label 'Subir tu imagen presentación', class: "ui purple" do %>
-                  <%= f.file_field :img %>
-                <% end %>
+              <div class="form-group">
+                  <%= f.file_field :img, class:'form-control-file' %>
               </div>
-              <div class="field">
-                <%= f.submit 'Publicar', class:"ui pink fluid button", :autofocus=>'off'%>
+              <div class="form-group">
+                <%= f.submit 'Publicar', class:"btn btn-primary", :autofocus=>'off'%>
               </div>
 
-        </div>
-    </div>
+            </form>
   <% end %>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
+</div>

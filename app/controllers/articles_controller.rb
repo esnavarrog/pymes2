@@ -5,11 +5,13 @@ class ArticlesController < ApplicationController
   # GET /articles.json
   def index
     @articles = Article.all
+    @products = Product.all
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
+    @products = Product.all
   end
 
   # GET /articles/new
@@ -25,6 +27,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    @article.user = current_user
 
     respond_to do |format|
       if @article.save

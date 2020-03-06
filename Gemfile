@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # Agregados por el desarrollador
 
 gem 'devise'
+gem 'carrierwave'
 
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_article
   # GET /products
   # GET /products.json
   def index
@@ -25,14 +25,13 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(product_params)
-
+    @product.user = current_user
+    @product.article = @article
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        format.html { redirect_to @article, notice: 'Product was successfully created.' }
       else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        render article_path(@article)
       end
     end
   end
@@ -67,8 +66,13 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
+    def set_article
+      @article = Article.find(params[:article_id])
+    end
+    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :articles_id, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera)
+      params.require(:product).permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera)
     end
 end

@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :set_article, except: [:index, :show, :destroy]
   # GET /products
   # GET /products.json
   def index
@@ -15,6 +14,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    # @categories = Category.all
   end
 
   # GET /products/1/edit
@@ -26,14 +26,12 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user = current_user
-    @product.article = @article
-    respond_to do |format|
+    @product.categories = params[:categories]
       if @product.save
-        format.html { redirect_to @article, notice: 'Product was successfully created.' }
+        redirect_to @product, notice: 'Product was successfully created.' 
       else
-        render article_path(@article)
+        render :new
       end
-    end
   end
 
   # PATCH/PUT /products/1
@@ -66,13 +64,15 @@ class ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
-    def set_article
-      @article = Article.find(params[:article_id])
+    def set_category
+      @category = Category.find(params[:id])
     end
+
+
     
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera)
+      params.require(:product).permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera, :categories)
     end
 end

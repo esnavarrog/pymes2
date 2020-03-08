@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :categories
   devise_for :users
   resources :products do
-    resources :articles
+    resources :categories
   end
+  resources :products
   resources :articles do
     resources :products
     resources :users

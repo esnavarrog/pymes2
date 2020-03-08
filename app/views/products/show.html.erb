@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<% @product.categories.each do |category| %>
+  <%= link_to category.name, category, style:"color:#{category.color};" %>
+<% end %>
+
 <p>
   <strong>Title:</strong>
   <%= @product.title %>
@@ -17,7 +21,7 @@
 
 <p>
   <strong>Img:</strong>
-  <%= @product.img %>
+  <%= image_tag @product.img.url, class:'rounded' %>
 </p>
 
 <p>
@@ -45,10 +49,7 @@
   <%= @product.twitter %>
 </p>
 
-<p>
-  <strong>Articles:</strong>
-  <%= @product.articles_id %>
-</p>
+
 
 <p>
   <strong>Info:</strong>
@@ -80,5 +81,5 @@
   <%= @product.tiempoEspera %>
 </p>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
+<!-- <%= link_to 'Edit', edit_product_path(@product) %> | -->
 <%= link_to 'Back', products_path %>

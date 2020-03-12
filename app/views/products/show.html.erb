@@ -1,23 +1,10 @@
-<div class="container">
-<nav aria-label="breadcrumb" class="bg-white">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to 'Home',home_index_path %></li>
-    <li class="breadcrumb-item">
-      <% @product.categories.each do |category| %>
-        <%= link_to category.name, category, style:"color:#{category.color};" %>
-      <% end %>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page"><%= @product.title %></li>
-  </ol>
-</nav>
-
-
 <div class="jumbotron bg-white">
-  <h1 class="text-center"><%= @product.title %></h1>
-  <hr>
   <div class="row justify-content-md-center">
-    <%= image_tag @product.img.thumb.url, class:'rounded img-fluid' %>
+    <%= image_tag @product.img.thumb.url, class:'rounded mx-auto d-block' %>
   </div>
+  <h1 class="text-center text-primary mt-3"><%= @product.title %></h1>
+
+  <h5 class="text-primary">Datos de contacto.</h5>
   
   <p class="lead"><%= @product.phone %></p>
   <hr class="my-4">
@@ -33,22 +20,14 @@
   </p>
   <a class="btn btn-primary btn-sm" href="<%= @product.facebook %>" role="button">Facebook</a>
   <p>
-    <%= @product.tiempoEspera %> Minutos
+    <strong>Tiempo de espera:</strong> <%= @product.tiempoEspera %> Minutos
   </p>
-  <p>
-    <strong>Hora apertura:</strong>
-    <%= @product.horaA %>:<%= @product.minA %>
-    
-  </p>
-  
-  
-  
-  <p>
-    <strong>Hora cierre:</strong>
-    <%= @product.horaC %>:<%= @product.minC %>
-    
-  </p>
+
 </div>
+<div class="container">
+
+
+
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
@@ -87,12 +66,14 @@
   <div class="row">
     <% list.pops.each do |pop| %>
     <div class="col-xs-6 col-md-3 mt-3">
-      <div class="card text-white bg-success mb-3">
+      <div class="card text-white bg-secondary mb-3">
             <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
 
             <div class="card-body">
               <h5 class="card-title">
-                <i class="fas fa-star mt-0" style="color: yellow;"></i>
+                <% if pop.destacado == true %>
+                  <i class="fas fa-star" style="color: yellow;"></i>
+                <% end %>
 
                 <%= pop.title %>
               </h5>

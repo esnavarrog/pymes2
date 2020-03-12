@@ -1,107 +1,107 @@
-<%= form_with(model: product, local: true) do |form| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-        <% product.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <label>Categorías</label>
-    <% @categories.each do |category| %>
-    <div class="field">
-      <%= check_box_tag "categories[]", category.id %> <%= category.name %>
-    </div>
-    
+<div class="modal-body">
+  <div class="form">
+  <%= form_with(model: @product, local: true) do |form| %>
+    <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+  
+        <ul>
+          <% product.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
+  
+    <div class="form-group-check">
+    <h5>Categorías</h5>
+    <% @categories.each do |category| %>
+      <label><%= category.name %></label>
+        <%= check_box_tag "categories[]", category.id, class:'form-control-check' %> 
+      
+      <% end %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label 'Nombre empresa' %>
+      <%= form.text_field :title, class:'form-control', autofocus:'true' %>
+    </div>
+  
+  
+  
+    <div class="form-group">
+      <%= form.label 'Descripción empresa' %>
+      <%= form.text_area :body, class:'form-control' %>
+    </div>
+  
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <%= form.label 'Elige una imágen', class:'custom-file-label' %>
+        <%= form.file_field :img, class:'custom-file-input' %>
+      </div>
+  
+    </div>
+  
+  
+  
+    <div class="form-group">
+      <%= form.label 'Número de contacto' %>
+      <%= form.number_field :phone, class:'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label 'Correo electrónico de contacto clientes' %>
+      <%= form.text_field :email, class:'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label 'Dirección empresa' %>
+      <%= form.text_field :address, class:'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label :facebook %>
+      <%= form.text_field :facebook, class:'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label :twitter %>
+      <%= form.text_field :twitter, class:'form-control' %>
+    </div>
+  
+  
+  
+    <div class="form-group">
+      <%= form.label 'Otra información relevante' %>
+      <%= form.text_field :info, class:'form-control' %>
+    </div>
+  
+    <div class="form-group">
+      <%= form.label 'Hora apertura' %>
+      <%= form.select :horaA, Product::H_LIST, class:'custom-select' %> : 
+      <%= form.select :minA, Product::M_LIST, class:'custom-select' %>
+    </div>
+  
+  
+  
+    <div class="form-group">
+      <%= form.label 'Hora Cierre' %>
+      <%= form.select :horaC, Product::H_LIST, class:'form-control' %> : 
+      <%= form.select :minC, Product::M_LIST, class:'form-control' %>
+    </div>
+  
+  
+    <div class="form-group">
+      <%= form.label 'Tiempo de espera' %>
+      <%= form.select :tiempoEspera, Product::M_LIST, class:'form-control' %> min.
+    </div>
+  
   </div>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :view %>
-    <%= form.check_box :view %>
-  </div>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :img %>
-    <%= form.file_field :img %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.number_field :phone %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= form.label :facebook %>
-    <%= form.text_field :facebook %>
-  </div>
-
-  <div class="field">
-    <%= form.label :twitter %>
-    <%= form.text_field :twitter %>
-  </div>
-
-  <div class="field">
-    <%= form.label :articles_id %>
-    <%= form.text_field :articles_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :info %>
-    <%= form.text_field :info %>
-  </div>
-
-  <div class="field">
-    <%= form.label :horaA %>
-    <%= form.number_field :horaA %>
-  </div>
-
-  <div class="field">
-    <%= form.label :minA %>
-    <%= form.number_field :minA %>
-  </div>
-
-  <div class="field">
-    <%= form.label :horaC %>
-    <%= form.number_field :horaC %>
-  </div>
-
-  <div class="field">
-    <%= form.label :minC %>
-    <%= form.number_field :minC %>
-  </div>
-
-  <div class="field">
-    <%= form.label :tiempoEspera %>
-    <%= form.text_field :tiempoEspera %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <div class="actions">
+              <%= form.submit 'Publicar', class:'btn btn-primary' %>
+            </div>
 <% end %>
+</div>

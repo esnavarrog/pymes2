@@ -1,5 +1,5 @@
-<div class="modal-body">
 <%= form_with(model: [@category, @product, @list], local: true) do |form| %>
+<div class="modal-body">
   
   <div class="form-group">
     <%= form.label 'Título.' %>
@@ -10,6 +10,6 @@
   <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
   <%= form.submit 'Publicar', class:'btn btn-primary' %>
   
-  <% end %>
 </div>
+<% end %>
   

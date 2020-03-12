@@ -12,7 +12,7 @@
 
 
 <div class="jumbotron">
-  <h1><%= @product.title %></h1>
+  <h1 class="text-center"><%= @product.title %></h1>
   <hr>
   <div class="row justify-content-md-center">
     <%= image_tag @product.img.thumb.url, class:'rounded img-fluid' %>
@@ -74,10 +74,10 @@
 </div>
 
 <% @product.lists.each do |list| %>
-<% if user_signed_in? && current_user == @product.user %>
-<h4 class="h3"><%= link_to list.title, list %></h4>
-<%= link_to 'Agregar plato', list, class:'btn btn-primary btn-sm'%>
-<% else %>
+  <% if user_signed_in? && current_user == @product.user %>
+    <h4 class="mt-3"><%= link_to list.title, list %></h4>
+    <%= link_to 'Agregar plato', list, class:'btn btn-primary btn-sm'%>
+  <% else %>
 <div class="inline-block"><h4 class="h3"><%= list.title %></h4>
 </div>
 
@@ -86,13 +86,9 @@
 <div class="container">
   <div class="row">
     <% list.pops.each do |pop| %>
-    <div class="col-3 mt-3">
-      <div class="card text-white bg-success mb-3" style="width: 18rem;">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-            <%= image_tag pop.avatar.thumb.url, class:'card-img' %>
-          </div>
-          <div class="col-md-8">
+    <div class="col-sm-12 col-md-3 mw-100 mt-3">
+      <div class="card text-white bg-success mb-3" style="width: 20rem;">
+            <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
 
             <div class="card-body">
               <h5 class="card-title">
@@ -100,12 +96,9 @@
 
                 <%= pop.title %>
               </h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= pop.precio %></h6>
-              <p class="card-text"><%= pop.descripcion.truncate(30) %></p>
-              <a href="#" class="card-link">Card link</a>
+              <h6 class="card-subtitle mb-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></h6>
+              <p class="card-text"><%= pop.descripcion.truncate_words(15) %></p>
             </div>
-          </div>
-        </div>
       </div>
     </div>
     <% end %>

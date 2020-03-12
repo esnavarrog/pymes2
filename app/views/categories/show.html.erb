@@ -1,15 +1,15 @@
 
-<p>
-  <strong>Name:</strong>
+<h1 class="text-align-center">
+  
   <%= @category.name %>
-</p>
+</h1>
 
-<p>
-  <strong>Color:</strong>
-  <%= @category.color %>
-</p>
 
 <%= render @category.products %>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+
+
+<div class="fixed-bottom"><%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %></div>
+
+

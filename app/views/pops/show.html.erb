@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @pop.title %>
+</p>
+
+<p>
+  <strong>Destacado:</strong>
+  <%= @pop.destacado %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @pop.descripcion %>
+</p>
+
+<p>
+  <strong>Precio:</strong>
+  <%= @pop.precio %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @pop.avatar %>
+</p>
+
+<p>
+  <strong>List:</strong>
+  <%= @pop.list_id %>
+</p>
+
+<%= link_to 'Edit', edit_pop_path(@pop) %> |
+<%= link_to 'Back', pops_path %>

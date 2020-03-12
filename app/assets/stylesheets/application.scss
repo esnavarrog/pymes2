@@ -13,4 +13,10 @@
  *= require_tree .
  *= require_self
  */
+ $primary: #8e24aa;
+ $secondary: #ccff90;
+ $success: #99cc60;
+ $dark: #5c007a;
+ $danger: red;
+
  @import "bootstrap/scss/bootstrap";

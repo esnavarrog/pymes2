@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_132144) do
+ActiveRecord::Schema.define(version: 2020_03_11_214009) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -36,6 +48,30 @@ ActiveRecord::Schema.define(version: 2020_03_07_132144) do
     t.index ["product_id"], name: "index_has_categories_on_product_id"
   end
 
+  create_table "lists", force: :cascade do |t|
+    t.string "title"
+    t.integer "product_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_lists_on_product_id"
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
+
+  create_table "pops", force: :cascade do |t|
+    t.string "title"
+    t.boolean "destacado"
+    t.string "descripcion"
+    t.integer "precio"
+    t.string "avatar"
+    t.integer "list_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_id"
+    t.index ["list_id"], name: "index_pops_on_list_id"
+    t.index ["product_id"], name: "index_pops_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "title"
     t.boolean "view"
@@ -55,8 +91,6 @@ ActiveRecord::Schema.define(version: 2020_03_07_132144) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "article_id"
-    t.index ["article_id"], name: "index_products_on_article_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -75,6 +109,9 @@ ActiveRecord::Schema.define(version: 2020_03_07_132144) do
   add_foreign_key "articles", "users"
   add_foreign_key "has_categories", "categories"
   add_foreign_key "has_categories", "products"
-  add_foreign_key "products", "articles"
+  add_foreign_key "lists", "products"
+  add_foreign_key "lists", "users"
+  add_foreign_key "pops", "lists"
+  add_foreign_key "pops", "products"
   add_foreign_key "products", "users"
 end

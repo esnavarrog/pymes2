@@ -1,0 +1,27 @@
+<div class="col-3 mt-3">
+    <div class="card mb-3" style="width: 18rem;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <%= image_tag pop.avatar.thumb.url, class:'card-img' %>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <% if pop.destacado == true %>
+                    <i class="fas fa-star mb-2 mt-0" style="color: yellow;"></i>
+                    <% end %>
+                    <%= pop.title %>
+                  </h5>
+                  <h6 class="card-subtitle mb-2 text-muted"><%= pop.precio %></h6>
+                  <p class="card-text"><%= pop.descripcion.truncate(30) %></p>
+                    <% if user_signed_in? && current_user == @list.user %>
+                    <%= link_to 'Eliminar', [pop.list, pop],
+                                            method: :delete,
+                                            data: { confirm: 'Estás seguro de eliminar en post?' }, class:'btn btn-danger btn-sm' %>
+                   <% end %>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

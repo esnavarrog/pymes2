@@ -1,10 +1,10 @@
 class Product < ApplicationRecord
   mount_uploader :img, ImageUploader
   belongs_to :user
-  has_many :has_categories
-  has_many :categories, through: :has_categories
-  after_create :save_categories
-
+  has_many :has_categories, dependent: :destroy
+  has_many :categories, through: :has_categories, dependent: :destroy
+  # after_create :save_categories
+  has_many :lists
 
   def categories=(value)
     @categories = value

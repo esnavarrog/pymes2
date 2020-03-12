@@ -1,0 +1,15 @@
+<h4 class="h3"><%= link_to list.title, list %></h4>
+<hr>
+<% list.pops.each do |pop| %>
+    <%= pop.precio %>
+
+    <%= pop.title %>
+    <%= pop.descripcion.truncate(30) %>
+    <div class="media">
+        
+        <%= image_tag pop.avatar.thumb.url, class:'rounded' %>
+    </div>
+    
+
+    <br>
+<% end %>

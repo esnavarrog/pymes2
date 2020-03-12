@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
+  
+  
+  mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
+  devise_for :admins
   resources :categories
   devise_for :users
+
   resources :products do
     resources :categories
+    resources :lists
   end
-  resources :products
-  resources :articles do
-    resources :products
-    resources :users
+  resources :lists do
+    resources :pops
   end
+ 
 
   root to: "home#index"
   get 'home/index'

@@ -1,25 +1,28 @@
-<h1 class=""><%= @list.title %></h1>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
-  Agregar item.
-</button>
+<div class="container">
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Publica tu platillo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <h1 class="text-primary text-center"><%= @list.title %></h1>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+    Agregar item.
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="exampleModalLabel">Publica tu platillo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <%= render 'pops/form' %>
+        
       </div>
-      <%= render 'pops/form' %>
-      
     </div>
   </div>
-</div>
-<div class="row">
-
-  <%= render @list.pops %>
+  <div class="row">
+    
+    <%= render @list.pops %>
+  </div>
 </div>

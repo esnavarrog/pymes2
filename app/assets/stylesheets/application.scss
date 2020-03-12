@@ -13,10 +13,32 @@
  *= require_tree .
  *= require_self
  */
- $primary: #8e24aa;
- $secondary: #ccff90;
- $success: #99cc60;
- $dark: #5c007a;
- $danger: red;
+ $primary: #e24e42;
+ $secondary: #e9b000;
+ $dark: #008f95;
+ $danger: #984b43;
 
  @import "bootstrap/scss/bootstrap";
+
+ body{
+    background-color: #f0f0f0;
+ }
+ .img-contenedor img {
+    -webkit-transition:all .9s ease; /* Safari y Chrome */
+    -moz-transition:all .9s ease; /* Firefox */
+    -o-transition:all .9s ease; /* IE 9 */
+    -ms-transition:all .9s ease; /* Opera */
+    width:100%;
+    }
+    .img-contenedor:hover img {
+    -webkit-transform:scale(1.25);
+    -moz-transform:scale(1.25);
+    -ms-transform:scale(1.25);
+    -o-transform:scale(1.25);
+    transform:scale(1.25);
+    }
+    .img-contenedor {/*Ancho y altura son modificables al requerimiento de cada uno*/
+    width:auto;
+    height:auto;
+    overflow:hidden;
+    }

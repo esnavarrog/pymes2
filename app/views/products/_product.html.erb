@@ -1,10 +1,9 @@
 <% if product.view == true %>
-<div class="col-sm col-md-4">
+<div class="col-sm-6 col-md-4">
   <figure class="figure shadow-sm bg-white rounded">
     <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product %>
     <figcaption class="figure-caption">
-      <h5 class=""><%= product.title %></h5>
-      <p class="card-text"><%= product.info %></p>
+      <h5 class="p-3"><%= product.title %></h5>
       <% if user_signed_in? && current_user = @admin %>
         <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
       <% end %>

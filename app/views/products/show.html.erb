@@ -1,4 +1,5 @@
-<nav aria-label="breadcrumb">
+<div class="container">
+<nav aria-label="breadcrumb" class="bg-white">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to 'Home',home_index_path %></li>
     <li class="breadcrumb-item">
@@ -11,7 +12,7 @@
 </nav>
 
 
-<div class="jumbotron">
+<div class="jumbotron bg-white">
   <h1 class="text-center"><%= @product.title %></h1>
   <hr>
   <div class="row justify-content-md-center">
@@ -36,7 +37,7 @@
   </p>
   <p>
     <strong>Hora apertura:</strong>
-    <%= @product.horaA %>:<%= @product.minA %>0 am.
+    <%= @product.horaA %>:<%= @product.minA %>
     
   </p>
   
@@ -44,7 +45,7 @@
   
   <p>
     <strong>Hora cierre:</strong>
-    <%= @product.horaC %>:<%= @product.minC %>0 pm.
+    <%= @product.horaC %>:<%= @product.minC %>
     
   </p>
 </div>
@@ -83,11 +84,10 @@
 
 <% end %>
 <hr>
-<div class="container">
   <div class="row">
     <% list.pops.each do |pop| %>
-    <div class="col-sm-12 col-md-3 mw-100 mt-3">
-      <div class="card text-white bg-success mb-3" style="width: 20rem;">
+    <div class="col-xs-6 col-md-3 mt-3">
+      <div class="card text-white bg-success mb-3">
             <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
 
             <div class="card-body">
@@ -103,7 +103,6 @@
     </div>
     <% end %>
   </div>
-</div>
   
    
 
@@ -111,9 +110,4 @@
 
 <% end %>
 <br><br><br>
-
-
-<!-- <%= link_to 'Edit', edit_product_path(@product) %> | -->
-<div class="fixed-bottom">
-<%= link_to 'Back', products_path %>
 </div>

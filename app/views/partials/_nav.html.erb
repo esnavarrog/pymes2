@@ -11,14 +11,43 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%= link_to 'Home', root_path, class:'nav-link' %>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Comida
+        </a>
+        <div class="dropdown-menu fade" aria-labelledby="navbarDropdown">
+          <% @categories.each do |category| %>
+            <% if category.dropdown == 'Comida Rápida' %>
+              <%= link_to category.name, category, class:'dropdown-item' %>
+            <% end %>
+          <% end %>
+        </div>
       </li>
-      <% @categories.each do |category| %>
-       <li class="nav-item">
-            <%= link_to category.name, category, class:'nav-link' %>
-       </li>
-    <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Servicios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% @categories.each do |category| %>
+            <% if category.dropdown == 'Servicios' %>
+              <%= link_to category.name, category, class:'dropdown-item' %>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Delivery
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% @categories.each do |category| %>
+            <% if category.dropdown == 'Delivery' %>
+              <%= link_to category.name, category, class:'dropdown-item' %>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
      
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -42,3 +71,4 @@
     </ul>
   </div>
 </nav>
+

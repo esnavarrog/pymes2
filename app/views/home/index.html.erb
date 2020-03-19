@@ -30,12 +30,12 @@
     
     <h5 class="p-2 text-primary text-center">Publicaciones</h5>
     <hr class="border-success">
-    <div class="row p-2">
+    <div class="row p-2 row-cols-2">
       <% @products.each do |product| %>
       
       <% if product.pub_normal == true %>
       <% if product.view == true %>
-      <div class="col-sm-6 col-md-3">
+      <div class="col-6 col-md-3">
         <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
 
@@ -57,11 +57,11 @@
     
     <h5 class="p-2 text-primary text-center">Clasificados</h5>
     <hr class="border-success">
-    <div class="row p-2">
+    <div class="row p-2 row-cols-3">
       <% @products.each do |product| %>
-      <% if product.pub_clasificado == true %>
-      <% if product.view == true %>
-      <div class="col-sm-4 col-md-2">
+        <% if product.pub_clasificado == true %>
+          <% if product.view == true %>
+      <div class="col-4 col-sm-4 col-md-2">
         <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
 
@@ -69,16 +69,16 @@
           </div>
           <figcaption class="figure-caption pt-2 pb-2 border">
             <p class="m-2"><%= product.title.truncate(22) %></p>
-            <% if user_signed_in? && current_user = @admin %>
+              <% if user_signed_in? && current_user = @admin %>
                 <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
-                <% end %>
-              </figcaption>
-            </figure>
-          </div>
+              <% end %>
+          </figcaption>
+        </figure>
+      </div>
+            <% end %>
           <% end %>
-          <% end %>
-          <% end %>
-        </div>
+      <% end %>
+    </div>
       </div>
       
     </div>

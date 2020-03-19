@@ -3,8 +3,13 @@ Rails.application.routes.draw do
   
   mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
   devise_for :admins
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  
+
+
   resources :categories
-  devise_for :users
+
 
   resources :products do
     resources :categories

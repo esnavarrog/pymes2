@@ -21,6 +21,11 @@
     <%= form.color_field :color %>
   </div>
 
+  <div>
+    <%= form.label 'Tipo de categoría' %>
+    <%= form.select :dropdown, Category::DROPDOWN_LIST, class:'custom-select' %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

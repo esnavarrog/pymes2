@@ -1,10 +1,33 @@
 
-<div class="container">
-  <div class="mt-2 bg-white rounded">
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="jumbotron jumbotron-fluid mt-2">
+        <div class="container">
+          <h1 class="display-4">BuinPymes imagen</h1>
+          <p class="lead">Este espacio será para colocar un banner o imagen de nuestra web</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-8">
+      <div class="jumbotron mb-0 mt-2">
+        <h1 class="display-4">BuinPymes</h1>
+        <p class="lead">Comentar brevemente de que se trata nuestra web</p>
+        <hr class="my-4">
+        <p>Invitar a que se registren brevemente, dando a entender que es bueno y bonito. y necesario</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Leer más</a>
+        <!-- Acá el boton llevará a nuestra politica de usuarios o algo así -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mt-2 bg-light rounded">
 
     <h5 class="p-2 text-primary">Publicaciones Destacadas</h5>
     <hr class="border-success">
-    <div class="row p-2">
+    <div class="row m-1">
       <% @products.each do |product| %>
       <% if product.pub_destacada == true %>
       <% if product.view == true %>
@@ -30,7 +53,7 @@
     
     <h5 class="p-2 text-primary text-center">Publicaciones</h5>
     <hr class="border-success">
-    <div class="row p-2 row-cols-2">
+    <div class="row row-cols-2 m-1">
       <% @products.each do |product| %>
       
       <% if product.pub_normal == true %>
@@ -57,7 +80,7 @@
     
     <h5 class="p-2 text-primary text-center">Clasificados</h5>
     <hr class="border-success">
-    <div class="row p-2 row-cols-3">
+    <div class="row m-1 row-cols-3">
       <% @products.each do |product| %>
         <% if product.pub_clasificado == true %>
           <% if product.view == true %>

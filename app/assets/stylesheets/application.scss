@@ -13,10 +13,11 @@
  *= require_tree .
  *= require_self
  */
- $primary: #ed7902;
- $secondary: #fdbd10;
+
+ $primary: #5851db;
+ $secondary: #e1306c;
  $dark: #0066b2;
- $danger: #984b43;
+ $danger: #fd1d1d;
 
  @import "bootstrap/scss/bootstrap";
 
@@ -39,7 +40,21 @@
    background: #147ec0;
    color: #fff;
  }
-
+ .btn-instagram {
+   background: #e1306c;
+   border-radius: 5px;
+   color: #fff;
+   border-width: 1px;
+   border-style: solid;
+   border-color: #e1306c; 
+ }
+ .btn-instagram:link, .btn-instagram:visited {
+   color: #fff;
+ }
+ .btn-instagram:active, .btn-instagram:hover {
+   background: #a82450;
+   color: #fff;
+ }
  .btn-whatsapp {
    background: #25d366;
    border-radius: 5px;

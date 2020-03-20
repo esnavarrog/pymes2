@@ -5,7 +5,8 @@ class Product < ApplicationRecord
   has_many :categories, through: :has_categories
   after_create :save_categories
   has_many :lists
-
+  has_many :comments
+  
   def categories=(value)
     @categories = value
   end

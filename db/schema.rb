@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_18_231927) do
+ActiveRecord::Schema.define(version: 2020_03_20_201534) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,6 +38,18 @@ ActiveRecord::Schema.define(version: 2020_03_18_231927) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "dropdown"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "comment_id"
+    t.integer "user_id"
+    t.integer "product_id"
+    t.index ["comment_id"], name: "index_comments_on_comment_id"
+    t.index ["product_id"], name: "index_comments_on_product_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "has_categories", force: :cascade do |t|
@@ -115,6 +127,9 @@ ActiveRecord::Schema.define(version: 2020_03_18_231927) do
   end
 
   add_foreign_key "articles", "users"
+  add_foreign_key "comments", "comments"
+  add_foreign_key "comments", "products"
+  add_foreign_key "comments", "users"
   add_foreign_key "has_categories", "categories"
   add_foreign_key "has_categories", "products"
   add_foreign_key "lists", "products"

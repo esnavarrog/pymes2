@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :products do
     resources :categories
     resources :lists
+    resources :comments
   end
   resources :lists do
     resources :pops

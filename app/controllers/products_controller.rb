@@ -16,6 +16,8 @@ class ProductsController < ApplicationController
     @pop = Pop.new
     @lists = List.all
     @pops = @list.pops.all
+    @comment = Comment.new
+    @comments = @product.comments.all
   end
 
   # GET /products/new

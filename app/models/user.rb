@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
 
+  mount_uploader :image, AvatarUploader
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -22,6 +24,7 @@ class User < ApplicationRecord
   end
   has_many :products, dependent: :destroy
   has_many :lists, dependent: :destroy
+  has_many :comments
 
   def online?
     update_at > 3.minutes.ago

@@ -13,15 +13,62 @@
  *= require_tree .
  *= require_self
  */
- $primary: #e24e42;
- $secondary: #e9b000;
- $dark: #008f95;
+ $primary: #ed7902;
+ $secondary: #fdbd10;
+ $dark: #0066b2;
  $danger: #984b43;
 
  @import "bootstrap/scss/bootstrap";
 
  body{
     background-color: #f0f0f0;
+ }
+ 
+ .btn-twitter {
+   background: #1da1f2;
+   border-radius: 5px;
+   color: #fff;
+   border-width: 1px;
+   border-style: solid;
+   border-color: #1da1f2; 
+ }
+ .btn-twitter:link, .btn-twitter:visited {
+   color: #fff;
+ }
+ .btn-twitter:active, .btn-twitter:hover {
+   background: #147ec0;
+   color: #fff;
+ }
+
+ .btn-whatsapp {
+   background: #25d366;
+   border-radius: 5px;
+   color: #fff;
+   border-width: 1px;
+   border-style: solid;
+   border-color: #25d366; 
+ }
+ .btn-whatsapp:link, .btn-whatsapp:visited {
+   color: #fff;
+ }
+ .btn-whatsapp:active, .btn-whatsapp:hover {
+   background: #1ca34e;
+   color: #fff;
+ }
+ .btn-facebook {
+   background: #3B5998;
+   border-radius: 5px;
+   color: #fff;
+   border-width: 1px;
+   border-style: solid;
+   border-color: #263961; 
+ }
+ .btn-facebook:link, .btn-facebook:visited {
+   color: #fff;
+ }
+ .btn-facebook:active, .btn-facebook:hover {
+   background: #263961;
+   color: #fff;
  }
  .img-contenedor img {
     -webkit-transition:all .9s ease; /* Safari y Chrome */

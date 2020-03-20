@@ -9,6 +9,7 @@
     <div class="form-group form-check">
       <%= form.label 'Este item es destacado?' %>
       <%= form.check_box :destacado, class:'form-control-check' %>
+      <br><small>Selecciona esto si quieres destacar tu artículo.</small>
     </div>
   
     <div class="form-group">
@@ -20,6 +21,7 @@
     <div class="form-group">
       <%= form.label :precio %>
       <%= form.number_field :precio, class:'form-control' %>
+      <small>En pesos Chilenos</small>
     </div>
   
     <div class="input-group mb-3">

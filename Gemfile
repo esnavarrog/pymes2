@@ -32,7 +32,6 @@ gem 'carrierwave'
 gem 'rails_admin', '~> 2.0'
 gem 'font_awesome5_rails'
 gem 'omniauth-facebook'
-gem 'omniauth'
 gem 'omniauth-google-oauth2'
 
 

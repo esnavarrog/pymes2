@@ -1,94 +1,152 @@
 <div class="jumbotron bg-white">
-  <div class="row justify-content-md-center">
-    <%= image_tag @product.img.thumb.url, class:'rounded mx-auto d-block' %>
-  </div>
-  <h1 class="text-center text-primary mt-3"><%= @product.title %></h1>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="row justify-content-md-center">
+        <%= image_tag @product.img.thumb.url, class:'rounded mx-auto d-block img-fluid' %>
+      </div>
 
-  <h5 class="text-primary">Datos de contacto.</h5>
-  
-  <p class="lead"><%= @product.phone %></p>
+    </div>
+    <div class="col-md-7">
+      <h1 class="text-center text-primary mt-3"><%= @product.title %></h1>
+    
+      
+      <hr class="my-4">
+      <div class="container">
+    
+        <div class="p-3 mb-2 bg-light text-primary text-center">
+          <p> <strong>Teléfono: </strong><%= @product.phone %></p>
+          
+          <p>
+            <strong>Correo electrónico: </strong><%= @product.email %>
+          </p>
+          <p>
+            <strong>Dirección: </strong><%= @product.address %>
+          </p>
+          <p>
+            <strong>Tiempo de espera:</strong> <%= @product.tiempoEspera %> Minutos
+          </p>
+          <% if @product.info.empty? %>
+          <% else %>
+          <%= @product.info %>
+          <% end %>
+        </div>
+        
+        <p class="p-3 mb-2 bg-light text-dark text-justify"><%= @product.body %></p>
+      </div>
+
+    </div>
+
+  </div>
   <hr class="my-4">
-  <p><%= @product.body %></p>
-  <p>
-    <%= @product.email %>
-  </p>
-  <p>
-    <%= @product.address %>
-  </p>
-  <p>
-    <%= @product.info %>
-  </p>
-  <a class="btn btn-primary btn-sm" href="<%= @product.facebook %>" role="button">Facebook</a>
-  <p>
-    <strong>Tiempo de espera:</strong> <%= @product.tiempoEspera %> Minutos
-  </p>
+        <div class="text-center">
+          <h5 class="text-primary mb-4">Accesos directos.</h5>
+      
+          <% if @product.phone.nil? %>
+          <% else %>
+          <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+          <% end %>
+
+          <% if @product.facebook.empty? %>
+          <% else %>
+          <a href="<%= @product.facebook %>" title="Facebook" class="shadow btn btn-facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <% end %>
+
+          <% if @product.twitter.empty? %>
+          <% else %>
+          <a href="<%= @product.twitter %>" class="shadow btn btn-twitter"><i class="fab fa-twitter"></i> Twitter</a>
+          <% end %>
+
+          <% if @product.email.empty? %>
+          <% else %>
+          <a href="mailto:<%= @product.email %>" class="shadow btn btn-primary"><i class="far fa-envelope"></i> Email</a>
+          <% end %>
+          
+        </div>
 
 </div>
 <div class="container">
 
+  <nav>
+    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
+      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Información</a>
 
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="text-center"> 
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">
-  Agrega un nuevo menú.
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-
-          Título Menú
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <% if user_signed_in? && current_user == @product.user %>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">
+          <i class="fas fa-chevron-up"></i> Agrega categoría
         </button>
+        <% end %>
       </div>
-      <%= render 'lists/form' %>
-     
-    </div>
-  </div>
-</div>
-
-<% @product.lists.each do |list| %>
-  <% if user_signed_in? && current_user == @product.user %>
-    <h4 class="mt-3"><%= link_to list.title, list %></h4>
-    <%= link_to 'Agregar plato', list, class:'btn btn-primary btn-sm'%>
-  <% else %>
-<div class="inline-block"><h4 class="h3"><%= list.title %></h4>
-</div>
-
-<% end %>
-<hr>
-  <div class="row">
-    <% list.pops.each do |pop| %>
-    <div class="col-xs-6 col-md-3 mt-3">
-      <div class="card text-white bg-secondary mb-3">
-            <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
-
-            <div class="card-body">
-              <h5 class="card-title">
-                <% if pop.destacado == true %>
-                  <i class="fas fa-star" style="color: yellow;"></i>
-                <% end %>
-
-                <%= pop.title %>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+      
+                Título artículo
               </h5>
-              <h6 class="card-subtitle mb-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></h6>
-              <p class="card-text"><%= pop.descripcion.truncate_words(15) %></p>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <%= render 'lists/form' %>
+           
+          </div>
+        </div>
       </div>
+      
+      <% @product.lists.each do |list| %>
+        <% if user_signed_in? && current_user == @product.user %>
+          <h4 class="mt-3"><%= link_to list.title, list %></h4>
+          <%= link_to 'Agregar item', list, class:'btn btn-primary btn-sm'%>
+        <% else %>
+      <div class="inline-block"><h4 class="h3"><%= list.title %></h4>
+      </div>
+      
+      <% end %>
+      <hr>
+        <div class="row">
+          <% list.pops.each do |pop| %>
+          <div class="col-6 col-md-3 mt-1 pr-1 pl-1">
+            <div class="card text-primary shadow-sm mb-3">
+                  <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
+      
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <% if pop.destacado == true %>
+                        <i class="fas fa-star" style="color: yellow;"></i>
+                      <% end %>
+      
+                      <%= pop.title %>
+                    </h5>
+                    <h6 class="card-subtitle mt-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></h6>
+                    <p class="card-text"><%= pop.descripcion.truncate_words(15) %></p>
+                  </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        
+         
+      
+          <br>
+      
+      <% end %>
+
     </div>
-    <% end %>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <h4>Información.</h4>
+    </div>
   </div>
-  
-   
 
-    <br>
-
-<% end %>
 <br><br><br>
 </div>

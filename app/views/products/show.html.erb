@@ -1,8 +1,8 @@
-<div class="jumbotron bg-white pt-3">
+<div class="bg-white py-3 shadow-sm ">
   <div class="row">
     <div class="col-md-5">
       <div class="row justify-content-md-center">
-        <%= image_tag @product.img.thumb.url, class:'rounded mx-auto d-block img-fluid' %>
+        <%= image_tag @product.img.thumb.url, class:'rounded d-block text-center mx-auto' %>
       </div>
 
     </div>
@@ -13,7 +13,7 @@
       <hr class="my-4">
       <div class="container">
     
-        <div class=" mb-2 bg-light text-primary text-center">
+        <div class=" mb-2 p-3 rounded bg-light text-primary text-center">
           <p> <strong>Teléfono principal: </strong>+<%= @product.phone %>
             <br>          
             <strong>Correo electrónico: </strong><%= @product.email %>
@@ -22,45 +22,43 @@
             <br>
             <strong>Tiempo de espera:</strong> <%= @product.tiempoEspera %> Minutos
           </p>
-          <% if @product.info.empty? %>
+          <% if @product.info.nil? %>
           <% else %>
           <%= @product.info %>
           <% end %>
         </div>
         
-        <p class="p-3 mb-2 bg-light text-dark text-justify"><%= @product.body %></p>
+        <p class="p-3 mb-2 bg-light text-dark text-justify rounded"><%= @product.body %></p>
       </div>
 
     </div>
 
   </div>
   <hr class="my-4">
-        <div class="text-center">
-          <h5 class="text-primary mb-4">Redes Sociales.</h5>
-      
+        <div class="text-center">      
           <% if @product.phone.nil? %>
           <% else %>
-          <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow btn btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+          <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
           <% end %>
 
-          <% if @product.facebook.empty? %>
+          <% if @product.facebook.nil? %>
           <% else %>
-          <a href="<%= @product.facebook %>" title="Facebook" class="shadow btn btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
+          <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
           <% end %>
 
-          <% if @product.twitter.empty? %>
+          <% if @product.twitter.nil? %>
           <% else %>
-          <a href="<%= @product.twitter %>" class="shadow btn btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
           <% end %>
 
-          <% if @product.email.empty? %>
+          <% if @product.email.nil? %>
           <% else %>
-          <a href="<%= @product.email %>" class="shadow btn btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
+          <a href="<%= @product.email %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
           <% end %>
 
-          <% if @product.email.empty? %>
+          <% if @product.email.nil? %>
           <% else %>
-          <a href="mailto:<%= @product.email %>" class="shadow btn btn-primary mt-1"><i class="far fa-envelope"></i> Email</a>
+          <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-primary mt-1"><i class="far fa-envelope"></i> Email</a>
           <% end %>
           
         </div>
@@ -69,7 +67,7 @@
 
 <!-- Contenido de la empresa -->
 <!-- Article -->
-<div class="container-fluid">
+<div class="container-fluid bg-light py-3">
   <div class="row row-cols-2">
     <div class="col-12 col-md-8">
       <!-- Carrousel de imagenes -->
@@ -184,7 +182,6 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th scope="col">#</th>
                 <th scope="col">Día</th>
                 <th scope="col">Hora apertura</th>
                 <th scope="col">Hora cierre</th>
@@ -192,46 +189,39 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">1</th>
                 <td>Lunes</td>
-                <td>10:00</td>
-                <td>22:00</td>
+                <td><%= @product.lunesA.strftime("%H:%M") %></td>
+                <td><%= @product.lunesC.strftime("%H:%M") %></td>
               </tr>
               <tr>
-                <th scope="row">2</th>
                 <td>Martes</td>
-                <td>10:00</td>
-                <td>22:00</td>
+                <td><%= @product.martesA.strftime("%H:%M") %></td>
+                <td><%= @product.martesC.strftime("%H:%M") %></td>
               </tr>
               <tr>
-                <th scope="row">3</th>
                 <td>Miercoles</td>
-                <td>10:00</td>
-                <td>22:00</td>
+                <td><%= @product.miercolesA.strftime("%H:%M") %></td>
+                <td><%= @product.miercolesC.strftime("%H:%M") %></td>
               </tr>
               <tr>
-                <th scope="row">4</th>
                 <td>Jueves</td>
-                <td>10:00</td>
-                <td>22:00</td>
+                <td><%= @product.juevesA.strftime("%H:%M") %></td>
+                <td><%= @product.juevesC.strftime("%H:%M") %></td>
               </tr>
               <tr>
-                <th scope="row">5</th>
                 <td>Viernes</td>
-                <td>10:00</td>
-                <td>21:00</td>
+                <td><%= @product.viernesA.strftime("%H:%M") %></td>
+                <td><%= @product.viernesC.strftime("%H:%M") %></td>
               </tr>
               <tr>
-                <th scope="row">6</th>
                 <td>Sábado</td>
-                <td>11:00</td>
-                <td>17:00</td>
+                <td><%= @product.sabadoA.strftime("%H:%M") %></td>
+                <td><%= @product.sabadoC.strftime("%H:%M") %></td>
               </tr>
               <tr>
-                <th scope="row">3</th>
                 <td>Domingo</td>
-                <td>N/A</td>
-                <td>N/A</td>
+                <td><%= @product.domingoA.strftime("%H:%M") %></td>
+                <td><%= @product.domingoC.strftime("%H:%M") %></td>
               </tr>
             </tbody>
           </table>
@@ -292,7 +282,7 @@
                     <%= form_for([@product, @product.comments.build]) do |f| %>
 
                       <p class="form-group">
-                        <%= f.text_area :body, class:'form-control', placeholder:'Escribe tu comentario aquí' %>
+                        <%= f.text_area :body, class:'form-control', placeholder:'Escribe tu comentario aquí', autofocus: true %>
                       </p>
                     </div>
                     <div class="modal-footer">

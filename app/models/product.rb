@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :has_categories, dependent: :destroy
   has_many :categories, through: :has_categories
-  after_create :save_categories
+  # after_create :save_categories
   has_many :lists
   has_many :comments
   
@@ -16,9 +16,9 @@ class Product < ApplicationRecord
 
   private
 
-  def save_categories
-    @categories.each do |category_id|
-      HasCategory.create(category_id: category_id, product_id: self.id)
-    end
-  end
+  # def save_categories
+  #   @categories.each do |category_id|
+  #     HasCategory.create(category_id: category_id, product_id: self.id)
+  #   end
+  # end
 end

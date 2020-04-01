@@ -14,24 +14,50 @@
  *= require_self
  */
 
- $primary: #3b7ddd;
- $secondary: #6f42c1;
+ $primary: #6200ea;
+ $secondary: #b388ff;
  $success: #28a745;
- $dark: #0066b2;
+ $dark: #1e1e1e;
  $danger: #dc3545;
+ $enable-gradients: true;
 
  @import "bootstrap/scss/bootstrap";
 
  body{
-    background-color: #f0f0f0;
+    background-image: url('https://onesolutionsgroup.com/images/blog/pymestransformacion-digital-g.png');
+    background-attachment: fixed;
+    background-position: center;
  }
+
+
+ .notify-badge{
+  position: absolute;
+  top:0.5rem;
+  width: auto;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1rem;
+  border-radius: 0px 1rem 1rem 0px;
+  padding-left: 5px;
+  padding-right: 10px;
+  color:white;
+  opacity: 95%;
+}
+
+.btn {
+  border-radius: 10rem;
+}
+
+.redes {
+  border-radius: 10rem;
+  color: #fff;
+  border-width: 1px;
+  border-style: solid;
+
+}
  
  .btn-twitter {
    background: #1da1f2;
-   border-radius: 5px;
-   color: #fff;
-   border-width: 1px;
-   border-style: solid;
    border-color: #1da1f2; 
  }
  .btn-twitter:link, .btn-twitter:visited {
@@ -43,10 +69,6 @@
  }
  .btn-instagram {
    background: #e1306c;
-   border-radius: 5px;
-   color: #fff;
-   border-width: 1px;
-   border-style: solid;
    border-color: #e1306c; 
  }
  .btn-instagram:link, .btn-instagram:visited {
@@ -58,10 +80,6 @@
  }
  .btn-whatsapp {
    background: #25d366;
-   border-radius: 5px;
-   color: #fff;
-   border-width: 1px;
-   border-style: solid;
    border-color: #25d366; 
  }
  .btn-whatsapp:link, .btn-whatsapp:visited {
@@ -73,10 +91,6 @@
  }
  .btn-facebook {
    background: #3B5998;
-   border-radius: 5px;
-   color: #fff;
-   border-width: 1px;
-   border-style: solid;
    border-color: #263961; 
  }
  .btn-facebook:link, .btn-facebook:visited {

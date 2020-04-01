@@ -1,7 +1,7 @@
 
 
-<div class="container-fluid">
-  <div class="row">
+<div class="">
+  <!-- <div class="row">
     <div class="col-12 col-md-4">
       <div class="jumbotron jumbotron-fluid mt-2">
         <div class="container">
@@ -17,32 +17,41 @@
         <hr class="my-4">
         <p>Invitar a que se registren brevemente, dando a entender que es bueno y bonito. y necesario</p>
         <a class="btn btn-primary btn-lg" href="#" role="button">Leer más</a>
-        <!-- Acá el boton llevará a nuestra politica de usuarios o algo así -->
+        Acá el boton llevará a nuestra politica de usuarios o algo así
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <div style="height: 40rem;"></div>
 
 
-  <div class="mt-2 bg-light rounded">
+  <div class="py-1 bg-light shadow container-sm container-fluid">
 
-    <h5 class="p-2 text-primary">Publicaciones Destacadas</h5>
-    <hr class="border-success">
-    <div class="row m-1">
+    <h5 class="pt-2 text-center text-light">Publicaciones Destacadas</h5>
+    
+
+      <hr>
+    
+    <div class="row justify-content-center">
       <% @products.each do |product| %>
       <% if product.pub_destacada == true %>
       <% if product.view == true %>
       <div class="col-sm-12 col-md-4">
         <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
-
+            
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
           </div>
-          <figcaption class="figure-caption border p-2">
+          <span class="notify-badge shadow-sm bg-primary"><i class="fa fa-circle text-success"></i> Disponible</span>
+          <figcaption class="figure-caption p-2">
             <h5 class="m-2"><%= product.title %></h5>
-            <p class="card-text m-2"><%= product.info %></p>
+            <p class="card-text m-2"><%= product.body.truncate(40) %></p>
             <% if user_signed_in? && current_user = @admin %>
             <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
+            <p class="float-left pl-2">5 Views</p>
+            
+            <p class="float-right pr-2">22 likes</p>
           </figcaption>
         </figure>
       </div>
@@ -52,21 +61,23 @@
     </div>
     
     <h5 class="p-2 text-primary text-center">Publicaciones</h5>
-    <hr class="border-success">
-    <div class="row row-cols-2 m-1">
+    <hr>
+    <div class="row row-cols-2 justify-content-center">
       <% @products.each do |product| %>
       
       <% if product.pub_normal == true %>
       <% if product.view == true %>
       <div class="col-6 col-md-3">
-        <figure class="figure shadow-sm bg-white rounded">
+        <figure class="figure shadow-sm bg-light rounded">
           <div class="img-contenedor">
 
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
+            
           </div>
+          <span class="notify-badge bg-primary"><i class="fa fa-circle text-success"></i> Disponible</span>
           <figcaption class="figure-caption border p-2">
             <h5 class="m-2"><%= product.title %></h5>
-            <p class="card-text m-2"><%= product.body.truncate(20) %></p>
+            <p class="card-text m-2"><%= product.body.truncate(40) %></p>
             <% if user_signed_in? && current_user = @admin %>
             <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
@@ -80,7 +91,7 @@
     
     <h5 class="p-2 text-primary text-center">Clasificados</h5>
     <hr class="border-success">
-    <div class="row m-1 row-cols-3">
+    <div class="row m-1 row-cols-3 justify-content-center">
       <% @products.each do |product| %>
         <% if product.pub_clasificado == true %>
           <% if product.view == true %>

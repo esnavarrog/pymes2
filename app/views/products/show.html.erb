@@ -1,19 +1,27 @@
 <div class="bg-white py-3 shadow-sm ">
   <div class="row">
-    <div class="col-md-5">
-      <div class="row justify-content-md-center">
+    <div class="col-md-7">
+      <div class="row justify-content-center">
         <%= image_tag @product.img.thumb.url, class:'rounded d-block text-center mx-auto' %>
       </div>
 
     </div>
-    <div class="col-md-7">
-      <h1 class="text-center text-primary mt-3"><u><%= @product.title %></u></h1>
+    <div class="col-md-5">
+      <blockquote class="blockquote text-center">
+        <h1 class="text-center shadow-text mt-3"><%= @product.title %></h1>
+        <footer class="blockquote-footer">
+          <% if @product.info.nil? %>
+          <% else %>
+          <%= @product.info %>
+          <% end %>
+        </footer>
+      </blockquote>
     
       
       <hr class="my-4">
       <div class="container">
     
-        <div class=" mb-2 p-3 rounded bg-light text-primary text-center">
+        <div class=" mb-2 p-3 rounded bg-light text-center">
           <p> <strong>Teléfono principal: </strong>+<%= @product.phone %>
             <br>          
             <strong>Correo electrónico: </strong><%= @product.email %>
@@ -22,46 +30,45 @@
             <br>
             <strong>Tiempo de espera:</strong> <%= @product.tiempoEspera %> Minutos
           </p>
-          <% if @product.info.nil? %>
-          <% else %>
-          <%= @product.info %>
-          <% end %>
+          
         </div>
         
-        <p class="p-3 mb-2 bg-light text-dark text-justify rounded"><%= @product.body %></p>
+        <p class="p-3 mb-2 bg-light text-dark text-justify rounded lead"><%= @product.body %></p>
       </div>
 
     </div>
 
   </div>
   <hr class="my-4">
-        <div class="text-center">      
-          <% if @product.phone.nil? %>
-          <% else %>
-          <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
-          <% end %>
 
-          <% if @product.facebook.nil? %>
-          <% else %>
-          <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
-          <% end %>
 
-          <% if @product.twitter.nil? %>
-          <% else %>
-          <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
-          <% end %>
+    <div class="text-center">      
+      <% if @product.phone.nil? %>
+      <% else %>
+      <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+      <% end %>
 
-          <% if @product.email.nil? %>
-          <% else %>
-          <a href="<%= @product.email %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
-          <% end %>
+      <% if @product.facebook.nil? %>
+      <% else %>
+      <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <% end %>
 
-          <% if @product.email.nil? %>
-          <% else %>
-          <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-primary mt-1"><i class="far fa-envelope"></i> Email</a>
-          <% end %>
-          
-        </div>
+      <% if @product.twitter.nil? %>
+      <% else %>
+      <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
+      <% end %>
+
+      <% if @product.email.nil? %>
+      <% else %>
+      <a href="<%= @product.email %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
+      <% end %>
+
+      <% if @product.email.nil? %>
+      <% else %>
+      <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-primary mt-1"><i class="far fa-envelope"></i> Email</a>
+      <% end %>
+      
+    </div>
 
 </div>
 
@@ -69,9 +76,9 @@
 <!-- Article -->
 <div class="container-fluid bg-light py-3">
   <div class="row row-cols-2">
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-sm-12 col-lg-8">
       <!-- Carrousel de imagenes -->
-      <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
+      <div id="carouselExampleIndicators" class="carousel slide my-3 mx-auto" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -101,8 +108,8 @@
       <!-- Comienza info -->
       <nav>
         <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
-          <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Información</a>
+          <a class="nav-item nav-link text-dark active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
+          <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Información</a>
     
         </div>
       </nav>
@@ -139,24 +146,27 @@
           
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>
-              <h4 class="mt-3"><%= link_to list.title, list %></h4>
-              <%= link_to 'Agregar item', list, class:'btn btn-primary btn-sm'%>
+              <h4 class="mt-3"><%= link_to list.title, list %> - <%= link_to 'Agregar item', list, class:'btn btn-dark btn-sm px-3'%>
+              </h4>
             <% else %>
-          <div class="inline-block"><h4 class="h3"><%= list.title %></h4>
-          </div>
+              <div class="inline-block">
+                <h4 class="text-center">
+                  <%= list.title %>
+                </h4>
+              </div>
           
-          <% end %>
+            <% end %>
           <hr>
             <div class="row">
               <% list.pops.each do |pop| %>
-              <div class="col-6 col-md-3 mt-1 pr-1 pl-1">
-                <div class="card text-primary shadow-sm mb-3">
+              <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-1 pr-1 pl-1">
+                <div class="card text-dark shadow-sm mb-3">
                       <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
           
                       <div class="card-body">
                         <h6 class="card-title">
                           <% if pop.destacado == true %>
-                            <i class="fas fa-star text-secondary"></i>
+                            <i class="fas fa-star estrellita"></i>
                           <% end %>
           
                           <%= pop.title %>
@@ -235,7 +245,7 @@
       </div>
     </div>
     <!-- Aside -->
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-12 col-lg-4">
       <div class="bg-light border rounded-lg p-3 m-0 shadow-sm">
         <h4 class="text-primary">Comentarios</h4>
         <% if @product.comments.empty? %>
@@ -246,14 +256,15 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-2">
-                <%= image_tag comment.user.image.avatar.url, class:'align-self-center media-object rounded m-0' %>
+                <%= image_tag comment.user.image.avatar.url, class:'redondaImg shadow-sm border border-dark' %>
+                
               </div>
               <div class="col-10">
-                <div class="d-flex w-100 justify-content-between">
-                  <h6 class="mb-1"><%= comment.user.name %></h6>
-                  <small><%= "#{time_ago_in_words(comment.created_at)}" if comment.created_at %></small>
+                <div class="alert borde_comentario mb-0">
+                  <h6 class="mb-1 text-dark"><%= comment.user.name %></h6>
+                  <%= comment.body %>
                 </div>
-                <p class="mb-1"><%= comment.body %></p>
+                <small class="text-right"><%= "#{time_ago_in_words(comment.created_at)}" if comment.created_at %></small>
                 
               </div>
             </div>
@@ -263,7 +274,7 @@
         <% end %>
                   <!-- Button trigger modal -->
           
-          <button type="button" class="btn btn-primary btn-block mt-2" data-toggle="modal" data-target="#comment">
+          <button type="button" class="btn btn-dark btn-block mt-2" data-toggle="modal" data-target="#comment">
             Agregar comentario
           </button>
 
@@ -287,7 +298,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <%= f.submit 'Publicar comentario', class:'btn btn-primary' %>
+                      <%= f.submit 'Publicar comentario', class:'btn btn-dark' %>
                       <% end %>
                   <% else %>
                     <%= link_to 'Iniciar sesión', new_user_session_path, class:'btn btn-success' %>
@@ -303,7 +314,7 @@
       </div>
 
       <div class="bg-light p-3 mt-3 shadow-sm border rounded-lg">
-        <h4 class="text-primary">Envía un mensaje directo</h4>
+        <h4 class="text-dark">Envía un mensaje directo</h4>
         <small class="text-muted font-italic">Este mensaje solo será recibido por la empresa.</small>
         <form>
           <div class="form-group">
@@ -316,7 +327,7 @@
             <textarea class="form-control" id="message-text" placeholder="Ingresa tu mensaje"></textarea>
 
           </div>
-          <button class="btn btn-primary btn-block">Enviar mensaje</button>
+          <button class="btn btn-dark btn-block">Enviar mensaje</button>
         </form>
       </div>
     </div>

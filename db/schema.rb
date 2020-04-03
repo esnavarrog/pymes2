@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_201534) do
+ActiveRecord::Schema.define(version: 2020_03_30_221914) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -107,6 +107,20 @@ ActiveRecord::Schema.define(version: 2020_03_20_201534) do
     t.boolean "pub_destacada"
     t.boolean "pub_normal"
     t.boolean "pub_clasificado"
+    t.datetime "lunesA"
+    t.datetime "lunesC"
+    t.datetime "martesA"
+    t.datetime "martesC"
+    t.datetime "miercolesA"
+    t.datetime "miercolesC"
+    t.datetime "juevesA"
+    t.datetime "juevesC"
+    t.datetime "viernesA"
+    t.datetime "viernesC"
+    t.datetime "sabadoA"
+    t.datetime "sabadoC"
+    t.datetime "domingoA"
+    t.datetime "domingoC"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 

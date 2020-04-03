@@ -14,23 +14,44 @@
  *= require_self
  */
 
- $primary: #6200ea;
- $secondary: #b388ff;
- $success: #28a745;
- $dark: #1e1e1e;
+ $primary: #1e558c;
+ $secondary: #8c8c1e;
+ $success: #558c1e;
+ $dark: #8C1E55;
  $danger: #dc3545;
  $enable-gradients: true;
 
  @import "bootstrap/scss/bootstrap";
 
- body{
-    background-image: url('https://onesolutionsgroup.com/images/blog/pymestransformacion-digital-g.png');
-    background-attachment: fixed;
-    background-position: center;
- }
+body{
+  background-image: url('https://onesolutionsgroup.com/images/blog/pymestransformacion-digital-g.png');
+  background-attachment: fixed;
+  background-position: center;
+  max-width: 100%;
+  z-index: 5;
+}
+body::after{
+  opacity: 95%;
+  z-index: -1;
+}
 
+.logo{
+  max-height: 6rem;
+  opacity: 100%;
+}
+.logo_footer{
+  max-height: 4rem;
+  opacity: 100%;
+}
+.fondoLogo{
+  opacity: 80%;
+}
 
- .notify-badge{
+.estrellita{
+  color: yellow;
+}
+
+.notify-badge{
   position: absolute;
   top:0.5rem;
   width: auto;
@@ -44,8 +65,41 @@
   opacity: 95%;
 }
 
+.redondaImg{
+  border-radius: 50%;
+}
+
+.boton{
+  width:30px;
+  height:30px;
+  margin: 5px;
+  padding:10px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  font-size:11px;
+  line-height:32px;
+  text-transform: uppercase;
+  float:left;
+}
+.boton:hover{
+  opacity: 0.50;
+  -moz-opacity: .50;
+  filter:alpha (opacity=50);
+}
+.boton a{
+  text-decoration:none;
+  padding:5px 5px 5px 0;
+}
+
 .btn {
-  border-radius: 10rem;
+  border-radius: 2rem;
+}
+
+.borde_comentario{
+  border-radius: 1rem;
+  background-color: #f0f0cc;
+  border-color: #bee5eb;
 }
 
 .redes {
@@ -55,70 +109,70 @@
   border-style: solid;
 
 }
- 
- .btn-twitter {
-   background: #1da1f2;
-   border-color: #1da1f2; 
- }
- .btn-twitter:link, .btn-twitter:visited {
-   color: #fff;
- }
- .btn-twitter:active, .btn-twitter:hover {
-   background: #147ec0;
-   color: #fff;
- }
- .btn-instagram {
-   background: #e1306c;
-   border-color: #e1306c; 
- }
- .btn-instagram:link, .btn-instagram:visited {
-   color: #fff;
- }
- .btn-instagram:active, .btn-instagram:hover {
-   background: #a82450;
-   color: #fff;
- }
- .btn-whatsapp {
-   background: #25d366;
-   border-color: #25d366; 
- }
- .btn-whatsapp:link, .btn-whatsapp:visited {
-   color: #fff;
- }
- .btn-whatsapp:active, .btn-whatsapp:hover {
-   background: #1ca34e;
-   color: #fff;
- }
- .btn-facebook {
-   background: #3B5998;
-   border-color: #263961; 
- }
- .btn-facebook:link, .btn-facebook:visited {
-   color: #fff;
- }
- .btn-facebook:active, .btn-facebook:hover {
-   background: #263961;
-   color: #fff;
- }
- .img-contenedor img {
-    -webkit-transition:all .9s ease; /* Safari y Chrome */
-    -moz-transition:all .9s ease; /* Firefox */
-    -o-transition:all .9s ease; /* IE 9 */
-    -ms-transition:all .9s ease; /* Opera */
-    width:100%;
-    }
- .img-contenedor:hover img {
-    -webkit-transform:scale(1.25);
-    -moz-transform:scale(1.25);
-    -ms-transform:scale(1.25);
-    -o-transform:scale(1.25);
-    transform:scale(1.25);
- }
- .img-contenedor {/*Ancho y altura son modificables al requerimiento de cada uno*/
-    width:auto;
-    height:auto;
-    overflow:hidden;
- }
- .navbar{
-    opacity: 90%;
- }
+
+.btn-twitter {
+  background: #1da1f2;
+  border-color: #1da1f2; 
+}
+.btn-twitter:link, .btn-twitter:visited {
+  color: #fff;
+}
+.btn-twitter:active, .btn-twitter:hover {
+  background: #147ec0;
+  color: #fff;
+}
+.btn-instagram {
+  background: #e1306c;
+  border-color: #e1306c; 
+}
+.btn-instagram:link, .btn-instagram:visited {
+  color: #fff;
+}
+.btn-instagram:active, .btn-instagram:hover {
+  background: #a82450;
+  color: #fff;
+}
+.btn-whatsapp {
+  background: #25d366;
+  border-color: #25d366; 
+}
+.btn-whatsapp:link, .btn-whatsapp:visited {
+  color: #fff;
+}
+.btn-whatsapp:active, .btn-whatsapp:hover {
+  background: #1ca34e;
+  color: #fff;
+}
+.btn-facebook {
+  background: #3B5998;
+  border-color: #263961; 
+}
+.btn-facebook:link, .btn-facebook:visited {
+  color: #fff;
+}
+.btn-facebook:active, .btn-facebook:hover {
+  background: #263961;
+  color: #fff;
+}
+.img-contenedor img {
+  -webkit-transition:all .9s ease; /* Safari y Chrome */
+  -moz-transition:all .9s ease; /* Firefox */
+  -o-transition:all .9s ease; /* IE 9 */
+  -ms-transition:all .9s ease; /* Opera */
+  width:100%;
+  }
+.img-contenedor:hover img {
+  -webkit-transform:scale(1.25);
+  -moz-transform:scale(1.25);
+  -ms-transform:scale(1.25);
+  -o-transform:scale(1.25);
+  transform:scale(1.25);
+}
+.img-contenedor {/*Ancho y altura son modificables al requerimiento de cada uno*/
+  width:auto;
+  height:auto;
+  overflow:hidden;
+}
+.navbar{
+  opacity: 90%;
+}

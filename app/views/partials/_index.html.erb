@@ -1,0 +1,86 @@
+<div class="py-1 bg-light shadow container-sm container-fluid rounded">
+
+    <h5 class="pt-2 text-center text-dark">Publicaciones Destacadas</h5>
+      <hr>
+    <div class="row justify-content-center">
+      <% @products.each do |product| %>
+      <% if product.pub_destacada == true %>
+      <% if product.view == true %>
+      <div class="col-sm-12 col-md-4">
+        <figure class="figure shadow-sm bg-white rounded">
+          <div class="img-contenedor">
+            
+            <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
+          </div>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Disponible</span>
+          <figcaption class="figure-caption p-2">
+            <h5 class="m-2 text-dark"><%= product.title %></h5>
+            <p class="card-text m-2"><%= product.body.truncate(40) %></p>
+            <% if user_signed_in? && current_user = @admin %>
+            <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <p class="float-left pl-2"><i class="far fa-eye"></i> 5 Views</p>
+            
+            <p class="float-right pr-2"><i class="far fa-heart"></i> 22 likes</p>
+          </figcaption>
+        </figure>
+      </div>
+      <% end %>
+      <% end %>
+      <% end %>
+    </div>
+    
+    <h5 class="pt-2 text-dark text-center">Publicaciones</h5>
+    <hr>
+    <div class="row row-cols-2 justify-content-center">
+      <% @products.each do |product| %>
+      
+      <% if product.pub_normal == true %>
+      <% if product.view == true %>
+      <div class="col-6 col-md-3">
+        <figure class="figure shadow-sm bg-light rounded">
+          <div class="img-contenedor">
+
+            <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
+            
+          </div>
+          <span class="notify-badge bg-primary"><i class="fa fa-circle text-success"></i> Disponible</span>
+          <figcaption class="figure-caption border p-2">
+            <h5 class="m-2"><%= product.title %></h5>
+            <p class="card-text m-2"><%= product.body.truncate(40) %></p>
+            <% if user_signed_in? && current_user = @admin %>
+            <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </figcaption>
+        </figure>
+      </div>
+      <% end %>
+      <% end %>
+      <% end %>
+    </div>
+    
+    <h5 class="pt-2 text-dark text-center">Clasificados</h5>
+    <hr>
+    <div class="row m-1 row-cols-3 justify-content-center">
+      <% @products.each do |product| %>
+        <% if product.pub_clasificado == true %>
+          <% if product.view == true %>
+      <div class="col-4 col-sm-4 col-md-2">
+        <figure class="figure shadow-sm bg-white rounded">
+          <div class="img-contenedor">
+
+            <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
+          </div>
+          <figcaption class="figure-caption pt-2 pb-2 border">
+            <p class="m-2"><%= product.title.truncate(22) %></p>
+              <% if user_signed_in? && current_user = @admin %>
+                <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+          </figcaption>
+        </figure>
+      </div>
+            <% end %>
+          <% end %>
+      <% end %>
+    </div>
+      </div>

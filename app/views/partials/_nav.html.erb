@@ -1,9 +1,22 @@
-<div class="bg-dark py-3">
-  <%= link_to (image_tag 'logo.png', class:'mx-auto d-block'), root_path %>
+<div class="bg-light fondoLogo py-2 row">
+  <div class="col-12 col-sm-6 col-md-8">
+    <%= link_to (image_tag 'logo.svg', class:'logo mx-auto d-block'), root_path %>
+  </div>
+  <div class="col-12 col-sm-6 col-md-4 text-center">
+    <button class="btn redes btn-facebook mt-1">
+      <i class="fab fa-facebook-f"></i> Facebook  
+    </button>
+    <button class="btn redes btn-twitter mt-1">
+      <i class="fab fa-twitter"></i> Twitter
+    </button>
+    <button class="btn redes btn-instagram mt-1">
+      <i class="fab fa-instagram"></i> Instagram
+    </button>
+  </div>
 </div>
 
-<nav class="navbar sticky-top navbar-expand-lg navbar-light">
-  <%= link_to 'BuinPymes', root_path, class:'navbar-brand' %>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to 'ConectaBuin', root_path, class:'navbar-brand' %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>

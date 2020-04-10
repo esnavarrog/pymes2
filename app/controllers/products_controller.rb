@@ -3,21 +3,28 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   # GET /products
   # GET /products.json
+  PER_PAGE = 10
   def index
-    @products = Product.all
-    @product = Product.new
-
+    @products = Product.all.with_rich_text_body
+    if params[:body].present?
+      @products = @products.where("body ILIKE ?", "%#{params[:body]}%")
+    end
   end
+
+
+
 
   # GET /products/1
   # GET /products/1.json
   def show
     @list = List.new
     @pop = Pop.new
+    @comment = Comment.new
+    @message = Message.new
     @lists = List.all
     @pops = @list.pops.all
-    @comment = Comment.new
-    @comments = @product.comments.all
+    @messages = Message.all
+    @comments = @product.comments.all.order(:created_at)
   end
 
   # GET /products/new
@@ -36,11 +43,14 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user = current_user
     @product.categories = params[:categories]
+    respond_to do |format|
       if @product.save
-        redirect_to @product, notice: 'Product was successfully created.' 
+
+        format.html {redirect_to @product, notice: 'Product was successfully created.'} 
       else
-        render :new
+        format.html {render :new}
       end
+    end
   end
 
   # PATCH/PUT /products/1
@@ -77,6 +87,8 @@ class ProductsController < ApplicationController
 
 
 
+
+
     
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -91,6 +103,9 @@ class ProductsController < ApplicationController
         :address, 
         :facebook, 
         :twitter, 
+        :instagram,
+        :web,
+        :palabras,
         :info, 
         :horaA, 
         :minA, 
@@ -111,7 +126,13 @@ class ProductsController < ApplicationController
         :sabadoA,
         :sabadoC,
         :domingoA,
-        :domingoC
+        :domingoC,
+        :latitude,
+        :longitude,
+        :efectivo,
+        :transferencia,
+        :credito,
+        :debito,
       )
     end
 end

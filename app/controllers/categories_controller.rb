@@ -1,10 +1,15 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    if user_signed_in? && current_user == @category.user
+      @categories = Category.all
+    else
+      redirect_to home_index_path, alert: "No tienes permiso para esta sección"
+    end
   end
 
   # GET /categories/1
@@ -19,12 +24,17 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    if user_signed_in? && current_user == @category.user
+    else
+      redirect_to @category, alert:"No tienes permiso para editar esto."
+    end
   end
 
   # POST /categories
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+    @category.user = current_user
 
     respond_to do |format|
       if @category.save
@@ -69,6 +79,6 @@ class CategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
-      params.require(:category).permit(:name, :color)
+      params.require(:category).permit(:name, :color, :dropdown)
     end
 end

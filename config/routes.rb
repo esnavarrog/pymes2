@@ -1,20 +1,30 @@
 Rails.application.routes.draw do
   
   
+  resources :messages
   mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
   devise_for :admins
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+
+  
+  devise_for :users, controllers: { 
+    sessions: 'users/sessions',
+    :omniauth_callbacks => "users/omniauth_callbacks" 
+  }
 
   
 
 
   resources :categories
+  resources :users
+  
 
 
   resources :products do
     resources :categories
     resources :lists
     resources :comments
+    resources :messages
   end
   resources :lists do
     resources :pops
@@ -23,6 +33,11 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   get 'home/index'
+  get 'search' => 'home#search'
+  get 'pages/sobrenosotros'
+  get 'pages/reglamento'
+  get 'pages/sugerencia'
+  get 'pages/terminosycondiciones'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

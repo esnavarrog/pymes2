@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :products, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :comments
+  has_many :categories
 
   def online?
     update_at > 3.minutes.ago

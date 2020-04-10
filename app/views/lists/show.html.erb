@@ -1,12 +1,15 @@
-<div class="container">
+<div class="container-sm container-md rounded shadow-sm bg-light py-3">
 
-  <h1 class="text-primary text-center p-3"><%= @list.title %></h1>
+  <%= link_to '<i class="fas fa-chevron-left"></i> Volver al portal'.html_safe, @list.product, class:'btn btn-dark btn-sm'%> 
+  <h2 class="text-primary text-center pt-3">
+    <%= @list.title %> de <%= @list.product.title %>
+  </h2>
   <hr>
   <!-- Button trigger modal -->
   <div class="text-center">
 
-    <button type="button" class="btn btn-secondary text-danger" data-toggle="modal" data-target="#exampleModal">
-      <i class="fas fa-chevron-down"></i> Agregar item.
+    <button type="button" class="btn btn-danger text-light" data-toggle="modal" data-target="#exampleModal">
+      <i class="fas fa-plus"></i> Agregar item.
     </button>
   </div>
   
@@ -25,6 +28,7 @@
       </div>
     </div>
   </div>
+  
   <div class="row">
     
     <%= render @list.pops %>

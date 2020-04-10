@@ -1,14 +1,17 @@
-<div class="bg-white py-3 shadow-sm ">
+<div class="container-fluid bg-white py-3 shadow-sm">
   <div class="row">
-    <div class="col-md-7">
-      <div class="row justify-content-center">
-        <%= image_tag @product.img.thumb.url, class:'rounded d-block text-center mx-auto' %>
+    <div class="col-12 col-sm-12 col-md-7">
+      <div class="justify-content-center">
+        <%= image_tag @product.img.thumb.url, class:'rounded img-fluid d-block text-center mx-auto shadow' %>
       </div>
-
-    </div>
-    <div class="col-md-5">
       <blockquote class="blockquote text-center">
         <h1 class="text-center shadow-text mt-3"><%= @product.title %></h1>
+        <% if user_signed_in? && current_user == @product.user %>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#configura">
+          <i class="fas fa-edit"></i> Configurar
+        </button>
+
+        <% end %>
         <footer class="blockquote-footer">
           <% if @product.info.nil? %>
           <% else %>
@@ -16,30 +19,102 @@
           <% end %>
         </footer>
       </blockquote>
-    
-      
-      <hr class="my-4">
-      <div class="container">
-    
-        <div class=" mb-2 p-3 rounded bg-light text-center">
-          <p> <strong>Teléfono principal: </strong>+<%= @product.phone %>
-            <br>          
-            <strong>Correo electrónico: </strong><%= @product.email %>
-            <br>
-            <strong>Dirección: </strong><%= @product.address %>
-            <br>
-            <strong>Tiempo de espera:</strong> <%= @product.tiempoEspera %> Minutos
-          </p>
+       <!-- Modal -->
+       <div class="modal fade" id="configura" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ingresa datos.</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <%= render 'form' %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 col-2 col-sm-12 col-md-5">
+
+        <div class="mx-auto d-block p-3 rounded bg-light text-muted">
+
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
+                <td>+<%= @product.phone %></td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-right"><i class="far fa-envelope"></i></th>
+                <td><%= @product.email %></td>
+
+              </tr>
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-map-marked-alt"></i></th>
+                <td><%= @product.address %></td>
+              </tr>
+              <% if @product.credito == true %>
+              <tr>
+                <th scope="row" class="text-right"><i class="far fa-credit-card"></i></th>
+                <td><%= image_tag 'mediosPagos.png', class:'img-fluid rounded', style:'max-height: 3rem;' %></td>
+              </tr>
+              <% end %>
+              <% if @product.efectivo == true %>
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-money-bill-wave"></i></th>
+                <td>Eféctivo</td>
+              </tr>
+              <% end %>
+              <% if @product.transferencia == true %>
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-money-check"></i></th>
+                <td>Transferencias</td>
+              </tr>
+              <% end %>
+              <% if @product.debito == true %>
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-wallet"></i></th>
+                <td>Débito</td>
+              </tr>
+              <% end %>
+
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-hourglass-start"></i></th>
+                <td><%= @product.tiempoEspera %> Minutos espera</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="text-center">
+
+            <% if (Time.now.strftime("%A") === "Sunday") && (@product.domingoA.strftime("%H %M")..@product.domingoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Domingo nos encontramos atendiendo desde las <%= @product.domingoA.strftime("%H:%M")%> hasta las <%= @product.domingoC.strftime("%H:%M")%>hrs. </span>
+            <% elsif (Time.now.strftime("%A") === "Monday") && (@product.lunesA.strftime("%H %M")..@product.lunesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Lunes nos encontramos atendiendo desde las <%= @product.lunesA.strftime("%H:%M")%> hasta las <%= @product.lunesC.strftime("%H:%M")%>hrs.</span>
+            <% elsif (Time.now.strftime("%A") === "Tuesday") && (@product.martesA.strftime("%H %M")..@product.martesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Martes nos encontramos atendiendo desde las <%= @product.martesA.strftime("%H:%M")%> hasta las <%= @product.martesC.strftime("%H:%M")%>hrs.</span>
+            <% elsif (Time.now.strftime("%A") === "Wednesday") && (@product.miercolesA.strftime("%H %M")..@product.miercolesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Miércoles nos encontramos atendiendo desde las <%= @product.miercolesA.strftime("%H:%M")%> hasta las <%= @product.miercolesC.strftime("%H:%M")%>hrs.</span>
+            <% elsif (Time.now.strftime("%A") === "Thursday") && (@product.juevesA.strftime("%H %M")..@product.juevesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Jueves nos encontramos atendiendo desde las <%= @product.juevesA.strftime("%H:%M")%> hasta las <%= @product.juevesC.strftime("%H:%M")%>hrs.</span>
+            <% elsif (Time.now.strftime("%A") === "Friday") && (@product.viernesA.strftime("%H %M")..@product.viernesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Viernes nos encontramos atendiendo desde las <%= @product.viernesA.strftime("%H:%M")%> hasta las <%= @product.viernesC.strftime("%H:%M")%>hrs.</span>
+            <% elsif (Time.now.strftime("%A") === "Saturday") && (@product.sabadoA.strftime("%H %M")..@product.sabadoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Sábado nos encontramos atendiendo desde las <%= @product.sabadoA.strftime("%H:%M")%> hasta las <%= @product.sabadoC.strftime("%H:%M")%>hrs.</span>
+            <% else %>
+            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-danger"></i>Hoy <%= Time.now.strftime("%A") %> tenemos cerrado</span>
+            <% end %>
+          </div>
+            
           
         </div>
         
-        <p class="p-3 mb-2 bg-light text-dark text-justify rounded lead"><%= @product.body %></p>
-      </div>
+      
 
     </div>
 
   </div>
-  <hr class="my-4">
+  <hr>
 
 
     <div class="text-center">      
@@ -58,14 +133,14 @@
       <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
       <% end %>
 
-      <% if @product.email.nil? %>
+      <% if @product.instagram.nil? %>
       <% else %>
-      <a href="<%= @product.email %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="<%= @product.instagram %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
       <% end %>
 
       <% if @product.email.nil? %>
       <% else %>
-      <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-primary mt-1"><i class="far fa-envelope"></i> Email</a>
+      <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-danger mt-1"><i class="far fa-envelope"></i> Email</a>
       <% end %>
       
     </div>
@@ -74,42 +149,21 @@
 
 <!-- Contenido de la empresa -->
 <!-- Article -->
-<div class="container-fluid bg-light py-3">
+<div class="container-fluid bg-white py-3">
   <div class="row row-cols-2">
     <div class="col-12 col-sm-12 col-lg-8">
-      <!-- Carrousel de imagenes -->
-      <div id="carouselExampleIndicators" class="carousel slide my-3 mx-auto" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://www.jhbotts.com/wp-content/uploads/2014/06/1200-x-300-1.png" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://www.blungrey.com/wp-content/uploads/2018/02/desarrollos.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://americanpronunciationcoach.com/wp-content/uploads/1200-x-300-website-sliders-china-man.jpg" class="d-block w-100" alt="...">
-          </div>
+        <div class="p-4 mb-3 bg-light text-primary text-justify rounded border shadow-sm lead">
+          <h5 class="text-center">Descripción de servicios.</h5><hr>
+          <%= @product.rich_text_body %>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+
+
 
       <!-- Comienza info -->
       <nav>
-        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+        <div class="nav nav-tabs mb-3 mr-sm-2" id="nav-tab" role="tablist">
           <a class="nav-item nav-link text-dark active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
-          <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Información</a>
+          <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios</a>
     
         </div>
       </nav>
@@ -150,7 +204,7 @@
               </h4>
             <% else %>
               <div class="inline-block">
-                <h4 class="text-center">
+                <h4 class="text-center text-dark">
                   <%= list.title %>
                 </h4>
               </div>
@@ -161,23 +215,48 @@
               <% list.pops.each do |pop| %>
               <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-1 pr-1 pl-1">
                 <div class="card text-dark shadow-sm mb-3">
-                      <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
-          
-                      <div class="card-body">
+                  <a data-toggle="modal" data-target="#<%= pop.title.delete(' ') %>">
+                    <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
+                  </a>
+                      <% if pop.destacado == true %>
+                      <div class="notify-badge">
+                        <i class="fas fa-star estrellita"></i>
+                      </div>
+                      <% end %>
+                      <div class="card-body text-center">
                         <h6 class="card-title">
-                          <% if pop.destacado == true %>
-                            <i class="fas fa-star estrellita"></i>
-                          <% end %>
-          
                           <%= pop.title %>
                         </h6>
-                        <p class="card-subtitle mt-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
+                        <p class="card-subtitle text-secondary">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
                         <small class="card-text"><%= pop.descripcion.truncate_words(15) %></small>
                       </div>
+                      
+                </div>
+                <div class="modal fade" id="<%= pop.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle"><%= pop.title %></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <%= image_tag pop.avatar.url, class:'rounded img-fluid' %>
+                          <p class="text-secondary my-3">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
+                          <p class="card-text"><%= pop.descripcion %></p>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <% end %>
             </div>
+
             
              
           
@@ -236,9 +315,12 @@
             </tbody>
           </table>
     
-          <div class="bg-light rounded shadow-sm" style="height: 30rem; width: 30rem;">
-            Mapa
-          </div>
+          
+            <div style='width: 800px;'>
+              <div id="map" style='width: 800px; height: 400px;'></div>
+            </div>
+
+            
     
     
         </div>
@@ -246,22 +328,22 @@
     </div>
     <!-- Aside -->
     <div class="col-12 col-md-12 col-lg-4">
-      <div class="bg-light border rounded-lg p-3 m-0 shadow-sm">
+      <div class="bg-light border rounded-lg p-3 shadow-sm">
         <h4 class="text-primary">Comentarios</h4>
         <% if @product.comments.empty? %>
           <h5 class="alert alert-info">Deja el primer comentario</h5>
         <% else %>
-        <ul class="list-group" style="max-height: 600px; overflow-y: scroll; overflow-x: hidden;">
-          <% @product.comments.each do |comment| %>
+        <ul class="list-group box_comentarios">
+          <% @product.comments.order(created_at: :desc).each do |comment| %>
           <li class="list-group-item">
             <div class="row">
               <div class="col-2">
-                <%= image_tag comment.user.image.avatar.url, class:'redondaImg shadow-sm border border-dark' %>
+                <%= image_tag comment.user.image.avatar.url, class:'redondaImg img-fluid shadow-sm border border-dark' %>
                 
               </div>
               <div class="col-10">
                 <div class="alert borde_comentario mb-0">
-                  <h6 class="mb-1 text-dark"><%= comment.user.name %></h6>
+                  <h6 class="text-dark"><%= comment.user.name %></h6>
                   <%= comment.body %>
                 </div>
                 <small class="text-right"><%= "#{time_ago_in_words(comment.created_at)}" if comment.created_at %></small>
@@ -273,63 +355,76 @@
         </ul>
         <% end %>
                   <!-- Button trigger modal -->
-          
-          <button type="button" class="btn btn-dark btn-block mt-2" data-toggle="modal" data-target="#comment">
-            Agregar comentario
-          </button>
+          <% if user_signed_in? %>
+            <%= form_for([@product, @product.comments.build]) do |f| %>
+              <p class="form-group">
+                <%= f.text_field :body, class:'form-control mt-1', placeholder:'Escribe tu comentario aquí...' %>
+              </p>
+              <%= f.submit 'Publicar comentario', class:'btn btn-dark btn-block' %>
+            <% end %>
+          <% else %>
+              <p class="text-info text-center">Para comentar debes:</p>
+            <%= link_to 'Iniciar sesión', new_user_session_path, class:'btn btn-success btn-sm btn-block mt-3' %>
+            <%= link_to 'Registrarse', new_user_registration_path, class:'btn btn-danger btn-sm btn-block mt-3' %>
+          <% end %>
 
-          <!-- Modal -->
-          <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalCenterTitle">Escribe un comentario</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <% if user_signed_in? %>
-                    <%= form_for([@product, @product.comments.build]) do |f| %>
-
-                      <p class="form-group">
-                        <%= f.text_area :body, class:'form-control', placeholder:'Escribe tu comentario aquí', autofocus: true %>
-                      </p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <%= f.submit 'Publicar comentario', class:'btn btn-dark' %>
-                      <% end %>
-                  <% else %>
-                    <%= link_to 'Iniciar sesión', new_user_session_path, class:'btn btn-success' %>
-                    <%= link_to 'Registrarse', new_user_registration_path, class:'btn btn-danger' %>
-                    </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
+    
+ 
       </div>
 
       <div class="bg-light p-3 mt-3 shadow-sm border rounded-lg">
         <h4 class="text-dark">Envía un mensaje directo</h4>
         <small class="text-muted font-italic">Este mensaje solo será recibido por la empresa.</small>
-        <form>
-          <div class="form-group">
-            <input name="" id="" class="form-control" placeholder="Ingresa tu Email">
-          </div>
-          <div class="form-group">
-            <input name="" id="" class="form-control" placeholder="Ingresa tu Nombre">
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" id="message-text" placeholder="Ingresa tu mensaje"></textarea>
 
-          </div>
-          <button class="btn btn-dark btn-block">Enviar mensaje</button>
-        </form>
+        <%= form_for([@product, @product.messages.build]) do |f| %>
+          <p class="form-group">
+            <%= f.text_field :email, class:'form-control', placeholder:'Ingresa tu Email' %>
+          </p>
+          <p class="form-group">
+            <%= f.text_field :name, class:'form-control', placeholder:'Ingresa tu Nombre' %>
+          </p>
+          <p class="form-group">
+            <%= f.text_area :body, class:'form-control', placeholder:'Ingresa tu mensaje...' %>
+          </p>
+          <%= f.submit 'Enviar mensaje', class:'btn btn-dark btn-block' %>
+        <% end %>
+
       </div>
+
+
+
+      <!-- Button trigger modal -->
+      <% if user_signed_in? && current_user == @product.user %>
+      <div class="bg-light p-3 mt-3 shadow-sm border rounded-lg">
+        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#message">
+          Leer mensajes internos
+        </button>
+      </div>
+      <% end %>
+
+      
+
+<!-- Modal -->
+<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Mensajes directos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+          <%= render @messages %>
+        </div>
+      <div class="modal-footer">
+        <p class="text-left text-info">Responde a tus posibles clientes vía email.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
     </div>
 
   </div>
@@ -338,3 +433,21 @@
   
 
 </div>
+<script type="text/javascript">
+  handler = Gmaps.build('Google');  
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){  
+    markers = handler.addMarkers([  
+      {  
+        "lat": 37.3333945,  
+        "lng": -121.8806499,  
+        "picture": {  
+          "width":  32,  
+          "height": 32  
+        },  
+        "infowindow": "SJSU"  
+      }  
+    ]);  
+    handler.bounds.extendWith(markers);  
+    handler.fitMapToBounds();  
+  }); 
+</script>

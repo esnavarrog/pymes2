@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
         @comment.product = @product
         respond_to do |format|
           if @comment.save
-            format.html { redirect_to @product, notice: "El comentario fué creado exitosamente" }
+            format.html { redirect_to @product }
             format.json { render :show, status: :created, location: @comment.product }
             format.js
           else

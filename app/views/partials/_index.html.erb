@@ -1,27 +1,47 @@
+
+
+
+
+
 <div class="py-1 bg-light shadow container-sm container-fluid rounded">
 
-    <h5 class="pt-2 text-center text-dark">Publicaciones Destacadas</h5>
-      <hr>
+    <h5 class="p-2 text-center">Publicaciones Destacadas</h5>
     <div class="row justify-content-center">
       <% @products.each do |product| %>
       <% if product.pub_destacada == true %>
       <% if product.view == true %>
       <div class="col-sm-12 col-md-4">
-        <figure class="figure shadow-sm bg-white rounded">
+        <figure class="figure shadow bg-white rounded">
           <div class="img-contenedor">
             
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
           </div>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Disponible</span>
+
+          <% if (Time.now.strftime("%A") === "Sunday") && (product.domingoA.strftime("%H %M")..product.domingoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% elsif (Time.now.strftime("%A") === "Monday") && (product.lunesA.strftime("%H %M")..product.lunesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% elsif (Time.now.strftime("%A") === "Tuesday") && (product.martesA.strftime("%H %M")..product.martesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% elsif (Time.now.strftime("%A") === "Wednesday") && (product.miercolesA.strftime("%H %M")..product.miercolesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% elsif (Time.now.strftime("%A") === "Thursday") && (product.juevesA.strftime("%H %M")..product.juevesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% elsif (Time.now.strftime("%A") === "Friday") && (product.viernesA.strftime("%H %M")..product.viernesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% elsif (Time.now.strftime("%A") === "Saturday") && (product.sabadoA.strftime("%H %M")..product.sabadoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% else %>
+            <span class="notify-badge shadow-sm bg-dark"><i class="fab fa-expeditedssl"></i> Cerrado</span>
+          <% end %>
+
           <figcaption class="figure-caption p-2">
-            <h5 class="m-2 text-dark"><%= product.title %></h5>
-            <p class="card-text m-2"><%= product.body.truncate(40) %></p>
+            <h5 class="m-2 text-center"><%= product.title %></h5>
+            <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
+            <p class="card-text m-2"><%= truncate(strip_tags(product.rich_text_body.to_s), length: 50) %></p>
             <% if user_signed_in? && current_user = @admin %>
             <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
-            <p class="float-left pl-2"><i class="far fa-eye"></i> 5 Views</p>
-            
-            <p class="float-right pr-2"><i class="far fa-heart"></i> 22 likes</p>
           </figcaption>
         </figure>
       </div>
@@ -30,24 +50,42 @@
       <% end %>
     </div>
     
-    <h5 class="pt-2 text-dark text-center">Publicaciones</h5>
-    <hr>
+    <h5 class="p-2 text-center">Publicaciones</h5>
     <div class="row row-cols-2 justify-content-center">
       <% @products.each do |product| %>
       
       <% if product.pub_normal == true %>
       <% if product.view == true %>
       <div class="col-6 col-md-3">
-        <figure class="figure shadow-sm bg-light rounded">
+        <figure class="figure shadow bg-light rounded">
           <div class="img-contenedor">
 
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
             
           </div>
-          <span class="notify-badge bg-primary"><i class="fa fa-circle text-success"></i> Disponible</span>
+
+        <% if (Time.now.strftime("%A") === "Sunday") && (product.domingoA.strftime("%H %M")..product.domingoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% elsif (Time.now.strftime("%A") === "Monday") && (product.lunesA.strftime("%H %M")..product.lunesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% elsif (Time.now.strftime("%A") === "Tuesday") && (product.martesA.strftime("%H %M")..product.martesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% elsif (Time.now.strftime("%A") === "Wednesday") && (product.miercolesA.strftime("%H %M")..product.miercolesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% elsif (Time.now.strftime("%A") === "Thursday") && (product.juevesA.strftime("%H %M")..product.juevesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% elsif (Time.now.strftime("%A") === "Friday") && (product.viernesA.strftime("%H %M")..product.viernesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% elsif (Time.now.strftime("%A") === "Saturday") && (product.sabadoA.strftime("%H %M")..product.sabadoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+        <% else %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fab fa-expeditedssl"></i> Cerrado</span>
+        <% end %>
+
           <figcaption class="figure-caption border p-2">
-            <h5 class="m-2"><%= product.title %></h5>
-            <p class="card-text m-2"><%= product.body.truncate(40) %></p>
+            <h5 class="m-2 text-center"><%= product.title %></h5>
+            <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
+            <p class="card-text m-2"><%= truncate(strip_tags(product.rich_text_body.to_s), length: 37) %></p>
             <% if user_signed_in? && current_user = @admin %>
             <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
@@ -59,8 +97,7 @@
       <% end %>
     </div>
     
-    <h5 class="pt-2 text-dark text-center">Clasificados</h5>
-    <hr>
+    <h5 class="p-2 text-center">Clasificados</h5>
     <div class="row m-1 row-cols-3 justify-content-center">
       <% @products.each do |product| %>
         <% if product.pub_clasificado == true %>
@@ -72,7 +109,7 @@
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
           </div>
           <figcaption class="figure-caption pt-2 pb-2 border">
-            <p class="m-2"><%= product.title.truncate(22) %></p>
+            <p class="m-2 text-center text-dark"><%= product.title.truncate(22) %></p>
               <% if user_signed_in? && current_user = @admin %>
                 <%= link_to 'Destroy', product, class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
               <% end %>
@@ -84,3 +121,4 @@
       <% end %>
     </div>
       </div>
+

@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_221914) do
+ActiveRecord::Schema.define(version: 2020_04_09_232721) do
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,6 +69,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_221914) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "dropdown"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -71,6 +104,16 @@ ActiveRecord::Schema.define(version: 2020_03_30_221914) do
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_messages_on_product_id"
+  end
+
   create_table "pops", force: :cascade do |t|
     t.string "title"
     t.boolean "destacado"
@@ -83,6 +126,13 @@ ActiveRecord::Schema.define(version: 2020_03_30_221914) do
     t.integer "product_id"
     t.index ["list_id"], name: "index_pops_on_list_id"
     t.index ["product_id"], name: "index_pops_on_product_id"
+  end
+
+  create_table "product_attachments", force: :cascade do |t|
+    t.integer "product_id"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -121,6 +171,16 @@ ActiveRecord::Schema.define(version: 2020_03_30_221914) do
     t.datetime "sabadoC"
     t.datetime "domingoA"
     t.datetime "domingoC"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "carrousel"
+    t.boolean "efectivo"
+    t.boolean "transferencia"
+    t.boolean "credito"
+    t.boolean "debito"
+    t.string "instagram"
+    t.text "palabras"
+    t.string "web"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -140,7 +200,9 @@ ActiveRecord::Schema.define(version: 2020_03_30_221914) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "users"
+  add_foreign_key "categories", "users"
   add_foreign_key "comments", "comments"
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
@@ -148,6 +210,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_221914) do
   add_foreign_key "has_categories", "products"
   add_foreign_key "lists", "products"
   add_foreign_key "lists", "users"
+  add_foreign_key "messages", "products"
   add_foreign_key "pops", "lists"
   add_foreign_key "pops", "products"
   add_foreign_key "products", "users"

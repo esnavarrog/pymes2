@@ -1,6 +1,10 @@
-<h1>Editing Product</h1>
 
-<%= render 'form', product: @product %>
+<div class="container-sm container bg-light rounded py-3">
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+    <h1 class="text-center p-3">Configura tu empresa</h1>
+    
+    <%= render 'form', product: @product %>
+    
+        <%= link_to '<i class="fas fa-step-backward"></i> Regresar'.html_safe, products_path, class:'btn btn-sm btn-dark' %>
+        <%= link_to '<i class="far fa-eye"></i> Ver'.html_safe, @product, class:'btn btn-sm btn-success' %>
+</div>

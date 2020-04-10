@@ -9,6 +9,12 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require("custom/underscore")
+
+require("trix")
+require("@rails/actiontext")
+
+require("gmaps/google")
 
 
 
@@ -18,3 +24,6 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+require("trix")
+require("@rails/actiontext")

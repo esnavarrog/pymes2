@@ -1,0 +1,11 @@
+<div class="container-sm container-fluid">
+    <div class="row">
+        <h1>Perfil de usuario</h1>
+        <div class="col">
+            
+            <%= @user.email %>
+            <%= image_tag @user.image.thumb.url, class:'redondaImg img-fluid shadow-sm border border-dark' %>
+            
+        </div>
+    </div>
+</div>

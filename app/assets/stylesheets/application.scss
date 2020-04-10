@@ -20,31 +20,49 @@
  $dark: #8C1E55;
  $danger: #dc3545;
  $enable-gradients: true;
-
  @import "bootstrap/scss/bootstrap";
+ @import "./actiontext.scss";
+ 
+
 
 body{
   background-image: url('https://onesolutionsgroup.com/images/blog/pymestransformacion-digital-g.png');
   background-attachment: fixed;
   background-position: center;
   max-width: 100%;
-  z-index: 5;
 }
-body::after{
+body::before{
   opacity: 95%;
   z-index: -1;
 }
+a{
+  text-decoration: $light;
+}
+
+h5, h6, h1, h2, h3, h4{
+  color: $dark;
+}
+.min{
+  min-height: 20rem;
+}
+
+
 
 .logo{
   max-height: 6rem;
   opacity: 100%;
+}
+.logo1{
+  max-height: 40px;
 }
 .logo_footer{
   max-height: 4rem;
   opacity: 100%;
 }
 .fondoLogo{
-  opacity: 80%;
+  background: rgba(255, 255, 255, 80%);
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .estrellita{
@@ -97,22 +115,28 @@ body::after{
 }
 
 .borde_comentario{
-  border-radius: 1rem;
-  background-color: #f0f0cc;
+  border-radius: .5rem;
+  
   border-color: #bee5eb;
+}
+
+.box_comentarios{
+  max-height: 400px; 
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  font-size: 0.7rem;
 }
 
 .redes {
   border-radius: 10rem;
   color: #fff;
-  border-width: 1px;
-  border-style: solid;
+  opacity: 100%;
 
 }
 
 .btn-twitter {
   background: #1da1f2;
-  border-color: #1da1f2; 
+  border-color: 1px solid transparent; 
 }
 .btn-twitter:link, .btn-twitter:visited {
   color: #fff;
@@ -123,7 +147,7 @@ body::after{
 }
 .btn-instagram {
   background: #e1306c;
-  border-color: #e1306c; 
+  border-color: 1px solid transparent; 
 }
 .btn-instagram:link, .btn-instagram:visited {
   color: #fff;
@@ -134,7 +158,7 @@ body::after{
 }
 .btn-whatsapp {
   background: #25d366;
-  border-color: #25d366; 
+  border-color: 1px solid transparent; 
 }
 .btn-whatsapp:link, .btn-whatsapp:visited {
   color: #fff;
@@ -145,7 +169,7 @@ body::after{
 }
 .btn-facebook {
   background: #3B5998;
-  border-color: #263961; 
+  border-color: 1px solid transparent; 
 }
 .btn-facebook:link, .btn-facebook:visited {
   color: #fff;
@@ -175,4 +199,17 @@ body::after{
 }
 .navbar{
   opacity: 90%;
+}
+
+.btn-search{
+  border-radius: 0 5px 5px 0;
+}
+.input-search{
+  border-radius: 10rem;
+}
+.text-tiny{
+  font-size: 0.6rem;
+}
+.inp{
+  max-width: 4rem;
 }

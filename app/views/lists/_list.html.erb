@@ -1,15 +1,16 @@
-<h4 class="text-primary"><%= link_to list.title, list %></h4>
-<hr>
-<% list.pops.each do |pop| %>
-    <%= pop.precio %>
-
-    <%= pop.title %>
-    <%= pop.descripcion.truncate(30) %>
-    <div class="media">
-        
-        <%= image_tag pop.avatar.thumb.url, class:'rounded' %>
+<div class="card text-dark shadow-sm mb-3">
+    <%= image_tag @pop.avatar.thumb.url, class:'card-img-top' %>
+    <% if @pop.destacado == true %>
+    <div class="notify-badge">
+    <i class="fas fa-star estrellita"></i>
+    </div>
+    <% end %>
+    <div class="card-body text-center">
+    <h6 class="card-title">
+        <%= @pop.title %>
+    </h6>
+    <p class="card-subtitle text-secondary">Precio $<%= number_with_delimiter(@pop.precio, :delimiter => ".") %></p>
+    <small class="card-text"><%= @pop.descripcion.truncate_words(15) %></small>
     </div>
     
-
-    <br>
-<% end %>
+</div>

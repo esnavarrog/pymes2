@@ -1,5 +1,5 @@
-<div class="col-sm-6 col-md-3 mt-3">
-    <div class="card mb-3">
+<div class="col-6 col-md-4 col-lg-3 mt-3">
+    <div class="card mb-3 shadow-sm">
         <div class="row no-gutters">
 
                 <%= image_tag pop.avatar.thumb.url, class:'card-img' %>
@@ -13,7 +13,7 @@
                   <h6 class="card-subtitle mb-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></h6>
                   <p class="card-text"><%= pop.descripcion.truncate_words(30) %></p>
                     <% if user_signed_in? && current_user == @list.user %>
-                    <%= link_to 'Eliminar', [pop.list, pop],
+                    <%= link_to '<i class="fas fa-trash-alt"></i> Eliminar'.html_safe, [pop.list, pop],
                                             method: :delete,
                                             data: { confirm: 'Estás seguro de eliminar en post?' }, class:'btn btn-danger btn-sm' %>
                    <% end %>

@@ -35,6 +35,16 @@ body::before{
   opacity: 95%;
   z-index: -1;
 }
+body::-webkit-scrollbar{
+  width: 0.5rem;
+}
+body::-webkit-scrollbar-track{
+  background: $danger;
+}
+body::-webkit-scrollbar-thumb{
+  background: $dark;
+  border-radius: 5px;
+}
 a{
   text-decoration: $light;
 }
@@ -45,9 +55,6 @@ h5, h6, h1, h2, h3, h4{
 .min{
   min-height: 20rem;
 }
-
-
-
 .logo{
   max-height: 6rem;
   opacity: 100%;
@@ -77,11 +84,27 @@ h5, h6, h1, h2, h3, h4{
   line-height: 2rem;
   font-size: 1rem;
   border-radius: 0px 1rem 1rem 0px;
-  padding-left: 5px;
+  padding-left: 0.8rem;
   padding-right: 10px;
   color:white;
-  opacity: 95%;
+  opacity: 80%;
 }
+// para ocupar despues
+.notify-badge-bt{
+  position: absolute;
+  top: 2.2rem;
+  max-width: 9rem;
+  width: auto;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 0.8rem;
+  border-radius: 0px 1rem 1rem 0px;
+  padding-left: 0.4rem;
+  padding-right: 10px;
+  color:white;
+  opacity: 80%;
+}
+
 
 .redondaImg{
   border-radius: 50%;
@@ -116,8 +139,7 @@ h5, h6, h1, h2, h3, h4{
 
 .borde_comentario{
   border-radius: .5rem;
-  
-  border-color: #bee5eb;
+  border-color: #f2dbff;
 }
 
 .box_comentarios{
@@ -125,6 +147,17 @@ h5, h6, h1, h2, h3, h4{
   overflow-y: scroll; 
   overflow-x: hidden;
   font-size: 0.7rem;
+}
+.box_comentarios::-webkit-scrollbar{
+  width: 0.5rem;
+}
+.box_comentarios::-webkit-scrollbar-track{
+  background: $danger;
+  border-radius: 5px;
+}
+.box_comentarios::-webkit-scrollbar-thumb{
+  background: $dark;
+  border-radius: 3px;
 }
 
 .redes {

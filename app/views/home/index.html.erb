@@ -1,53 +1,38 @@
 
 
-<div class="">
-  <!-- <div class="row">
-    <div class="col-12 col-md-4">
-      <div class="jumbotron jumbotron-fluid mt-2">
-        <div class="container">
-          <h1 class="display-4">BuinPymes imagen</h1>
-          <p class="lead">Este espacio será para colocar un banner o imagen de nuestra web</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-8">
-      <div class="jumbotron mb-0 mt-2">
-        <h1 class="display-4">BuinPymes</h1>
-        <p class="lead">Comentar brevemente de que se trata nuestra web</p>
-        <hr class="my-4">
-        <p>Invitar a que se registren brevemente, dando a entender que es bueno y bonito. y necesario</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Leer más</a>
-        Acá el boton llevará a nuestra politica de usuarios o algo así
-      </div>
-    </div>
-  </div> -->
+ 
+<div class="container-sm container p-0 rounded-top">
 
-  <div style="height: 30rem;">
-      <!-- <div class="widget">
-        <div class="fecha">
-          <p id="diaSemana" class="diaSemana"></p>
-          <p id="dia" class="dia"></p>
-          <p>de</p>
-          <p id="mes" class="mes"></p>
-          <p>del</p>
-          <p id="anio" class="anio"></p>
-        </div>
-        <div class="reloj">
-          <p id="horas" class="horas"></p>
-          <p>:</p>
-          <p id="minutos" class="minutos"></p>
-          <p>:</p>
-          <div class="cajaSegundos">
-            <p id="ampm" class="ampm"></p>
-            <p id="segundos" class="segundos"></p>
-          </div>
-        </div>
-      </div> -->
+  <div id="carouselExampleIndicators" class="carousel slide carousel-fade rounded-top" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag 'banner_1.jpg', class:'d-block w-100 rounded-top' %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag 'banner_1.jpg', class:'d-block w-100 rounded-top' %>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag 'banner_1.jpg', class:'d-block w-100 rounded-top' %>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
+</div>
 
     <%= render 'partials/index' %>
       
-  </div>
       
       
       

@@ -54,7 +54,7 @@
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-truck"></i> Delivery
         </a>
         <div class="dropdown-menu fade text-center" aria-labelledby="navbarDropdown">
@@ -71,7 +71,9 @@
     <%= form_tag search_path, class:'input-group', style:'max-width: 20rem;', method: :get do %>
     <%= text_field_tag :search, params[:search], :autocomplete => "off", class:'form-control input-search' %>
         <div class="input-group-append">
-          <%= submit_tag 'Buscar', name: nil, class:'btn btn-outline-light' %>
+          <button type="submit" class="btn btn-outline-light" name="nil">
+            <%= fa_icon "search" %>
+          </button>
         </div>
     <% end %>
     <ul class="navbar-nav my-2 my-lg-0">

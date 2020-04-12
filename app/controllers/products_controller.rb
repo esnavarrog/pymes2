@@ -133,6 +133,7 @@ class ProductsController < ApplicationController
         :transferencia,
         :credito,
         :debito,
+        :delivery
       )
     end
 end

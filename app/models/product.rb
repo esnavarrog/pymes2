@@ -21,6 +21,7 @@ class Product < ApplicationRecord
 
   H_LIST = (0..23).to_a
   M_LIST = ["00", "15", "30", "45", "60", "75", "90"]
+  DELIVERY = [['SI', true], ['NO', false]]
 
 
 

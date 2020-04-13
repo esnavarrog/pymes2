@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
             format.json { render :show, status: :created, location: @comment.product }
             format.js
           else
-            format.html { render :new }
+            format.html { redirect_to @product }
             format.json { render json: @comment.errors, status: :unprocessable_entity }
             format.js
           end

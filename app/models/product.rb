@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  before_update :set_visits_count
   mount_uploader :img, ImageUploader
   has_many :product_attachments
   accepts_nested_attributes_for :product_attachments
@@ -22,6 +23,15 @@ class Product < ApplicationRecord
   H_LIST = (0..23).to_a
   M_LIST = ["00", "15", "30", "45", "60", "75", "90"]
   DELIVERY = [['SI', true], ['NO', false]]
+
+  def update_visits_count
+    self.save if self.visits_count.nil?
+    self.update(visits_count: self.visits_count + 1) if self.visits_count.present?
+  end
+
+  def set_visits_count
+    self.visits_count ||= 0 
+  end
 
 
 

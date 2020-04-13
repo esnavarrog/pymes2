@@ -31,11 +31,11 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-utensils"></i> Comida
         </a>
-        <div class="dropdown-menu fade text-center" aria-labelledby="navbarDropdown">
-          <small class="text-danger">Todo comida</small><hr>
+        <div class="dropdown-menu fade text-center bg-dark shadow" aria-labelledby="navbarDropdown">
+          <small class="text-white">Todo comida</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Comida Rápida' %>
-              <%= link_to category.name, category, class:'dropdown-item' %>
+              <%= link_to category.name, category, class:'dropdown-item text-danger' %>
             <% end %>
           <% end %>
         </div>
@@ -48,7 +48,7 @@
           <small class="text-danger">Servicios varios</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Servicios' %>
-              <%= link_to category.name, category, class:'dropdown-item' %>
+              <%= link_to category.name, category, class:'dropdown-item text-danger' %>
             <% end %>
           <% end %>
         </div>
@@ -61,7 +61,7 @@
           <small class="text-danger">Servicios de delivery</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Delivery' %>
-              <%= link_to category.name, category, class:'dropdown-item' %>
+              <%= link_to category.name, category, class:'dropdown-item text-danger' %>
             <% end %>
           <% end %>
         </div>

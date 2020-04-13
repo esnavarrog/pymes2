@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
     @pops = @list.pops.all
     @messages = Message.all
     @comments = @product.comments.all.order(:created_at)
+    @product.update_visits_count
   end
 
   # GET /products/new

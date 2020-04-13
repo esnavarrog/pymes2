@@ -5,19 +5,22 @@
         <%= image_tag @product.img.thumb.url, class:'rounded img-fluid d-block text-center mx-auto shadow' %>
       </div>
       <blockquote class="blockquote text-center">
-        <h1 class="text-center shadow-text titulo mt-3"><%= @product.title %></h1>
+        <h2 class="text-center shadow-text titulo mt-3"><%= @product.title.upcase %></h2>
         <% if user_signed_in? && current_user == @product.user %>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>">
           <i class="fas fa-edit"></i> Configurar
         </button>
-
         <% end %>
+
+        <% if @product.info.nil? %>
+        <% else %>
         <footer class="blockquote-footer">
-          <% if @product.info.nil? %>
-          <% else %>
           <%= @product.info %>
-          <% end %>
         </footer>
+        <% end %>
+        <h6>
+          <i class="fas fa-eye"></i> <%= @product.visits_count %> vistas
+        </h6>
       </blockquote>
        <!-- Modal -->
        <div class="modal fade" id="<%= @product.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -328,7 +331,15 @@
     <!-- Aside -->
     <div class="col-12 col-md-12 col-lg-4">
       <div class="bg-light border rounded-lg p-3 shadow-sm">
-        <h4 class="text-primary">Comentarios <i class="fas fa-comments"></i></h4>
+        <h4>
+          <% if @product.comments.empty? %>
+          Sin comentarios
+          <% elsif @product.comments.count == 1 %>
+          <%= @product.comments.count %> Comentario
+          <% else %>
+          <%= @product.comments.count %> Comentarios
+          <% end %>
+           <i class="fas fa-comments"></i></h4>
         <% if @product.comments.empty? %>
           <h5 class="alert alert-info">Deja el primer comentario</h5>
         <% else %>

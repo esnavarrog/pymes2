@@ -1,8 +1,6 @@
 class Product < ApplicationRecord
   before_update :set_visits_count
   mount_uploader :img, ImageUploader
-  has_many :product_attachments
-  accepts_nested_attributes_for :product_attachments
   belongs_to :user
   has_many :has_categories, dependent: :destroy
   has_many :categories, through: :has_categories

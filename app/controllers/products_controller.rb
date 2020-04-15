@@ -6,9 +6,7 @@ class ProductsController < ApplicationController
   PER_PAGE = 10
   def index
     @products = Product.all.with_rich_text_body
-    if params[:body].present?
-      @products = @products.where("body ILIKE ?", "%#{params[:body]}%")
-    end
+
   end
 
 

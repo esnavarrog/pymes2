@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+        @comments = Comment.all.order(created_at: :desc)
     end
     def index
         if user_signed_in?

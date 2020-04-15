@@ -1,16 +1,18 @@
 <div class="container-sm container-fluid bg-white rounded shadow p-3">
-    <h2 class="text-center">Perfil de usuario</h2>
     <% if user_signed_in? && current_user == @user %>
-        <%= link_to 'Edita tu perfil', edit_user_registration_path, class:'btn btn-danger' %>
+    <%= link_to edit_user_registration_path, class:'btn btn-danger float-right' do %>
+        <i class="fas fa-cog"></i>    
     <% end %>
+    <% end %>
+    <h2 class="text-center">Perfil de <%= @user.name.capitalize %></h2>
     <hr>
     <div class="row text-center">
         <div class="col-12 col-md-4">
             <div class="form-group"> 
                 <%= image_tag @user.image.url(:medium), class:'redondaImg shadow-sm border border-dark' %>
             </div>
-            <div class="form-group shadow-sm">
-                <ul class="list-group text-left text-dark">
+            <div class="form-group">
+                <ul class="list-group list-group-flush text-left text-dark">
                     <% if @user.provider.nil? %>
                     <% else %>
                     <li class="list-group-item">Te registraste con: <%= @user.provider.capitalize %></li>
@@ -53,7 +55,20 @@
 
         </div>
         <div class="col-12 col-md-8">
-            <p>Acá irán las empresas seguidas</p>
+            <h5>Comentarios realizados a distintas empresas.</h5>
+            <% if @user.comments.count == 0 %>
+                <p>No haz hecho ningún comentario, comenta a algún negocio preferido.</p>
+            <% elsif @user.comments.count == 1 %>
+                <p>Solo haz hecho un comentario, comenta más, así ayudamos a todos.</p>
+            <% else %>
+                <p>Haz hecho <%= @user.comments.count %> comentarios</p>
+            <% end %>
+            
+            <div class="row col-rows-2 p-2">
+                
+                <%= render @user.comments %>
+            </div>
+                
         </div>
     </div>
 </div>

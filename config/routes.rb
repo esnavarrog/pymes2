@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :lists do
     resources :pops
   end
+
+  resources :friendships, only: [:create, :destroy]
  
 
   root to: "home#index"

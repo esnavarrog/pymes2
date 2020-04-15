@@ -24,11 +24,29 @@
                     
                     </li>
                     <li class="list-group-item">Email: <%= @user.email %></li>
+                    <% if @user.country.present? %>
                     <li class="list-group-item">Vivo en: <%= @user.country %></li>
+                    <% else %>
+                    <li class="list-group-item">
+                        Dinos donde vives
+                    </li>
+                    <% end %>
+                    <% if @user.date_of_birth.present? %>
                     <li class="list-group-item">Edad:  <%= (distance_of_time_in_words(Time.now, @user.date_of_birth)) unless @user.date_of_birth.blank? %></li>
+                    <% else %>
+                    <li class="list-group-item">
+                        Ingresa tu edad
+                    </li>
+                    <% end %>
+                    <% if @user.biografia.present? %>
                     <li class="list-group-item">Biografía: <br>
                         <%= @user.biografia %>
                     </li>
+                    <% else %>
+                    <li class="list-group-item">
+                        Agrega una biografía
+                    </li>
+                    <% end %>
                 </ul>
                 
             </div>

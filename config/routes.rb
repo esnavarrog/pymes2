@@ -9,14 +9,15 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: { 
     sessions: 'users/sessions',
+    registrations: 'registrations',
     :omniauth_callbacks => "users/omniauth_callbacks" 
   }
 
   
 
-
+  # resources :products, except: [:index, :show]
   resources :categories
-  resources :users
+  resources :users, only: [:index, :show]
   
 
 
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
  
 
   root to: "home#index"
-  get 'home/index'
+  get 'users/index'
   get 'search' => 'home#search'
   get 'pages/sobrenosotros'
   get 'pages/reglamento'

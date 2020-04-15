@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_11_194512) do
+ActiveRecord::Schema.define(version: 2020_04_13_213318) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_194512) do
     t.text "palabras"
     t.string "web"
     t.boolean "delivery"
+    t.integer "visits_count"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -197,6 +198,10 @@ ActiveRecord::Schema.define(version: 2020_04_11_194512) do
     t.string "provider"
     t.string "image"
     t.string "name"
+    t.string "lastname"
+    t.date "date_of_birth"
+    t.string "country"
+    t.text "biografia"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

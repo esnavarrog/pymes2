@@ -54,6 +54,7 @@ es:
     table_headers:
       model_name: "Nombre del modelo"
       last_used: "Último uso"
+      last_created: "Último creado"
       records: "Registros"
       username: "Usuario"
       changes: "Cambios"

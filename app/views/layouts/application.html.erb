@@ -18,6 +18,7 @@
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script>
     <script src='//underscorejs.org/underscore-min.js' type='text/javascript'></script>
+    
 
 
   </head>
@@ -25,16 +26,16 @@
   <body>
     <%= render 'partials/nav' %>
     <% if notice %>
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> <%= notice %> 
+      <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert">
+        <strong>ConectaBuin te notifica que!</strong> <%= notice %> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
     <% end %>
     <% if alert %>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Holy guacamole!</strong> <%= alert %> 
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert">
+        <strong>Cuidado!</strong> <%= alert %> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -44,5 +45,11 @@
         <%= yield %>
       </div>
       <%= render 'partials/footer' %>
+
+      <script>
+        setTimeout(function() {
+            $("#alert").fadeOut();           
+        },2000);
+      </script>
   </body>
 </html>

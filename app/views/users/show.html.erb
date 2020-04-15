@@ -1,11 +1,41 @@
-<div class="container-sm container-fluid">
-    <div class="row">
-        <h1>Perfil de usuario</h1>
-        <div class="col">
-            
-            <%= @user.email %>
-            <%= image_tag @user.image.thumb.url, class:'redondaImg img-fluid shadow-sm border border-dark' %>
-            
+<div class="container-sm container-fluid bg-white rounded shadow p-3">
+    <h2 class="text-center">Perfil de usuario</h2>
+    <% if user_signed_in? && current_user == @user %>
+        <%= link_to 'Edita tu perfil', edit_user_registration_path, class:'btn btn-danger' %>
+    <% end %>
+    <hr>
+    <div class="row text-center">
+        <div class="col-12 col-md-4">
+            <div class="form-group"> 
+                <%= image_tag @user.image.url(:medium), class:'redondaImg shadow-sm border border-dark' %>
+            </div>
+            <div class="form-group shadow-sm">
+                <ul class="list-group text-left text-dark">
+                    <% if @user.provider.nil? %>
+                    <% else %>
+                    <li class="list-group-item">Te registraste con: <%= @user.provider.capitalize %></li>
+                    <% end %>
+                    <li class="list-group-item">Nombre: <span class="pull-right"><%= @user.name.capitalize %> 
+                        <% if @user.lastname.nil? %>
+                        <% else %>
+                        <%= @user.lastname.capitalize %>
+                        <% end %>
+                    </span>
+                    
+                    </li>
+                    <li class="list-group-item">Email: <%= @user.email %></li>
+                    <li class="list-group-item">Vivo en: <%= @user.country %></li>
+                    <li class="list-group-item">Edad:  <%= (distance_of_time_in_words(Time.now, @user.date_of_birth)) unless @user.date_of_birth.blank? %></li>
+                    <li class="list-group-item">Biografía: <br>
+                        <%= @user.biografia %>
+                    </li>
+                </ul>
+                
+            </div>
+
+        </div>
+        <div class="col-12 col-md-8">
+            <p>Acá irán las empresas seguidas</p>
         </div>
     </div>
 </div>

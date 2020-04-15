@@ -26,6 +26,7 @@ class User < ApplicationRecord
   has_many :lists, dependent: :destroy
   has_many :comments
   has_many :categories
+  has_rich_text :biografia
 
   def online?
     update_at > 3.minutes.ago

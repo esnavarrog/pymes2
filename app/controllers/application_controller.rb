@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
     before_action :set_categories
     before_action :set_products
+    before_action :set_user_rich_text, only: [:show, :new, :edit]
+    before_action :configure_devise_params, if: :devise_controller?
 
     def new_session_path(scope)
         new_user_session_path
@@ -13,6 +15,17 @@ class ApplicationController < ActionController::Base
 
 
     private
+
+    def configure_devise_params
+        devise_parameter_sanitizer.permit(:account_update) {|u| u.permit(:name, :biografia, :lastname, :date_of_birth, :country, :image, :email, :password, :password_confirmation)}
+        devise_parameter_sanitizer.permit(:sign_up) do |admin|
+          admin.permit(:image, :name, :lastname, :country, :biografia, :email, :date_of_birth, :password, :password_confirmation)
+        end
+    end
+
+    def set_user_rich_text
+        @users = User.all.with_rich_text_biografia
+    end
 
     def set_categories
         @categories = Category.all

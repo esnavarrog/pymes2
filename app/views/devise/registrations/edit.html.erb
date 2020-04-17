@@ -1,27 +1,77 @@
 
 <div class="container-sm container-fluid shadow-sm bg-white rounded p-3">
-
-  <h2 class="text-center">Actualizar información de <%= @user.name.capitalize %></h2>
-  
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="form-group text-center">
-    <%= image_tag @user.image.url(:medium), class:'redondaImg border border-dark' %>
-  </div>
-  
-  
-  <div class="form-group">
-    <%= f.label :email%>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control shadow-sm', placeholder:'Correo electrónico' %>
-  </div>
-  <div class="input-group shadow-sm">
-    <%= f.label 'Sube un avatar', class:'custom-file-label' %>
-    <%= f.file_field :image, autofocus: true, class:'custom-file-input shadow-sm', placeholder:'Sube un avatar' %>
-  </div>
-  
-  <div class="row mt-3">
-    <div class="col-12 col-md-6">
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="form-group text-center">
+        <h2>Información de <%= @user.name.capitalize %></h2><hr>
+      </div>
+      <div class="form-group text-center"> 
+        <%= image_tag @user.image.url(:medium), class:'redondaImg shadow-sm border border-dark' %>
+      </div>
       <div class="form-group">
+        <ul class="list-group list-group-flush text-left text-dark">
+          <% if @user.provider.nil? %>
+          <% else %>
+          <li class="list-group-item">Te registraste con: <%= @user.provider.capitalize %></li>
+          <% end %>
+          <li class="list-group-item">Nombre: <span class="pull-right"><%= @user.name.capitalize %> 
+            <% if @user.lastname.nil? %>
+            <% else %>
+            <%= @user.lastname.capitalize %>
+            <% end %>
+          </span>
+        </li>
+        <li class="list-group-item">Email: <%= @user.email %></li>
+        <% if @user.country.present? %>
+        <li class="list-group-item">Vivo en: <%= @user.country %></li>
+        <% else %>
+        <li class="list-group-item">
+          Dinos donde vives
+        </li>
+        <% end %>
+        
+        <% if @user.date_of_birth.present? %>
+        <li class="list-group-item">Edad:  <%= (distance_of_time_in_words(Time.now, @user.date_of_birth)) unless @user.date_of_birth.blank? %></li>
+        <% else %>
+        <li class="list-group-item">
+          Ingresa tu edad
+        </li>
+        <% end %>
+        <% if @user.biografia.present? %>
+        <li class="list-group-item">
+            Biografía: <br>
+            <%= @user.biografia %>
+        </li>
+        <% else %>
+        <li class="list-group-item">
+          Agrega una biografía
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-12 col-md-8">
+
+    
+    <h2 class="text-center">Actualizar información.</h2><hr>
+    
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    
+    
+    <div class="form-group">
+      <%= f.label :email%>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control shadow-sm', placeholder:'Correo electrónico' %>
+    </div>
+    <div class="input-group shadow-sm">
+      <%= f.label 'Sube un avatar', class:'custom-file-label' %>
+      <%= f.file_field :image, autofocus: true, class:'custom-file-input shadow-sm', placeholder:'Sube un avatar' %>
+    </div>
+    
+    <div class="row mt-3">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
         <%= f.label 'Nombre'%>
         <%= f.text_field :name, placeholder: "Nombre", autocomplete: "name", class:'form-control shadow-sm' %>
       </div>
@@ -55,7 +105,7 @@
     <%= f.label :password %> <i>(deja en blanco si no quieres cambiar esto.)</i><br />
     <%= f.password_field :password, autocomplete: "new-password", class:'form-control' %>
     <% if @minimum_password_length %>
-  
+    
     <em> caracteres mínimos <%= @minimum_password_length %></em>
     <% end %>
   </div>
@@ -81,4 +131,6 @@
   
   <%= link_to "Back", :back %>
   
+</div>
+</div>
 </div>

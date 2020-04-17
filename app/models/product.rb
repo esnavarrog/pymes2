@@ -5,9 +5,10 @@ class Product < ApplicationRecord
   has_many :has_categories, dependent: :destroy
   has_many :categories, through: :has_categories
   after_create :save_categories
-  has_many :lists
-  has_many :comments
-  has_many :messages
+  has_many :lists, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :articles, dependent: :destroy
   has_rich_text :body
   # esto es de los follows
   has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy

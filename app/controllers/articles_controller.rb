@@ -1,17 +1,16 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :create, :destroy]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
-    @products = Product.all
   end
-
+  
   # GET /articles/1
   # GET /articles/1.json
   def show
-    @products = Product.all
+    
   end
 
   # GET /articles/new
@@ -28,13 +27,14 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user = current_user
+    @article.product = @product
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to @product, notice: 'Imagen subida correctamente a tu carrousel.' }
         format.json { render :show, status: :created, location: @article }
       else
-        format.html { render :new }
+        format.html { redirect_to @product, notice: 'No pudimos subir tu foto, vuelve a intentarlo o ponte en contacto con el admin.' }
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
@@ -70,8 +70,12 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
 
+    def set_product
+      @product = Product.find(params[:product_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title)
+      params.require(:article).permit(:title, :image)
     end
 end

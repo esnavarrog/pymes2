@@ -20,16 +20,18 @@
       </div>
       
       <div class="col-12 col-sm-12 col-md-4">
-        <% if user_signed_in? && current_user == User.where(id: 1) %>
+        <% if user_signed_in? && current_user == User.where(email: 'esnavarrog@gmail.com') %>
         <div class="form-group-check text-left">
           <h6>Categorías para menú</h6>
           <p class="text-tiny">Escoge categorías donde aparecerá tu empresa.</p>
           <% @categories.each do |category| %>
           <label><%= category.name %></label>
           <%= check_box_tag "categories[]", category.id, class:'form-control-check' %><br/>
-          
           <% end %>
         </div>
+        <% else %>
+        <%= image_tag @product.img.url(:thumb), class:'rounded img-fluid mx-auto d-block shadow-sm' %>
+        <h4 class="text-center"><%= @product.title %></h4>
         <% end %>
       </div>
 

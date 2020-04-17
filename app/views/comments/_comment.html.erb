@@ -1,0 +1,11 @@
+<div class="p-2 bg-light shadow-sm rounded border text-left col-6">
+    <div class="media">
+        <%= image_tag comment.product.img.url(:thumb), class:'mr-3 w-25 rounded' %>
+        <div class="media-body">
+            <small>Hace <%= "#{time_ago_in_words(comment.created_at)}" if comment.created_at %></small>
+            <h6>Comentario para: <br> <%= link_to comment.product.title, comment.product %></h6>
+                <%= comment.body %>
+        </div>
+    </div>
+
+</div>

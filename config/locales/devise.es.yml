@@ -114,8 +114,8 @@ es:
       already_signed_out: Se ha cerrado la sesión con éxito.
       new:
         sign_in: Iniciar sesión
-      signed_in: Sesión iniciada.
-      signed_out: Sesión finalizada.
+      signed_in: Iniciaste sesión.
+      signed_out: Finalizaste tu sesión.
     shared:
       links:
         back: Regresar

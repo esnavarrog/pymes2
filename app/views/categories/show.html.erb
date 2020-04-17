@@ -36,7 +36,6 @@
           <figcaption class="figure-caption p-2">
             <h6 class="text-center"><%= product.title.upcase %></h6>
             <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
-            <p class="mx-2 card-text text-center"><%= truncate(strip_tags(product.rich_text_body.to_s), length: 50) %></p>
             <!-- Ubicación -->
             <div class="row">
               <div class="col-5">
@@ -45,13 +44,13 @@
                   <small class="float-left mb-2 text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>
                 <% end %>
               </div>
-              <div class="col-2 text-center">
+              <div class="col-4 text-center">
                 <% if product.visits_count.nil? %>
                 <% else %>
                   <small class="mb-2 text-dark"><i class="fas fa-eye"></i> <%= product.visits_count %></small>
                 <% end %>
               </div>
-              <div class="col-5">
+              <div class="col-3">
                 <!-- Delivery si o no -->
                 <% if product.delivery == true %>
                   <small class="float-right mb-2 text-success"><i class="fas fa-motorcycle"></i> Delivery</small>

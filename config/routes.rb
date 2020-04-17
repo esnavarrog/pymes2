@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :lists
     resources :comments
     resources :messages
+    resources :articles
   end
   resources :lists do
     resources :pops

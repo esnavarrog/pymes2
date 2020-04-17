@@ -4,10 +4,12 @@
 
     
     <% if user_signed_in? && current_user == @product.user %>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#categoria">
-      <i class="fas fa-chevron-down"></i> Agrega categoría
-    </button>
+    <div class="btn-group mb-3" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>"><i class="fas fa-cog"></i> Configurar</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i> Agrega Lista</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#message"><i class="fab fa-readme"></i> Leer mensajes</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button>
+    </div>
     <% end %>
   </div>
   <div class="row">
@@ -17,34 +19,45 @@
       </div>
       <blockquote class="blockquote text-center">
         <h2 class="text-center shadow-text titulo mt-3"><%= @product.title.upcase %></h2>
-        <% if user_signed_in? && current_user == @product.user %>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>">
-          <i class="fas fa-edit"></i> Configurar
-        </button>
-        <% end %>
 
-        <% if @product.info.nil? %>
+
+        <% if @product.info.empty? %>
         <% else %>
         <footer class="blockquote-footer">
           <%= @product.info %>
         </footer>
         <% end %>
-        <h6>
-          <i class="fas fa-eye"></i> <%= @product.visits_count %> vistas
-        </h6>
 
-        <% if @product.followers.empty? %>
+        <div class="row text-center">
+          <div class="col">
+            <span class="badge "><%= @product.visits_count %></span> visitas
+          </div>
+          <div class="col">
+            <% if @product.followers.empty? %>
+            <% elsif @product.followers.count == 1 %>
+            <span class="badge"><%= @product.followers.count %></span> seguidor
+            <% else %>
+            <span class="badge"><%= @product.followers.count %></span> seguidores
+            <% end %>
+          </div>
           
-        <% elsif @product.followers.count == 1 %>
-          <%= @product.followers.count %> Seguidor
+        </div>
+        <% if @product.followers.empty? %>
         <% else %>
-          <%= @product.followers.count %> Seguidores
+        <div class="box_users d-block mx-auto">
+
+          <% @product.followers.each do |user| puts 1 %>
+          <%= link_to (image_tag user.image.url(:avatar), class:'redondaImg user_prod border border-white border-md'), user %>
+          
+          <% end %>
+        </div>
         <% end %>
+          
 
         <% if user_signed_in? && current_user == (@product.user) %>
         <% else %>
-          <% if current_user.following?(@product) %>
-            <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-danger btn-sm' do %>
+          <% if user_signed_in? && current_user.following?(@product) %>
+            <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-light btn-sm' do %>
             <i class="fas fa-check"></i> Siguiendo
             <% end %>
           <% else %>
@@ -187,20 +200,23 @@
 <!-- Article -->
 <div class="container-fluid bg-white py-3">
   <div class="row row-cols-2">
-    <div class="col-12 col-sm-12 col-lg-8">
+    <div class="col-12 col-sm-12 col-lg-9">
         <div class="p-4 mb-3 bg-light text-primary text-justify rounded border shadow-sm lead">
           <h5 class="text-center">Descripción de servicios.</h5><hr>
           <%= @product.rich_text_body %>
         </div>
+        <!-- Carousel imágenes -->
+          
+   
+        <!-- fin carousel -->
 
 
 
       <!-- Comienza info -->
       <nav>
         <div class="nav nav-tabs mb-3 mr-sm-2" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link text-dark active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
-          <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios</a>
-    
+          <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
+          <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios</a>
         </div>
       </nav>
       <div class="tab-content" id="nav-tabContent">
@@ -214,7 +230,7 @@
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
           
-                    Añadir una categoría
+                    Añadir una lista
                   </h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -225,10 +241,36 @@
               </div>
             </div>
           </div>
+
+           <!-- Modal -->
+           <div class="modal fade" id="modal_carrousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+          
+                    Agregar una imagen al carrousel.
+                  </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <%= render 'articles/form' %>
+               
+              </div>
+            </div>
+          </div>
           
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>
-              <h4 class="mt-3 text-center"><%= link_to list.title, list %> - <%= link_to '<i class="fas fa-plus"></i> Agregar item'.html_safe, list, class:'btn btn-dark btn-sm px-3'%>
+            <small>
+              <%= link_to list, class:'text-danger float-right', method: :delete, data: { confirm: 'Estás seguro?' } do %>
+              <i class="far fa-trash-alt"></i> Eliminar
+              <% end %>
+            </small>
+            <%= link_to '<i class="fas fa-th"></i> Agregar item'.html_safe, list, class:' text-primary float-left'%>
+              <h4 class="mt-3 text-center">
+                <%= link_to list.title, list %>
               </h4>
             <% else %>
               <div class="inline-block">
@@ -354,7 +396,7 @@
       </div>
     </div>
     <!-- Aside -->
-    <div class="col-12 col-md-12 col-lg-4">
+    <div class="col-12 col-md-12 col-lg-3">
       <div class="bg-light border rounded-lg p-3 shadow-sm">
         <h4>
           <% if @product.comments.empty? %>
@@ -413,33 +455,10 @@
         <h4 class="text-dark">Envía un mensaje directo</h4>
         <small class="text-muted font-italic">Este mensaje solo será recibido por la empresa.</small>
 
-        <%= form_for([@product, @product.messages.build]) do |f| %>
-          <p class="form-group">
-            <%= f.text_field :email, class:'form-control', placeholder:'Ingresa tu Email' %>
-          </p>
-          <p class="form-group">
-            <%= f.text_field :name, class:'form-control', placeholder:'Ingresa tu Nombre' %>
-          </p>
-          <p class="form-group">
-            <%= f.text_area :body, class:'form-control', placeholder:'Ingresa tu mensaje...' %>
-          </p>
-          <button type="submit" class="btn btn-dark btn-block">
-            Enviar mensaje <%= fa_icon "paper-plane" %>
-          </button>
-        <% end %>
+        <%= render 'messages/form'%>
 
       </div>
 
-
-
-      <!-- Button trigger modal -->
-      <% if user_signed_in? && current_user == @product.user %>
-      <div class="bg-light p-3 mt-3 shadow-sm border rounded-lg">
-        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#message">
-          Leer mensajes internos
-        </button>
-      </div>
-      <% end %>
 
       
 
@@ -472,6 +491,8 @@
   
 
 </div>
+
+
 <script type="text/javascript">
   handler = Gmaps.build('Google');  
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){  

@@ -13,9 +13,10 @@
                   <h6 class="card-subtitle mb-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></h6>
                   <p class="card-text"><%= pop.descripcion.truncate_words(30) %></p>
                     <% if user_signed_in? && current_user == @list.user %>
-                    <%= link_to '<i class="fas fa-trash-alt"></i> Eliminar'.html_safe, [pop.list, pop],
+                    <small><%= link_to '<i class="fas fa-trash-alt"></i> Eliminar'.html_safe, [pop.list, pop],
                                             method: :delete,
-                                            data: { confirm: 'Estás seguro de eliminar en post?' }, class:'btn btn-danger btn-sm' %>
+                                            data: { confirm: 'Estás seguro de eliminar en post?' } %>
+                    </small>
                    <% end %>
                 </div>
             

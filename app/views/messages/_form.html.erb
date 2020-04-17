@@ -1,37 +1,29 @@
-<%= form_with(model: message, local: true) do |form| %>
-  <% if message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
-
-      <ul>
-        <% message.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :references %>
-    <%= form.text_field :references %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<%= form_for([@product, @product.messages.build]) do |f| %>
+  <p class="form-group">
+    <%= f.text_field :email, class:'form-control', placeholder:'Ingresa tu Email' %>
+    <%- if @message.errors[:email].any? %>
+      <span class="badge badge-pill badge-danger">
+        <%= @message.errors[:email].first %>
+      </span>
+    <% end %>
+  </p>
+  <p class="form-group">
+    <%= f.text_field :name, class:'form-control', placeholder:'Ingresa tu Nombre' %>
+    <%- if @message.errors[:name].any? %>
+      <span class="badge badge-pill badge-danger">
+        <%= @message.errors[:name].first %>
+      </span>
+    <% end %>
+  </p>
+  <p class="form-group">
+    <%= f.text_area :body, class:'form-control', placeholder:'Ingresa tu mensaje...' %>
+    <%- if @message.errors[:body].any? %>
+      <span class="badge badge-pill badge-danger">
+        <%= @message.errors[:body].first %>
+      </span>
+    <% end %>
+  </p>
+  <button type="submit" class="btn btn-dark btn-block">
+    Enviar mensaje <%= fa_icon "paper-plane" %>
+  </button>
 <% end %>

@@ -35,7 +35,7 @@
           <small class="text-light">Todo comida</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Comida Rápida' %>
-              <%= link_to category.name, category, class:'dropdown-item text-white' %>
+              <%= link_to category.name, category, class:'dropdown-item' %>
             <% end %>
           <% end %>
         </div>

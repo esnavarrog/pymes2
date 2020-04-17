@@ -1,6 +1,6 @@
 class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
-  before_action :set_product, except: [:show, :index]
+  before_action :set_product, except: [:show, :index, :destroy]
 
   # GET /lists
   # GET /lists.json
@@ -33,10 +33,10 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @product, notice: 'List was successfully created.' }
+        format.html { redirect_to @product, notice: 'La lista fué creada satisfactoriamente.' }
         format.json { render :show, status: :created, location: @list }
       else
-        format.html { render :new }
+        format.html { redirect_to @product, notice: 'La lista no se creó, no puede estar vacía o tener menos de 4 letras.' }
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end
@@ -47,10 +47,10 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'List was successfully updated.' }
+        format.html { redirect_to @product, notice: 'List was successfully updated.' }
         format.json { render :show, status: :ok, location: @list }
       else
-        format.html { render :edit }
+        format.html { redirect_to @product }
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end
@@ -61,7 +61,7 @@ class ListsController < ApplicationController
   def destroy
     @list.destroy
     respond_to do |format|
-      format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
+      format.html { redirect_back fallback_location: @product, notice: 'La lista fué borrada satisfactoriamente' }
       format.json { head :no_content }
     end
   end

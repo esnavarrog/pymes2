@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_174147) do
+ActiveRecord::Schema.define(version: 2020_04_17_072119) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,9 @@ ActiveRecord::Schema.define(version: 2020_04_15_174147) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.string "image"
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_articles_on_product_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
@@ -224,6 +227,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_174147) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "articles", "products"
   add_foreign_key "articles", "users"
   add_foreign_key "categories", "users"
   add_foreign_key "comments", "comments"

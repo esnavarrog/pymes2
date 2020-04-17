@@ -1,22 +1,21 @@
-<%= form_with(model: article, local: true) do |form| %>
-  <% if article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
-
-      <ul>
-        <% article.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= form_for([@product, @product.articles.build] ) do |form| %>
+<div class="modal-body">
+  
+  <div class="form-group">
+    <%= form.label 'Agrega un pie de foto' %>
+    <%= form.text_field :title, class:'form-control', placeholder:'Pié de foto...' %>
+  </div>  
+  <div class="input-group mb-3">
+    <div class="custom-file">
+      <%= form.label 'Seleccionar una imágen', class:'custom-file-label' %>
+      <%= form.file_field :image, class:'custom-file-input', lang:'es' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  </div>      
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+  <%= form.submit 'Publicar', class:'btn btn-primary' %>
+  
+</div>
 <% end %>
+  

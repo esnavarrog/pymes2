@@ -1,4 +1,9 @@
-    <h4 class="mb-1 text-dark"><i class="fas fa-user"></i> <%= message.name %><small> - <a href="mailto:<%= message.email %>"><i class="fas fa-envelope-open-text"></i> <%= message.email %></a></small></h4>
+    <h4 class="mb-1 text-dark">
+        <i class="fas fa-user"></i> <%= message.name %>
+        <small> - <a href="mailto:<%= message.email %>">
+            <i class="fas fa-envelope-open-text"></i> <%= message.email %></a>
+        </small>
+        </h4>
     <p><%= message.body %></p>
     <small><%= "#{time_ago_in_words(message.created_at)}" if message.created_at %></small>
 

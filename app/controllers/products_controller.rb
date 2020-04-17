@@ -19,9 +19,11 @@ class ProductsController < ApplicationController
     @pop = Pop.new
     @comment = Comment.new
     @message = Message.new
+    @articles = Article.new
     @lists = List.all
     @pops = @list.pops.all
     @messages = Message.all
+    @articles = Article.all
     @comments = @product.comments.all.order(:created_at)
     @product.update_visits_count
   end

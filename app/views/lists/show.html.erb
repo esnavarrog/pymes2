@@ -1,16 +1,27 @@
-<div class="container-sm container-md rounded shadow-sm bg-light py-3">
-
-  <%= link_to '<i class="fas fa-chevron-left"></i> Volver al portal'.html_safe, @list.product, class:'btn btn-dark btn-sm'%> 
+<div class="container-sm container-md rounded shadow-sm bg-light py-3" style="min-height: 30rem;">
+    <%= link_to '<i class="fas fa-chevron-left"></i> Volver a tu portal'.html_safe, @list.product, class:'btn btn-dark btn-sm float-left'%> 
+    <button type="button" class="btn btn-danger btn-sm text-light float-right" data-toggle="modal" data-target="#exampleModal">
+      <i class="fas fa-plus"></i> Agregar item.
+    </button>
   <h2 class="text-primary text-center pt-3">
-    <%= @list.title %> de <%= @list.product.title %>
+    Lista: <%= @list.title %> de <%= @list.product.title %>
   </h2>
   <hr>
   <!-- Button trigger modal -->
   <div class="text-center">
 
-    <button type="button" class="btn btn-danger text-light" data-toggle="modal" data-target="#exampleModal">
-      <i class="fas fa-plus"></i> Agregar item.
-    </button>
+
+    <% if @list.pops.empty? %>
+
+      <p class="py-3">
+        No tienes ningún artículo en esta lista, agrega un artículo con el boton.
+      </p>
+    <% else %>
+      <p class="py-3 text-left">
+        Estos artículos se mostrarán en tu portal, agrega más respecto a tu lista, y crea una lista para cada categoría en tu negocio.
+      </p>
+    <% end %>
+
   </div>
   
   <!-- Modal -->

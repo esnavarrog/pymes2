@@ -15,17 +15,20 @@ class User < ApplicationRecord
       end
     end
     def self.from_omniauth(auth)
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+      where(provider: auth['provider'], uid: auth['uid']).first_or_create do |user|
+      user.email = auth['info']['email']
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+      user.name = auth['info']['first_name'] # assuming the user model has a name
+      user.lastname = auth['info']['last_name']
+      user.image = auth['info']['image'] # assuming the user model has an image
+      user.date_of_birth = auth['info']['user_birthday']
     end
+  
   end
   has_many :products, dependent: :destroy
   has_many :lists, dependent: :destroy
-  has_many :comments
-  has_many :categories
+  has_many :comments, dependent: :destroy
+  has_many :categories, dependent: :destroy
   has_rich_text :biografia
   has_many :active_friendships, class_name: "Friendship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy

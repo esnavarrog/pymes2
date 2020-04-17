@@ -47,8 +47,26 @@ body::-webkit-scrollbar-thumb{
 }
 a{
   text-decoration: $light;
+  color: $danger;
 }
 
+.nav-lg{
+  min-width: 50%;
+}
+.user_prod {
+  margin-left: -1rem;
+  max-width: 2.7rem;
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: $dark;
+  background-color: #fff;
+  border-color: $dark $dark #fff;
+}
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
 h5, h6, h1, h2, h3, h4{
   color: $dark;
 }
@@ -148,6 +166,7 @@ h5, h6, h1, h2, h3, h4{
   overflow-x: hidden;
   font-size: 0.7rem;
 }
+
 .box_comentarios::-webkit-scrollbar{
   width: 0.5rem;
 }
@@ -156,6 +175,25 @@ h5, h6, h1, h2, h3, h4{
   border-radius: 5px;
 }
 .box_comentarios::-webkit-scrollbar-thumb{
+  background: $dark;
+  border-radius: 3px;
+}
+
+.box_users{
+  max-width: 20rem; 
+  padding: 1rem;
+  overflow-y: hidden; 
+  overflow-x: scroll;
+  font-size: 0.7rem;
+}
+.box_users::-webkit-scrollbar{
+  height: 0.5rem;
+}
+.box_users::-webkit-scrollbar-track{
+  background: $light;
+  border-radius: 5px;
+}
+.box_users::-webkit-scrollbar-thumb{
   background: $dark;
   border-radius: 3px;
 }

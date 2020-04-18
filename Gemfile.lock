@@ -179,6 +179,7 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.9)
     orm_adapter (0.5.0)
+    pg (1.1.4)
     public_suffix (4.0.3)
     puma (3.12.2)
     rack (2.1.2)
@@ -323,6 +324,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   omniauth-facebook
   omniauth-google-oauth2
+  pg
   puma (~> 3.11)
   rails (~> 6.0.0)
   rails_admin (~> 2.0)

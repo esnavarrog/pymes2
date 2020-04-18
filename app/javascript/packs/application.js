@@ -27,4 +27,3 @@ require("gmaps/google")
 
 require("trix")
 require("@rails/actiontext")
-require("owl.carousel")

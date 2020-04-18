@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   
+  root to: "home#index"
+  get 'users/index'
+  get 'search' => 'home#search'
+  get 'pages/sobrenosotros'
+  get 'pages/reglamento'
+  get 'pages/sugerencia'
+  get 'pages/terminosycondiciones'
   
   resources :messages
   mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
@@ -35,13 +42,6 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create, :destroy]
  
 
-  root to: "home#index"
-  get 'users/index'
-  get 'search' => 'home#search'
-  get 'pages/sobrenosotros'
-  get 'pages/reglamento'
-  get 'pages/sugerencia'
-  get 'pages/terminosycondiciones'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

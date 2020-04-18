@@ -31,8 +31,6 @@ gem 'carrierwave'
 gem 'rails_admin', '~> 2.0'
 gem 'font_awesome5_rails'
 gem 'omniauth-facebook'
-gem 'gmaps4rails'
-gem 'geocoder'
 gem 'friendly_id'
 gem 'devise-i18n-views'
 

@@ -14,8 +14,6 @@ require("custom/underscore")
 require("trix")
 require("@rails/actiontext")
 
-require("gmaps/google")
-
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

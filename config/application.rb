@@ -15,7 +15,7 @@ module Pymes
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    config.time_zone = 'Mexico City'
+    config.time_zone = 'Santiago'
     config.i18n.locale = 'es'
     config.i18n.default_locale = 'es'
 

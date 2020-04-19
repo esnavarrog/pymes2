@@ -20,19 +20,15 @@
       </div>
       
       <div class="col-12 col-sm-12 col-md-4">
-        <% if user_signed_in? && current_user == User.where(email: 'esnavarrog@gmail.com') %>
         <div class="form-group-check text-left">
           <h6>Categorías para menú</h6>
           <p class="text-tiny">Escoge categorías donde aparecerá tu empresa.</p>
           <% @categories.each do |category| %>
           <label><%= category.name %></label>
           <%= check_box_tag "categories[]", category.id, class:'form-control-check' %><br/>
-          <% end %>
         </div>
-        <% else %>
         
-        <% end %>
-      </div>
+              </div>
 
     </div>
     

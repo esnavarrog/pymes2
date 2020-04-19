@@ -33,6 +33,7 @@ gem 'font_awesome5_rails'
 gem 'omniauth-facebook'
 gem 'friendly_id'
 gem 'devise-i18n-views'
+gem 'aws-sdk-s3', require: false
 
 
 # Reduces boot times through caching; required in config/boot.rb

@@ -28,9 +28,9 @@ class Product < ApplicationRecord
   validates :info, length: { maximum: 40 }
 
   
-  def categories=(value)
-    @categories = value
-  end
+  # def categories=(value)
+  #   @categories = value
+  # end
 
   H_LIST = (0..23).to_a
   M_LIST = ["00", "15", "30", "45", "60", "75", "90"]

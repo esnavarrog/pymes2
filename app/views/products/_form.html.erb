@@ -26,9 +26,10 @@
           <% @categories.each do |category| %>
           <label><%= category.name %></label>
           <%= check_box_tag "categories[]", category.id, class:'form-control-check' %><br/>
+          <% end %>
         </div>
-        
-              </div>
+       
+      </div>
 
     </div>
     

@@ -18,9 +18,7 @@ class ApplicationController < ActionController::Base
 
     def configure_devise_params
         devise_parameter_sanitizer.permit(:account_update) {|u| u.permit(:name, :biografia, :lastname, :date_of_birth, :country, :image, :email, :password, :password_confirmation)}
-        devise_parameter_sanitizer.permit(:sign_up) do |admin|
-          admin.permit(:email, :password, :password_confirmation)
-        end
+        devise_parameter_sanitizer.permit(:sign_up) {|admin| admin.permit(:name, :biografia, :lastname, :date_of_birth, :country, :image, :email, :password, :password_confirmation)}
     end
 
     def set_user_rich_text

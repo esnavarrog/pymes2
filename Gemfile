@@ -10,7 +10,6 @@ gem 'rails', '~> 6.0.0'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5'
-gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -35,6 +34,7 @@ gem 'omniauth-facebook'
 gem 'friendly_id'
 gem 'devise-i18n-views'
 gem 'aws-sdk-s3', require: false
+gem "fog-aws"
 
 
 # Reduces boot times through caching; required in config/boot.rb

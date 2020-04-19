@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'pages/terminosycondiciones'
   
   resources :messages
-  mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
   devise_for :admins
+  mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
 
 
   

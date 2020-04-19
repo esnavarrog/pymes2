@@ -1,2 +1,1 @@
-web: bundle exec bin/rails server -p $PORT -e $RAILS_ENV
-console: bundle exec bin/rails console
+web: bundle exec puma -w ${WEB_CONCURRENCY:-3} --preload -t 1:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}

@@ -5,7 +5,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    if user_signed_in?
+    if user_signed_in? && current_user == @admin
       @categories = Category.all
     else
       redirect_to root_path, alert: "No tienes permiso para esta sección"

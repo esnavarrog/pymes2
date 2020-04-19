@@ -31,8 +31,8 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-utensils"></i> Comida
         </a>
-        <div class="dropdown-menu fade text-center bg-dark shadow" aria-labelledby="navbarDropdown">
-          <small class="text-light">Todo comida</small><hr>
+        <div class="dropdown-menu fade text-center shadow" aria-labelledby="navbarDropdown">
+          <small>Todo comida</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Comida Rápida' %>
               <%= link_to category.name, category, class:'dropdown-item' %>

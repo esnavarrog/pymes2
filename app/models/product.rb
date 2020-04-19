@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :has_categories, dependent: :destroy
   has_many :categories, through: :has_categories
-  # after_create :save_categories
+  after_create :save_categories
   has_many :lists, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :messages, dependent: :destroy

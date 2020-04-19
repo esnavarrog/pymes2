@@ -1,14 +1,14 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
 
   # GET /categories
   # GET /categories.json
   def index
-    if user_signed_in? && current_user == @category.user
+    if user_signed_in? && current_user == User.where(email: 'esnavarrog@gmail.com')
       @categories = Category.all
     else
-      redirect_to home_index_path, alert: "No tienes permiso para esta sección"
+      redirect_to root_path, alert: "No tienes permiso para esta sección"
     end
   end
 

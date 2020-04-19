@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get 'pages/terminosycondiciones'
   
   resources :messages
-  devise_for :admins
+  devise_for :admins, controllers: {
+    registrations: 'registrations'
+  }
   mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
 
 

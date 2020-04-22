@@ -54,7 +54,7 @@
         <% end %>
           
 
-        <% if user_signed_in? && current_user == (@product.user) %>
+        <!-- <% if user_signed_in? && current_user == (@product.user) %>
         <% else %>
           <% if user_signed_in? && current_user.following?(@product) %>
             <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-light btn-sm' do %>
@@ -65,7 +65,7 @@
             <i class="fas fa-rss"></i> Seguir
             <% end %>
           <% end %>
-        <% end %>
+        <% end %> -->
 
       </blockquote>
        <!-- Modal -->

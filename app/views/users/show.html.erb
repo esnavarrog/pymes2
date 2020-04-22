@@ -55,7 +55,7 @@
         <div class="col-12 col-md-8">
             <nav>
                 <div class="nav nav-tabs justify-content-center mb-3" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link nav-lg active" id="nav-home-tab" data-toggle="tab" href="#tab-home" role="tab" aria-controls="nav-home" aria-selected="true">                        
+                    <!-- <a class="nav-item nav-link nav-lg active" id="nav-home-tab" data-toggle="tab" href="#tab-home" role="tab" aria-controls="nav-home" aria-selected="true">                        
                         
                         <% if @user.following.count == 0 %>
                             Seguidos
@@ -65,7 +65,7 @@
                             <span class="badge badge-dark badge-pill"><%= @user.following.count %></span> seguidos
                         <% end %>
                         <% end %>
-                        </a>
+                    </a> -->
                     <a class="nav-item nav-link nav-lg " id="nav-profile-tab" data-toggle="tab" href="#tab-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
                         <% if @user.comments.present? %>
 
@@ -84,7 +84,7 @@
             </nav>
               <div class="tab-content" id="nav-tabContent">
                   <div class="tab-pane fade show active" id="tab-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <div>
+                      <!-- <div>
 
                           <% if @user.following.count == 0 %>
                             <div class="alert alert-info" role="alert">No sigues a nadie aún, sigue a algún negocio y aparecerá acá</div>
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                           <% end %>
-                        </div>
+                        </div> -->
                   </div>
                 <div class="tab-pane fade" id="tab-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <h5 class="my-3">Comentarios realizados a distintas empresas.</h5>

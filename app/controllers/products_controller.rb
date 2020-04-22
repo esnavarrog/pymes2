@@ -1,9 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!
   # GET /products
   # GET /products.json
-  PER_PAGE = 10
   def index
     @products = Product.all.with_rich_text_body
 
@@ -31,7 +30,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    # @categories = Category.all
+    @categories = Category.all
   end
 
   # GET /products/1/edit
@@ -47,9 +46,13 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
 
-        format.html {redirect_to @product, notice: 'Product was successfully created.'} 
+        format.html {redirect_to @product, notice: 'Negocio creado correctamente.'} 
+        format.json { render :show, status: :created, location: @product }
+
       else
         format.html {render :new}
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -94,47 +97,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(
-        :title, 
-        :view, 
-        :body, 
-        :img, 
-        :phone, 
-        :email, 
-        :address, 
-        :facebook, 
-        :twitter, 
-        :instagram,
-        :web,
-        :palabras,
-        :info, 
-        :horaA, 
-        :minA, 
-        :horaC, 
-        :minC, 
-        :tiempoEspera, 
-        :categories,
-        :lunesA,
-        :lunesC,
-        :martesA,
-        :martesC,
-        :miercolesA,
-        :miercolesC,
-        :juevesA,
-        :juevesC,
-        :viernesA,
-        :viernesC,
-        :sabadoA,
-        :sabadoC,
-        :domingoA,
-        :domingoC,
-        :latitude,
-        :longitude,
-        :efectivo,
-        :transferencia,
-        :credito,
-        :debito,
-        :delivery
-      )
+      params.permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :user_id, :instagram, :web, :palabras, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera, :categories,:lunesA, :lunesC, :martesA, :martesC, :miercolesA, :miercolesC, :juevesA, :juevesC, :viernesA, :viernesC, :sabadoA, :sabadoC, :domingoA, :domingoC, :latitude, :longitude, :efectivo, :transferencia, :credito, :debito, :delivery)
     end
 end

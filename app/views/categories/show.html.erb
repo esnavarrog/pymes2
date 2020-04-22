@@ -15,45 +15,38 @@
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
           </div>
           <!-- Estado de abierto o cerrado -->
-          <% if (Time.now.strftime("%A") === "Sunday") && (product.domingoA.strftime("%H %M")..product.domingoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% elsif (Time.now.strftime("%A") === "Monday") && (product.lunesA.strftime("%H %M")..product.lunesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% elsif (Time.now.strftime("%A") === "Tuesday") && (product.martesA.strftime("%H %M")..product.martesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% elsif (Time.now.strftime("%A") === "Wednesday") && (product.miercolesA.strftime("%H %M")..product.miercolesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% elsif (Time.now.strftime("%A") === "Thursday") && (product.juevesA.strftime("%H %M")..product.juevesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% elsif (Time.now.strftime("%A") === "Friday") && (product.viernesA.strftime("%H %M")..product.viernesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% elsif (Time.now.strftime("%A") === "Saturday") && (product.sabadoA.strftime("%H %M")..product.sabadoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
-          <% else %>
-            <span class="notify-badge shadow-sm bg-dark"><i class="fab fa-expeditedssl"></i> Cerrado por hoy</span>
-          <% end %>
+          <% if (Time.now.strftime("%A") === "Sunday") && product.domingoA.try(:strftime, "%H %M")..product.domingoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Monday") && product.lunesA.try(:strftime, "%H %M")..product.lunesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Tuesday") && product.martesA.try(:strftime, "%H %M")..product.martesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Wednesday") && product.miercolesA.try(:strftime, "%H %M")..product.miercolesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Thursday") && product.juevesA.try(:strftime, "%H %M")..product.juevesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A"  ) === "Friday") && product.viernesA.try(:strftime, "%H %M")..product.viernesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A"  ) === "Saturday") && product.sabadoA.try(:strftime, "%H %M")..product.sabadoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% else %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fab fa-expeditedssl"></i> Cerrado por hoy</span>
+        <% end %>
 
           <figcaption class="figure-caption p-2">
             <h6 class="text-center"><%= product.title.upcase %></h6>
             <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
             <!-- Ubicación -->
-            <div class="row">
-              <div class="col-5">
-                <% if product.address.empty? %>
-                <% else %>
-                  <small class="float-left mb-2 text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>
+            <div class="row p-2">
+              <div class="col">
+                <% if product.address.present? %>
+                  <small class="float-left text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>
                 <% end %>
               </div>
-              <div class="col-4 text-center">
-                <% if product.visits_count.nil? %>
-                <% else %>
-                  <small class="mb-2 text-dark"><i class="fas fa-eye"></i> <%= product.visits_count %></small>
-                <% end %>
-              </div>
-              <div class="col-3">
+              <div class="col">
                 <!-- Delivery si o no -->
                 <% if product.delivery == true %>
-                  <small class="float-right mb-2 text-success"><i class="fas fa-motorcycle"></i> Delivery</small>
+                  <small class="float-right text-success"><i class="fas fa-motorcycle"></i> Delivery</small>
                 <% else %>
                 <% end %>
               </div>
@@ -81,30 +74,29 @@
             
           </div>
 
-        <% if (Time.now.strftime("%A") === "Sunday") && (product.domingoA.strftime("%H %M")..product.domingoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
-        <% elsif (Time.now.strftime("%A") === "Monday") && (product.lunesA.strftime("%H %M")..product.lunesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
-        <% elsif (Time.now.strftime("%A") === "Tuesday") && (product.martesA.strftime("%H %M")..product.martesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
-        <% elsif (Time.now.strftime("%A") === "Wednesday") && (product.miercolesA.strftime("%H %M")..product.miercolesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
-        <% elsif (Time.now.strftime("%A") === "Thursday") && (product.juevesA.strftime("%H %M")..product.juevesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
-        <% elsif (Time.now.strftime("%A") === "Friday") && (product.viernesA.strftime("%H %M")..product.viernesC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
-        <% elsif (Time.now.strftime("%A") === "Saturday") && (product.sabadoA.strftime("%H %M")..product.sabadoC.strftime("%H %M")) === Time.now.strftime("%H %M") %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Abierto</span>
+          <% if (Time.now.strftime("%A") === "Sunday") && product.domingoA.try(:strftime, "%H %M")..product.domingoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Monday") && product.lunesA.try(:strftime, "%H %M")..product.lunesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Tuesday") && product.martesA.try(:strftime, "%H %M")..product.martesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Wednesday") && product.miercolesA.try(:strftime, "%H %M")..product.miercolesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Thursday") && product.juevesA.try(:strftime, "%H %M")..product.juevesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A"  ) === "Friday") && product.viernesA.try(:strftime, "%H %M")..product.viernesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
+        <% elsif (Time.now.try(:strftime, "%A"  ) === "Saturday") && product.sabadoA.try(:strftime, "%H %M")..product.sabadoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
         <% else %>
-          <span class="notify-badge shadow-sm bg-dark"><i class="fab fa-expeditedssl"></i> Cerrado</span>
+          <span class="notify-badge shadow-sm bg-dark"><i class="fab fa-expeditedssl"></i> Cerrado por hoy</span>
         <% end %>
 
           <figcaption class="figure-caption p-2">
             <h6 class="m-2 text-center"><%= product.title.upcase %></h6>
             <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
             <!-- Ubicación -->
-            <% if product.address.empty? %>
-            <% else %>
+            <% if product.address.present? %>
             <small class="float-left mb-2 text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>
             <% end %>
             <!-- Delivery si o no -->
@@ -134,8 +126,7 @@
       <figcaption class="figure-caption pt-2 pb-2">
         <p class="m-2 text-center text-dark"><%= product.title.truncate(22) %></p>
         <!-- Ubicación -->
-        <% if product.address.empty? %>
-        <% else %>
+        <% if product.address.present? %>
         <small class="float-left mb-2 ml-2 text-dark"><i class="fas fa-map-marked-alt"></i></small>
         <% end %>
         <!-- Delivery si o no -->

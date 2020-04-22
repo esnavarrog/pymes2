@@ -20,14 +20,14 @@
       </div>
       
       <div class="col-12 col-sm-12 col-md-4">
-        <div class="form-group-check text-left">
-          <h6>Categorías para menú</h6>
-          <p class="text-tiny">Escoge categorías donde aparecerá tu empresa.</p>
-          <% @categories.each do |category| %>
-          <label><%= category.name %></label>
-          <%= check_box_tag "categories[]", category.id, class:'form-control-check' %><br/>
-          <% end %>
+        <h6>Categorías para menú</h6>
+        <p class="text-tiny">Escoge categorías donde aparecerá tu empresa.</p>
+        <% @categories.each do |category| %>
+          <div class="form-group form-check text-left">
+          <label class="form-check-label"><%= category.name %></label>
+          <%= check_box_tag "categories[]", category.id, class:'form-check-input', type:'checkbox' %><br/>
         </div>
+          <% end %>
        
       </div>
 
@@ -95,13 +95,32 @@
   <hr>
   <div class="text-center row">
     <div class="form-group col">
-      <%= form.label 'Tiempo de espera' %> <%= form.select :tiempoEspera, Product::M_LIST, class:'form-control' %> min.
+      <%= form.label 'Tiempo de espera' %> 
+      <%= form.select :tiempoEspera, Product::M_LIST, class:'form-control' %> min.
+    </div>
+    <div class="form-group form-check col">
+      <label class="form-check-label">Efectivo</label>
+      <%= form.check_box :efectivo, class:'form-check-input', type:'checkbox' %>
+    </div>
+    <div class="form-group form-check col">
+      <label class="form-check-label">Transferencias</label>
+      <%= form.check_box :transferencia, class:'form-check-input', type:'checkbox' %>
+    </div>
+    <div class="form-group form-check col">
+      <label class="form-check-label">Crédito</label>
+      <%= form.check_box :credito, class:'form-check-input', type:'checkbox' %>
+    </div>
+    <div class="form-group form-check col">
+      <label class="form-check-label">Débito</label>
+      <%= form.check_box :debito, class:'form-check-input', type:'checkbox' %>
     </div>
     <div class="form-group col">
       <%= form.label 'Haces Delivery?' %>
       <%= form.select :delivery, Product::DELIVERY, class:'form-control' %>
     </div>
+
   </div>
+
 
 
 

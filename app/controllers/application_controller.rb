@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
     before_action :set_categories
     before_action :set_products
-    before_action :set_user_rich_text, only: [:show, :new, :edit]
+    before_action :set_user_rich_text, only: [:show, :new, :edit, :update]
     before_action :configure_devise_params, if: :devise_controller?
 
     def new_session_path(scope)

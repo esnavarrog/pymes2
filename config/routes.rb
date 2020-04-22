@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
   
   root to: "home#index"
   get 'users/index'
@@ -9,8 +11,6 @@ Rails.application.routes.draw do
   get 'pages/terminosycondiciones'
   
   resources :messages
-  devise_for :admins
-  mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
 
 
   

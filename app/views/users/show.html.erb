@@ -13,13 +13,11 @@
             </div>
             <div class="form-group">
                 <ul class="list-group list-group-flush text-left text-dark">
-                    <% if @user.provider.nil? %>
-                    <% else %>
+                    <% if @user.provider.present? %>
                         <li class="list-group-item">Te registraste con: <%= @user.provider.capitalize %></li>
                     <% end %>
                         <li class="list-group-item">Nombre: <span class="pull-right"><%= @user.name.capitalize %> 
-                        <% if @user.lastname.nil? %>
-                        <% else %>
+                        <% if @user.lastname.present? %>
                             <%= @user.lastname.capitalize %>
                         <% end %>
                     </span>
@@ -58,6 +56,8 @@
             <nav>
                 <div class="nav nav-tabs justify-content-center mb-3" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link nav-lg active" id="nav-home-tab" data-toggle="tab" href="#pills-home" role="tab" aria-controls="nav-home" aria-selected="true">                        
+                        
+                        <% if @user.following.present? %>
                         <% if @user.following.count == 0 %>
                             Seguidos
                         <% elsif @user.following.count == 1 %>
@@ -65,14 +65,22 @@
                         <% else %>
                             <span class="badge badge-dark badge-pill"><%= @user.following.count %></span> seguidos
                         <% end %>
-                    </a>
+                        <% else %>
+                            No sigues a nadie
+                        <% end %>
+                        </a>
                     <a class="nav-item nav-link nav-lg " id="nav-profile-tab" data-toggle="tab" href="#pills-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                        <% if @user.comments.present? %>
+
                         <% if @user.comments.count == 0 %>
                         Comentarios
                         <% elsif @user.comments.count == 1 %>
                         <span class="badge badge-dark badge-pill"><%= @user.comments.count %></span> comentario
                         <% else %>
                         <span class="badge badge-dark badge-pill"><%= @user.comments.count %></span> comentarios
+                        <% end %>
+                        <% else %>
+                        No has hecho ningún comentario
                         <% end %>
                     </a>
                 </div>
@@ -81,8 +89,7 @@
                   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="nav-home-tab">
                       <div>
 
-                          <% if @user.following.nil? %>
-                          <% else %>
+                          <% if @user.following.present? %>
                           <% if @user.following.count == 0 %>
                             <div class="alert alert-info" role="alert">No sigues a nadie aún, sigue a algún negocio y aparecerá acá</div>
                           <% else %>
@@ -107,7 +114,10 @@
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <h5 class="my-3">Comentarios realizados a distintas empresas.</h5>
                     <div class="row col-rows-2 px-3">
+                        <% if @user.comments.present? %>
+
                         <%= render @user.comments %>
+                        <% end %>
                     </div>
                 </div>
               </div>

@@ -25,7 +25,6 @@ class Product < ApplicationRecord
   # fin de follows
   scope :published, -> { where(published: true) }
 
-  validates :info, length: { maximum: 40 }
 
   
   H_LIST = (0..23).to_a

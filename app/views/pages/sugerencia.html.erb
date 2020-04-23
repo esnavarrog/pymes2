@@ -33,3 +33,42 @@
     </div>
 
 </div>
+
+<div class="row text-center">
+    <div class="col">
+      <span class="badge "><%= @product.visits_count %></span> visitas
+    </div>
+    <div class="col">
+      <% if @product.followers.empty? %>
+      <% elsif @product.followers.count == 1 %>
+      <span class="badge"><%= @product.followers.count %></span> seguidor
+      <% else %>
+      <span class="badge"><%= @product.followers.count %></span> seguidores
+      <% end %>
+    </div>
+    
+  </div>
+  <% if @product.followers.empty? %>
+  <% else %>
+  <div class="box_users d-block mx-auto">
+
+    <% @product.followers.each do |user| puts 1 %>
+    <%= link_to (image_tag user.image.url(:avatar), class:'redondaImg user_prod border border-white border-md'), user %>
+    
+    <% end %>
+  </div>
+  <% end %> -->
+    
+
+  <!-- <% if user_signed_in? && current_user == (@product.user) %>
+  <% else %>
+    <% if user_signed_in? && current_user.following?(@product) %>
+      <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-light btn-sm' do %>
+      <i class="fas fa-check"></i> Siguiendo
+      <% end %>
+    <% else %>
+      <%= button_to friendships_path(product_id: @product.id), class:'btn btn-light btn-sm' do %>
+      <i class="fas fa-rss"></i> Seguir
+      <% end %>
+    <% end %>
+  <% end %>

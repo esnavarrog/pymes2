@@ -21,14 +21,13 @@
         <h2 class="text-center shadow-text titulo mt-3"><%= @product.title.upcase %></h2>
 
 
-        <% if @product.info.empty? %>
-        <% else %>
+        <% if @product.info.present? %>
         <footer class="blockquote-footer">
           <%= @product.info %>
         </footer>
         <% end %>
 
-        <div class="row text-center">
+        <!-- <div class="row text-center">
           <div class="col">
             <span class="badge "><%= @product.visits_count %></span> visitas
           </div>
@@ -51,7 +50,7 @@
           
           <% end %>
         </div>
-        <% end %>
+        <% end %> -->
           
 
         <!-- <% if user_signed_in? && current_user == (@product.user) %>

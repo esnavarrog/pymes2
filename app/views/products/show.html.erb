@@ -6,8 +6,9 @@
     <% if user_signed_in? && current_user == @product.user %>
     <div class="btn-group mb-3" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>"><i class="fas fa-cog"></i> Configurar</button>
+      <!-- <%= link_to 'Editar', edit_product_path(@product) %> -->
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i> Agrega Lista</button>
-      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#message"><i class="fab fa-readme"></i> Leer mensajes</button> -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#message"><i class="fab fa-readme"></i> Leer mensajes</button>
       <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button> -->
     </div>
     <% end %>
@@ -205,23 +206,21 @@
           </div>
 
            <!-- Modal -->
-           <div class="modal fade" id="modal_carrousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="modal_carrousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
-          
                     Agregar una imagen al carrousel.
                   </h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <%= render 'articles/form' %>
-               
+                  <%= render 'articles/form' %>
+                </div>
               </div>
             </div>
-          </div>
           
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>

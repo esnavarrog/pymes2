@@ -57,10 +57,10 @@
     
     <% end %>
   </div>
-  <% end %> -->
+  <% end %>
     
 
-  <!-- <% if user_signed_in? && current_user == (@product.user) %>
+  <% if user_signed_in? && current_user == (@product.user) %>
   <% else %>
     <% if user_signed_in? && current_user.following?(@product) %>
       <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-light btn-sm' do %>
@@ -72,3 +72,42 @@
       <% end %>
     <% end %>
   <% end %>
+
+
+
+
+  <!--  esto es de usuario -->
+
+  <!-- <div>
+
+                          <% if @user.following.count == 0 %>
+                            <div class="alert alert-info" role="alert">No sigues a nadie aún, sigue a algún negocio y aparecerá acá</div>
+                          <% else %>
+                          <h5 class="my-3">Negocios seguidos.</h5>
+                          <div class="card-group">
+                              <div class="row px-3">
+                                <% @user.following.each do |product| %>
+
+                                    <div class="card px-0 col-4 col-md-3">
+                                        <%= link_to (image_tag product.img.url(:thumb), class:'card-img-top', alt:'...'), product, class:'stretched-link' %>
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%= product.title %></h5>
+                                        </div>
+                                    </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                          <% end %>
+                        </div> -->
+
+                        <!-- <a class="nav-item nav-link nav-lg active" id="nav-home-tab" data-toggle="tab" href="#tab-home" role="tab" aria-controls="nav-home" aria-selected="true">                        
+                        
+                        <% if @user.following.count == 0 %>
+                            Seguidos
+                        <% elsif @user.following.count == 1 %>
+                            <span class="badge badge-dark badge-pill"><%= @user.following.count %></span> seguido
+                        <% else %>
+                            <span class="badge badge-dark badge-pill"><%= @user.following.count %></span> seguidos
+                        <% end %>
+                        <% end %>
+                    </a> -->

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:new, :show, :edit, :update, :destroy]
   before_action :authenticate_user!
   # GET /products
   # GET /products.json
@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
-    @categories = Category.all
+    # @categories = Category.all
   end
 
   # GET /products/1/edit
@@ -97,6 +97,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :user_id, :instagram, :web, :palabras, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera, :categories,:lunesA, :lunesC, :martesA, :martesC, :miercolesA, :miercolesC, :juevesA, :juevesC, :viernesA, :viernesC, :sabadoA, :sabadoC, :domingoA, :domingoC, :latitude, :longitude, :efectivo, :transferencia, :credito, :debito, :delivery)
+      params.require(:product).permit(:title, :view, :categories, :body, :img, :phone, :email, :address, :facebook, :twitter, :user_id, :instagram, :web, :palabras, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera, :categories ,:lunesA, :lunesC, :martesA, :martesC, :miercolesA, :miercolesC, :juevesA, :juevesC, :viernesA, :viernesC, :sabadoA, :sabadoC, :domingoA, :domingoC, :latitude, :longitude, :efectivo, :transferencia, :credito, :debito, :delivery)
     end
 end

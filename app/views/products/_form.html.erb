@@ -18,40 +18,27 @@
           <%= form.rich_text_area :body, class:'form-control', style:'min-height: 12rem;', placeholder:'Escribe una reseña de tu negocio...' %>
         </div>
       </div>
-      
-      <div class="col-12 col-sm-12 col-md-4">
-        <h6>Categorías para menú</h6>
-        <p class="text-tiny">Escoge categorías donde aparecerá tu empresa.</p>
-        <% @categories.each do |category| %>
-          <div class="form-group form-check text-left">
-          <label class="form-check-label"><%= category.name %></label>
-          <%= check_box_tag "categories[]", category.id, class:'form-check-input', type:'checkbox' %><br/>
-        </div>
-          <% end %>
-       
-      </div>
-
     </div>
     
 
-  <div class="input-group mb-3">
-    <div class="custom-file">
-      <%= form.label 'Elige una imágen', class:'custom-file-label' %>
-      <%= form.file_field :img, class:'custom-file-input' %>
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <%= form.label 'Elige una imágen', class:'custom-file-label' %>
+        <%= form.file_field :img, class:'custom-file-input' %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-12 col-sm-12 col-md-6">
-      <h6><%= form.label 'Web personal' %></h6>
-      <%= form.text_field :web, class:'form-control', placeholder:'Ej. https://www.ejemploweb.cl' %>
-    </div>
+    <div class="row">
+      <div class="form-group col-12 col-sm-12 col-md-6">
+        <h6><%= form.label 'Web personal' %></h6>
+        <%= form.text_field :web, class:'form-control', placeholder:'Ej. https://www.ejemploweb.cl' %>
+      </div>
 
-    <div class="form-group col-12 col-sm-12 col-md-6">
-      <h6><%= form.label 'Escribe palabras para el motor de busqueda' %></h6>
-      <%= form.text_field :palabras, class:'form-control', placeholder:'Ej. sushi, café, pasteles, libros, etc.' %>
+      <div class="form-group col-12 col-sm-12 col-md-6">
+        <h6><%= form.label 'Escribe palabras para el motor de busqueda' %></h6>
+        <%= form.text_field :palabras, class:'form-control', placeholder:'Ej. sushi, café, pasteles, libros, etc.' %>
 
+      </div>
     </div>
-  </div>
 
   
   <div class="row">

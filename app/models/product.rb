@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   before_update :set_visits_count
   mount_uploader :img, ImageUploader
-  after_create :save_categories
+  # after_create :save_categories
   belongs_to :user
   has_many :has_categories, dependent: :destroy
   has_many :categories, through: :has_categories
@@ -41,17 +41,17 @@ class Product < ApplicationRecord
   end
   
   #  custom setter
-  def categories=(value)
-    @categories = value
-  end
+  # def categories=(value)
+  #   @categories = value
+  # end
 
 
 
   private
 
-  def save_categories
-    @categories.each do |category_id|
-      HasCategory.create(category_id: category_id, product_id: self.id)
-    end
-  end
+  # def save_categories
+  #   @categories.each do |category_id|
+  #     HasCategory.create(category_id: category_id, product_id: self.id)
+  #   end
+  # end
 end

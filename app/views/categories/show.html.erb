@@ -15,7 +15,7 @@
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
           </div>
           <!-- Estado de abierto o cerrado -->
-          <% if (Time.now.strftime("%A") === "Sunday") && product.domingoA.try(:strftime, "%H %M")..product.domingoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <% if (Time.now.strftime("%A") === "Sunday") && product.domingoA.try(:strftime, "%H %M")..product.domingoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
           <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>
         <% elsif (Time.now.try(:strftime, "%A") === "Monday") && product.lunesA.try(:strftime, "%H %M")..product.lunesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
           <span class="notify-badge shadow-sm bg-dark"><i class="fas fa-lock-open"></i> Atendiendo</span>

@@ -16,7 +16,7 @@
   <div class="row">
     <div class="col-12 col-sm-12 col-md-7">
       <div class="justify-content-center">
-        <%= image_tag @product.img.thumb.url, class:'rounded img-fluid d-block text-center mx-auto shadow' %>
+        <%= image_tag @product.img.thumb.url, class:'rounded img-fluid d-block text-center mx-auto shadow-sm' %>
       </div>
       <blockquote class="blockquote text-center">
         <h2 class="text-center shadow-text titulo mt-3"><%= @product.title.upcase %></h2>
@@ -28,15 +28,57 @@
         </footer>
         <% end %>
 
+      </blockquote>
+
+      <div class="row text-center">
+        <div class="col">
+          <span class="badge "><%= @product.visits_count %></span> visitas
+        </div>
+        <div class="text-center col">
+
+          <% if user_signed_in? && current_user == (@product.user) %>
+          <% else %>
+            <% if user_signed_in? && current_user.following?(@product) %>
+              <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-light btn-sm' do %>
+                <i class="fas fa-check"></i> Siguiendo
+              <% end %>
+            <% else %>
+              <%= button_to friendships_path(product_id: @product.id), class:'btn btn-light btn-sm' do %>
+                <i class="fas fa-rss"></i> Seguir
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="col">
+          <% if @product.followers.present? %>
+            <% if @product.followers.count == 1 %>
+              <span class="badge"><%= @product.followers.count %></span> seguidor
+            <% else %>
+              <span class="badge"><%= @product.followers.count %></span> seguidores
+            <% end %>
+          <% else %>
+            Sin seguidores
+          <% end %>
+        </div>
+      </div>
+        
+      <% if @product.followers.present? %>
+        <div class="box_users d-block mx-auto text-center">
+          <% @product.followers.each do |user| puts 1 %>
+            <%= link_to (image_tag user.image.url(:avatar), class:'redondaImg user_prod border border-white border-md'), user %>
+          <% end %>
+        </div>
+      <% end %>
+      
     
 
-      </blockquote>
+
        <!-- Modal -->
-       <div class="modal fade" id="<%= @product.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="<%= @product.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Información de la empresa.</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Información de la empresa</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -47,9 +89,19 @@
       </div>
 
     </div>
-    <div class="col-12 col-2 col-sm-12 col-md-5">
+    <div class="col-12 col-sm-12 col-md-5">
+      <nav>
+        <div class="nav nav-tabs mb-3 mr-sm-2" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-datos" role="tab" aria-controls="nav-home" aria-selected="true">Datos</a>
+          <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-horarios" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-home-tab">
+
 
         <div class="mx-auto d-block p-3 rounded bg-light text-muted">
+          <h4 class="text-center">Datos</h4>
 
           <table class="table table-striped">
             <tbody>
@@ -125,6 +177,59 @@
             
           
         </div>
+        </div>
+        <div class="tab-pane fade" id="nav-horarios" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <h4 class="text-center">Horarios</h4>
+    
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Día</th>
+                <th scope="col">Hora apertura</th>
+                <th scope="col">Hora cierre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lunes</td>
+                <td><%= @product.lunesA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.lunesC.try(:strftime, "%H:%M") %></td>
+              </tr>
+              <tr>
+                <td>Martes</td>
+                <td><%= @product.martesA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.martesC.try(:strftime, "%H:%M") %></td>
+              </tr>
+              <tr>
+                <td>Miercoles</td>
+                <td><%= @product.miercolesA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.miercolesC.try(:strftime, "%H:%M") %></td>
+              </tr>
+              <tr>
+                <td>Jueves</td>
+                <td><%= @product.juevesA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.juevesC.try(:strftime, "%H:%M") %></td>
+              </tr>
+              <tr>
+                <td>Viernes</td>
+                <td><%= @product.viernesA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.viernesC.try(:strftime, "%H:%M") %></td>
+              </tr>
+              <tr>
+                <td>Sábado</td>
+                <td><%= @product.sabadoA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.sabadoC.try(:strftime, "%H:%M") %></td>
+              </tr>
+              <tr>
+                <td>Domingo</td>
+                <td><%= @product.domingoA.try(:strftime, "%H:%M") %></td>
+                <td><%= @product.domingoC.try(:strftime, "%H:%M") %></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
         
       
 
@@ -134,7 +239,7 @@
   <hr>
 
 
-    <div class="text-center">      
+    <div class="text-center mx-auto">      
       <% if @product.phone.present? %>
       <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
       <% end %>
@@ -157,6 +262,8 @@
       
     </div>
 
+
+
 </div>
 
 <!-- Contenido de la empresa -->
@@ -178,51 +285,11 @@
 
 
       <!-- Comienza info -->
-      <nav>
-        <div class="nav nav-tabs mb-3 mr-sm-2" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Lista artículos</a>
-          <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios</a>
-        </div>
-      </nav>
+
       <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         
           
-          <!-- Modal -->
-          <div class="modal fade" id="categoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
           
-                    Añadir una lista
-                  </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <%= render 'lists/form' %>
-               
-              </div>
-            </div>
-          </div>
-
-           <!-- Modal -->
-          <div class="modal fade" id="modal_carrousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Agregar una imagen al carrousel.
-                  </h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                  <%= render 'articles/form' %>
-                </div>
-              </div>
-            </div>
           <% if @product.lists.present? %>
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>
@@ -301,70 +368,11 @@
           <% else %>
             <div class="alert alert-info text-center">
               <h3>Agrega una lista.</h3>
-
             </div>
           <% end %>
     
-        </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <h4>Información.</h4>
-    
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Día</th>
-                <th scope="col">Hora apertura</th>
-                <th scope="col">Hora cierre</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Lunes</td>
-                <td><%= @product.lunesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.lunesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Martes</td>
-                <td><%= @product.martesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.martesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Miercoles</td>
-                <td><%= @product.miercolesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.miercolesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Jueves</td>
-                <td><%= @product.juevesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.juevesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Viernes</td>
-                <td><%= @product.viernesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.viernesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Sábado</td>
-                <td><%= @product.sabadoA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.sabadoC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Domingo</td>
-                <td><%= @product.domingoA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.domingoC.try(:strftime, "%H:%M") %></td>
-              </tr>
-            </tbody>
-          </table>
-    
-          
-            <div style='width: 800px;'>
-              <div id="map" style='width: 800px; height: 400px;'></div>
-            </div>
-
-            
-    
-    
-        </div>
+        
+        
       </div>
     </div>
     <!-- Aside -->
@@ -431,12 +439,47 @@
 
       </div>
 
+<!-- Modales -->
 
-      
+<!-- Modal -->
+<div class="modal fade" id="categoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+
+          Añade una lista
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <%= render 'lists/form' %>
+     
+    </div>
+  </div>
+</div>
+
+ <!-- Modal -->
+<div class="modal fade" id="modal_carrousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Agregar una imagen al carrousel
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <%= render 'articles/form' %>
+      </div>
+    </div>
+  </div>
 
 <!-- Modal -->
 <div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable" role="document">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalScrollableTitle">Mensajes directos</h5>

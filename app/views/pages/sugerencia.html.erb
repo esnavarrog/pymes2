@@ -39,8 +39,8 @@
       <span class="badge "><%= @product.visits_count %></span> visitas
     </div>
     <div class="col">
-      <% if @product.followers.empty? %>
-      <% elsif @product.followers.count == 1 %>
+      <% if @product.followers.present? %>
+      <% if @product.followers.count == 1 %>
       <span class="badge"><%= @product.followers.count %></span> seguidor
       <% else %>
       <span class="badge"><%= @product.followers.count %></span> seguidores

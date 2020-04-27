@@ -4,14 +4,14 @@
 
 
 <div class="py-1 bg-light shadow container-sm container-fluid rounded-bottom">
-
+    
     <h5 class="p-2 text-center">Publicaciones Destacadas</h5>
     <div class="row justify-content-center">
       <% @products.each do |product| %>
       <% if product.pub_destacada == true %>
       <% if product.view == true %>
       <div class="col-sm-12 col-md-6 col-lg-4">
-        <figure class="figure shadow bg-white rounded">
+        <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
             
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
@@ -43,7 +43,6 @@
               <div class="row">
                 <div class="col">
                   <% if product.address.present? %>
-                  <% else %>
                     <small class="float-left text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>
                   <% end %>
                 </div>
@@ -51,7 +50,6 @@
                   <!-- Delivery si o no -->
                   <% if product.delivery == true %>
                     <small class="float-right text-success"><i class="fas fa-motorcycle"></i> Delivery</small>
-                  <% else %>
                   <% end %>
                 </div>
               </div>
@@ -70,7 +68,7 @@
       <% if product.pub_normal == true %>
       <% if product.view == true %>
       <div class="col-6 col-md-3">
-        <figure class="figure shadow bg-white rounded">
+        <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
 
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
@@ -105,7 +103,6 @@
             <!-- Delivery si o no -->
             <% if product.delivery == true %>
             <small class="float-right mb-2 text-success"><i class="fas fa-motorcycle"></i> Deli</small>
-            <% else %>
             <% end %>
           </figcaption>
         </figure>

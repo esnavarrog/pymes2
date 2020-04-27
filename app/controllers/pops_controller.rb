@@ -30,7 +30,7 @@ class PopsController < ApplicationController
 
     respond_to do |format|
       if @pop.save
-        format.html { redirect_to @list, notice: 'Pop was successfully created.' }
+        format.html { redirect_to @list, notice: 'Creaste el artículo correctamente.' }
         format.json { render :show, status: :created, location: @pop }
       else
         format.html { render :new }
@@ -58,7 +58,7 @@ class PopsController < ApplicationController
   def destroy
     @pop.destroy
     respond_to do |format|
-      format.html { redirect_to @list, notice: 'Pop was successfully destroyed.' }
+      format.html { redirect_to @list, notice: 'El Item fué eliminado correctamente.' }
       format.json { head :no_content }
     end
   end

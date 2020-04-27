@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :links
   devise_for :admins
   mount RailsAdmin::Engine => '/adminkratos', as: 'rails_admin'
   

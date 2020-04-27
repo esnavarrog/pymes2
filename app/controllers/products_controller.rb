@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:new, :show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show, :index]
   # GET /products
   # GET /products.json
   def index
     @products = Product.all.with_rich_text_body
+    @product = Product.new
 
   end
 
@@ -19,10 +20,11 @@ class ProductsController < ApplicationController
     @comment = Comment.new
     @message = Message.new
     @articles = Article.new
+    @links = Link.all
     @lists = List.all
     @pops = @list.pops.all
-    @messages = Message.all
-    @articles = Article.all
+    @messages = @product.messages.all
+    @articles = @product.articles.all
     @comments = @product.comments.all.order(:created_at)
     @product.update_visits_count
   end
@@ -42,7 +44,6 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user = current_user
-    @product.categories = params[:categories]
     respond_to do |format|
       if @product.save
 
@@ -62,7 +63,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Actualizaste correctamente tu información.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -97,6 +98,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :view, :categories, :body, :img, :phone, :email, :address, :facebook, :twitter, :user_id, :instagram, :web, :palabras, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera, :categories ,:lunesA, :lunesC, :martesA, :martesC, :miercolesA, :miercolesC, :juevesA, :juevesC, :viernesA, :viernesC, :sabadoA, :sabadoC, :domingoA, :domingoC, :latitude, :longitude, :efectivo, :transferencia, :credito, :debito, :delivery)
+      params.require(:product).permit(:title, :view, :body, :img, :phone, :email, :address, :facebook, :twitter, :instagram, :web, :palabras, :info, :horaA, :minA, :horaC, :minC, :tiempoEspera, :categories ,:lunesA, :lunesC, :martesA, :martesC, :miercolesA, :miercolesC, :juevesA, :juevesC, :viernesA, :viernesC, :sabadoA, :sabadoC, :domingoA, :domingoC, :latitude, :longitude, :efectivo, :transferencia, :credito, :debito, :delivery)
     end
 end

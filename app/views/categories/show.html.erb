@@ -37,7 +37,7 @@
             <h6 class="text-center"><%= product.title.upcase %></h6>
             <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
             <!-- Ubicación -->
-            <div class="row p-2">
+            <div class="row">
               <div class="col">
                 <% if product.address.present? %>
                   <small class="float-left text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>

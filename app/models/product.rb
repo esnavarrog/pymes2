@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :articles, dependent: :destroy
+  # belongs_to :link
   has_rich_text :body
   # esto es de los follows
   # has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy

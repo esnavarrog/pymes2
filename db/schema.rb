@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_17_072119) do
+ActiveRecord::Schema.define(version: 2020_04_25_010222) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -114,6 +114,15 @@ ActiveRecord::Schema.define(version: 2020_04_17_072119) do
     t.index ["product_id"], name: "index_has_categories_on_product_id"
   end
 
+  create_table "links", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_links_on_product_id"
+  end
+
   create_table "lists", force: :cascade do |t|
     t.string "title"
     t.integer "product_id", null: false
@@ -160,7 +169,6 @@ ActiveRecord::Schema.define(version: 2020_04_17_072119) do
     t.boolean "view"
     t.text "body"
     t.string "img"
-    t.integer "phone"
     t.string "email"
     t.string "address"
     t.string "facebook"
@@ -203,6 +211,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_072119) do
     t.string "web"
     t.boolean "delivery"
     t.integer "visits_count"
+    t.string "phone"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -235,6 +244,7 @@ ActiveRecord::Schema.define(version: 2020_04_17_072119) do
   add_foreign_key "comments", "users"
   add_foreign_key "has_categories", "categories"
   add_foreign_key "has_categories", "products"
+  add_foreign_key "links", "products"
   add_foreign_key "lists", "products"
   add_foreign_key "lists", "users"
   add_foreign_key "messages", "products"

@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @product, notice: 'Message was successfully created.' }
+        format.html { redirect_to @product, notice: 'El mensaje fué enviado correctamente.' }
         format.json { render :show, status: :created, location: @message.product }
       else
         format.html { redirect_to @product, notice: 'El mensaje no se pudo enviar, revisa el formulario' }
@@ -51,7 +51,7 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy
     respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Message was successfully destroyed.' }
+      format.html { redirect_to messages_url, notice: 'El mensaje fué eliminado correctamente.' }
       format.json { head :no_content }
     end
   end

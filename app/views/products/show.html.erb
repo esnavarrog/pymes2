@@ -5,10 +5,10 @@
     
     <% if user_signed_in? && current_user == @product.user %>
     <div class="btn-group mb-3" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>"><i class="fas fa-cog"></i> Configurar</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>"><i class="fas fa-cog"></i><br> Configurar</button>
       <!-- <%= link_to 'Editar', edit_product_path(@product) %> -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i> Agrega Lista</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#message"><i class="fab fa-readme"></i> Leer mensajes</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i><br> Agrega Lista</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensaje"><i class="fab fa-readme"></i><br> Leer mensajes</button>
       <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button> -->
     </div>
     <% end %>
@@ -53,19 +53,24 @@
 
           <table class="table table-striped">
             <tbody>
+              <% if @product.phone.present? %>
               <tr>
                 <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
                 <td>+<%= @product.phone %></td>
               </tr>
+              <% end %>
+              <% if @product.email.present? %>
               <tr>
                 <th scope="row" class="text-right"><i class="far fa-envelope"></i></th>
                 <td><%= @product.email %></td>
-
               </tr>
+              <% end %>
+              <% if @product.address.present? %>
               <tr>
                 <th scope="row" class="text-right"><i class="fas fa-map-marked-alt"></i></th>
                 <td><%= @product.address %></td>
               </tr>
+              <% end %>
               <% if @product.credito == true %>
               <tr>
                 <th scope="row" class="text-right"><i class="far fa-credit-card"></i></th>
@@ -130,28 +135,23 @@
 
 
     <div class="text-center">      
-      <% if @product.phone.nil? %>
-      <% else %>
+      <% if @product.phone.present? %>
       <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
       <% end %>
 
-      <% if @product.facebook.nil? %>
-      <% else %>
+      <% if @product.facebook.present? %>
       <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
       <% end %>
 
-      <% if @product.twitter.nil? %>
-      <% else %>
+      <% if @product.twitter.present? %>
       <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
       <% end %>
 
-      <% if @product.instagram.nil? %>
-      <% else %>
+      <% if @product.instagram.present? %>
       <a href="<%= @product.instagram %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
       <% end %>
 
-      <% if @product.email.nil? %>
-      <% else %>
+      <% if @product.email.present? %>
       <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-danger mt-1"><i class="far fa-envelope"></i> Email</a>
       <% end %>
       
@@ -164,10 +164,12 @@
 <div class="container-fluid bg-white py-3">
   <div class="row row-cols-2">
     <div class="col-12 col-sm-12 col-lg-9">
+      <% if @product.rich_text_body.present? %>
         <div class="p-4 mb-3 bg-light text-primary text-justify rounded border shadow-sm lead">
           <h5 class="text-center">Descripción de servicios.</h5><hr>
           <%= @product.rich_text_body %>
         </div>
+      <% end %>
         <!-- Carousel imágenes -->
           
    
@@ -221,7 +223,7 @@
                 </div>
               </div>
             </div>
-          
+          <% if @product.lists.present? %>
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>
             <small>
@@ -234,13 +236,15 @@
                 <%= link_to list.title, list %>
               </h4>
             <% else %>
-              <div class="inline-block">
-                <h4 class="text-center text-dark">
-                  <%= list.title %>
-                </h4>
-              </div>
-          
+            <div class="inline-block">
+              <h4 class="text-center text-dark">
+                <%= list.title %>
+              </h4>
+            </div>
             <% end %>
+            
+
+
             <div class="row">
               <% list.pops.each do |pop| %>
               <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-1 pr-1 pl-1">
@@ -285,6 +289,7 @@
                 </div>
               </div>
               <% end %>
+              
             </div>
 
             
@@ -292,6 +297,12 @@
           
               <br>
           
+          <% end %>
+          <% else %>
+            <div class="alert alert-info text-center">
+              <h3>Agrega una lista.</h3>
+
+            </div>
           <% end %>
     
         </div>
@@ -424,7 +435,7 @@
       
 
 <!-- Modal -->
-<div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -434,7 +445,11 @@
         </button>
       </div>
         <div class="modal-body">
+          <% if @product.messages.present? %>
           <%= render @messages %>
+          <% else %>
+            No tienes ningún mensaje.
+          <% end %>
         </div>
       <div class="modal-footer">
         <p class="text-left text-info">Responde a tus posibles clientes vía email.</p>

@@ -77,7 +77,25 @@
               <% if @product.phone.present? %>
               <tr>
                 <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
-                <td>+<%= @product.phone %></td>
+                <td>
+                  +56 <%= @product.phone %> 
+                </td>
+              </tr>
+              <% end %>
+              <% if @product.mobil1.present? %>
+              <tr>
+                <th scope="row" class="text-right"><i class="fab fa-whatsapp"></i></th>
+                <td>
+                  +56 <%= @product.mobil1 %>
+                </td>
+              </tr>
+              <% end %>
+              <% if @product.mobil2.present? %>
+              <tr>
+                <th scope="row" class="text-right"><i class="fas fa-mobile-alt"></i></th>
+                <td>
+                  +56 <%= @product.mobil2 %>
+                </td>
               </tr>
               <% end %>
               <% if @product.email.present? %>
@@ -209,8 +227,8 @@
 
 
     <div class="text-center mx-auto">      
-      <% if @product.phone.present? %>
-      <a href="https://wa.me/<%= @product.phone %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+      <% if @product.mobil1.present? %>
+      <a href="https://wa.me/56<%= @product.mobil1 %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
       <% end %>
 
       <% if @product.facebook.present? %>

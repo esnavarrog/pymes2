@@ -44,7 +44,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-concierge-bell"></i> Servicios
         </a>
-        <div class="dropdown-menu fade text-center bg-dark shadow" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu fade text-center shadow" aria-labelledby="navbarDropdown">
           <small class="text-light">Servicios varios</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Servicios' %>
@@ -57,7 +57,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-truck"></i> Delivery
         </a>
-        <div class="dropdown-menu fade text-center bg-dark shadow" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu fade text-center shadow" aria-labelledby="navbarDropdown">
           <small class="text-light">Servicios de delivery</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Delivery' %>

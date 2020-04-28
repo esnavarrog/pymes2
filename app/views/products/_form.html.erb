@@ -20,7 +20,7 @@
     <div class="input-group mb-3">
       <div class="custom-file">
         <%= form.label 'Elige una imágen', class:'custom-file-label' %>
-        <%= form.file_field :img, class:'custom-file-input' %>
+        <%= form.file_field :img, class:'custom-file-input', lang:'es' %>
       </div>
     </div>
     <div class="row">
@@ -36,22 +36,52 @@
       </div>
     </div>
 
-  
-  <div class="row">
-    <div class="form-group col-6 col-md-4">
-      <h6><%= form.label 'Dirección' %></h6>
-      <%= form.text_field :address, class:'form-control' %>
-    </div>
+    <div class="row">
+      <div class="form-group col-12 col-md-6">
+        <h6><%= form.label 'Dirección' %></h6>
+        <%= form.text_field :address, class:'form-control' %>
+      </div>
+      <div class="form-group col-12 col-md-6">
+        <h6><%= form.label 'Correo electrónico de contacto clientes' %></h6>
+        <%= form.text_field :email, class:'form-control' %>
+      </div>
 
-    <div class="form-group col-6 col-md-4">
-      <h6><%= form.label 'Número de contacto' %></h6>
-      <%= form.number_field :phone, class:'form-control' %>
+  </div>
+  <div class="row">
+    <div class="form-group col-12 col-md-4">
+
+      <h6><%= form.label 'Teléfono' %></h6>
+      <div class="input-group">
+        
+        <div class="input-group-prepend">
+          <div class="input-group-text">+56</div>
+        </div>
+        <%= form.text_field :phone, class:'form-control', placeholder:'Ejem. 22 654 3214', type:'text' %>
+      </div>
+    </div>
+    <div class="form-group col-12 col-md-4">
+
+      <h6><%= form.label 'Whatsapp' %></h6>
+      <div class="input-group">
+        
+        <div class="input-group-prepend">
+          <div class="input-group-text">+56</div>
+        </div>
+        <%= form.text_field :mobil1, class:'form-control', placeholder:'Ejem. 987654321', type:'text' %>
+      </div>
+    </div>
+    <div class="form-group col-12 col-md-4">
+
+      <h6><%= form.label 'Movil otro' %></h6>
+      <div class="input-group">
+        
+        <div class="input-group-prepend">
+          <div class="input-group-text">+56</div>
+        </div>
+        <%= form.text_field :mobil2, class:'form-control', placeholder:'Ejem. 987654321', type:'text' %>
+      </div>
     </div>
   
-    <div class="form-group col-6 col-md-4">
-      <h6><%= form.label 'Correo electrónico de contacto clientes' %></h6>
-      <%= form.text_field :email, class:'form-control' %>
-    </div>
   </div>
   
   <h5 class="mt-3">Botones de redes sociales</h5>
@@ -74,34 +104,78 @@
   </div>
 
 
+  <h5 class="mt-3 text-center">Tipo de pagos</h5>
+  <hr>
+  <div class="row p-3">
+    <table>
+      <tr>
+        <th>
+          <label class="form-label">Efectivo</label>
+        </th>
+        <td>
+          <div class="form-inline pl-3">
+            <%= form.select :efectivo, Product::DELIVERY, class:'form-control' %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label class="form-label">Transferencias</label>
+        </th>
+        <td>
+          <div class="form-inline pl-3">
+            <%= form.select :transferencia, Product::DELIVERY, class:'form-control' %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label class="form-label">Crédito</label>
+        </th>
+        <td>
+          <div class="form-inline pl-3">
+            <%= form.select :credito, Product::DELIVERY, class:'form-control' %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <label class="form-label">Débito</label>
+        </th>
+        <td>
+          <div class="form-inline pl-3">
+            <%= form.select :debito, Product::DELIVERY, class:'form-control' %>
+          </div>
+        </td>
+      </tr>
+    </table>
+    
+  </div>
   <h5 class="mt-3 text-center">Tipo de atención</h5>
   <hr>
-  <div class="text-center row">
-    <div class="form-group col">
-      <%= form.label 'Tiempo de espera' %> 
-      <%= form.select :tiempoEspera, Product::M_LIST, class:'form-control' %> min.
-    </div>
-    <div class="form-group form-check col">
-      <label class="form-check-label">Efectivo</label>
-      <%= form.check_box :efectivo, class:'form-check-input', type:'checkbox' %>
-    </div>
-    <div class="form-group form-check col">
-      <label class="form-label">Transferencias</label>
-      <%= form.check_box :transferencia, class:'form-control', type:'checkbox' %>
-    </div>
-    <div class="form-group form-check col">
-      <label class="form-check-label">Crédito</label>
-      <%= form.check_box :credito, class:'form-check-input', type:'checkbox' %>
-    </div>
-    <div class="form-group form-check col">
-      <label class="form-check-label">Débito</label>
-      <%= form.check_box :debito, class:'form-check-input', type:'checkbox' %>
-    </div>
-    <div class="form-group col">
-      <%= form.label 'Haces Delivery?' %>
-      <%= form.select :delivery, Product::DELIVERY, class:'form-control' %>
-    </div>
-
+  <div class="row p-3">
+    <table>
+      <tr>
+        <th>
+          <%= form.label 'Tiempo de espera' %> 
+        </th>
+        <td>
+          <div class="form-inline pl-3">
+            <%= form.select :tiempoEspera, Product::M_LIST, prompt:'Selecciona', class:'form-control' %> min.
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>
+          <%= form.label 'Haces Delivery?' %>
+        </th>
+        <td>
+          <div class="form-inline pl-3">
+            <%= form.select :delivery, Product::DELIVERY, class:'form-control' %>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 
 

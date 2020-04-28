@@ -34,41 +34,11 @@
         <div class="col">
           <span class="badge "><%= @product.visits_count %></span> visitas
         </div>
-        <div class="text-center col">
-
-          <% if user_signed_in? && current_user == (@product.user) %>
-          <% else %>
-            <% if user_signed_in? && current_user.following?(@product) %>
-              <%= button_to friendship_path(product_id: @product.id), method: :delete, class:'btn btn-light btn-sm' do %>
-                <i class="fas fa-check"></i> Siguiendo
-              <% end %>
-            <% else %>
-              <%= button_to friendships_path(product_id: @product.id), class:'btn btn-light btn-sm' do %>
-                <i class="fas fa-rss"></i> Seguir
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="col">
-          <% if @product.followers.present? %>
-            <% if @product.followers.count == 1 %>
-              <span class="badge"><%= @product.followers.count %></span> seguidor
-            <% else %>
-              <span class="badge"><%= @product.followers.count %></span> seguidores
-            <% end %>
-          <% else %>
-            Sin seguidores
-          <% end %>
-        </div>
+        
+        
       </div>
         
-      <% if @product.followers.present? %>
-        <div class="box_users d-block mx-auto text-center">
-          <% @product.followers.each do |user| puts 1 %>
-            <%= link_to (image_tag user.image.url(:avatar), class:'redondaImg user_prod border border-white border-md'), user %>
-          <% end %>
-        </div>
-      <% end %>
+      
       
     
 
@@ -100,9 +70,8 @@
         <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-home-tab">
 
 
-        <div class="mx-auto d-block p-3 rounded bg-light text-muted">
           <h4 class="text-center">Datos</h4>
-
+          <hr>
           <table class="table table-striped">
             <tbody>
               <% if @product.phone.present? %>
@@ -176,7 +145,7 @@
           </div>
             
           
-        </div>
+        
         </div>
         <div class="tab-pane fade" id="nav-horarios" role="tabpanel" aria-labelledby="nav-profile-tab">
           <h4 class="text-center">Horarios</h4>

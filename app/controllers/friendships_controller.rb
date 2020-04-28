@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
     before_action :authenticate_user!
-    before_action :find_user
+    before_action :find_product
 
     def create
         current_user.follow(@product)
@@ -13,7 +13,7 @@ class FriendshipsController < ApplicationController
 
     private
 
-    def find_user
+    def find_product
         @product = Product.find(params[:product_id])
     end
 

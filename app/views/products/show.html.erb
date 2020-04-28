@@ -1,4 +1,4 @@
-<div class="container-fluid bg-white py-3 shadow-sm">
+<div class="container-fluid bg-white pt-3 shadow-sm">
   <div class="text-center"> 
 
 
@@ -74,11 +74,11 @@
           <hr>
           <table class="table table-striped">
             <tbody>
-              <% if @product.phone.present? %>
+              <% if @product.telefono.present? %>
               <tr>
                 <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
                 <td>
-                  +56 <%= @product.phone %> 
+                  +56 <%= @product.telefono %> 
                 </td>
               </tr>
               <% end %>

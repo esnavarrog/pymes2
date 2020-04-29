@@ -3,5 +3,5 @@ class List < ApplicationRecord
   belongs_to :user
   has_many :pops, dependent: :destroy
 
-  validates :title, length: { in: 4..20 }
+  validates :title, length: { in: 4..40 }
 end

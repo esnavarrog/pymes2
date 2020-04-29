@@ -11,6 +11,8 @@ class Product < ApplicationRecord
   has_many :articles, dependent: :destroy
   # belongs_to :link
   has_rich_text :body
+  geocoded_by :address
+  after_validation :geocode
   # esto es de los follows
   # has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
   # has_many :followers, through: :passive_friendships, source: :follower

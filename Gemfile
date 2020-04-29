@@ -35,6 +35,7 @@ gem 'friendly_id'
 gem 'devise-i18n-views'
 gem 'aws-sdk-s3', require: false
 gem "fog-aws"
+gem 'geocoder'
 
 
 # Reduces boot times through caching; required in config/boot.rb

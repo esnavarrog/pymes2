@@ -31,12 +31,20 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    if user_signed_in? && current_user == @admin
+      @product = Product.new
+    else
+      redirect_to home_index_path, notice: 'No tienes permiso para esto'
+    end
     # @categories = Category.all
   end
 
   # GET /products/1/edit
   def edit
+    if user_signed_in? && current_user == @product.user
+    else
+      redirect_to @product, notice: 'No tienes permiso para ejecutar esta acción, si eres el dueño inicia sesión'
+    end
   end
 
   # POST /products

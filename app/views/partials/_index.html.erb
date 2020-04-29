@@ -37,8 +37,16 @@
           
 
           <figcaption class="figure-caption p-2">
-            <h5 class="text-center"><%= product.title.upcase %></h5>
-            <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
+            <h5 class="text-center">
+              <% if product.title.present? %>
+              <%= product.title.upcase %>
+              <% end %>
+            </h5>
+            <p class="text-tiny text-center">
+              <% if product.info.present? %>
+              <%= product.info.truncate(50) %>
+              <% end %>
+            </p>
               <!-- Ubicación -->
               <div class="row">
                 <div class="col">
@@ -94,8 +102,18 @@
         <% end %>
 
           <figcaption class="figure-caption p-2">
-            <h5 class="m-2 text-center"><%= product.title %></h5>
-            <p class="text-tiny text-center"><%= product.info.truncate(50) %></p>
+
+            <h5 class="m-2 text-center">
+              <% if product.title.present? %>
+              <%= product.title %>
+              <% end %>
+            </h5>
+            <p class="text-tiny text-center">
+              <% if product.info.present? %>
+              <%= product.info.truncate(50) %>
+              <% end %>
+            </p>
+
             <!-- Ubicación -->
             <% if product.address.present? %>
             <small class="float-left mb-2 text-dark"><i class="fas fa-map-marked-alt"></i> <%= product.address %></small>
@@ -124,7 +142,11 @@
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
           </div>
           <figcaption class="figure-caption pt-2 pb-2">
-            <p class="m-2 text-center text-dark"><%= product.title.truncate(22) %></p>
+            <p class="m-2 text-center text-dark">
+              <% if product.title.present? %>
+              <%= product.title.truncate(22) %>
+              <% end %>
+            </p>
             <!-- Ubicación -->
             <% if product.address.present? %>
             <small class="float-left mb-2 ml-2 text-dark"><i class="fas fa-map-marked-alt"></i></small>

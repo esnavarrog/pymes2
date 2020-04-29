@@ -12,17 +12,17 @@ class Product < ApplicationRecord
   # belongs_to :link
   has_rich_text :body
   # esto es de los follows
-  has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
-  has_many :followers, through: :passive_friendships, source: :follower
-  def follow(product)
-    active_friendships.create(followed_id: product.id)
-  end
-  def unfollow(product)
-    active_friendships.find_by(followed_id: product.id).destroy
-  end
-  def following?(product)
-    following.include?(product)
-  end
+  # has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
+  # has_many :followers, through: :passive_friendships, source: :follower
+  # def follow(product)
+  #   active_friendships.create(followed_id: product.id)
+  # end
+  # def unfollow(product)
+  #   active_friendships.find_by(followed_id: product.id).destroy
+  # end
+  # def following?(product)
+  #   following.include?(product)
+  # end
   # fin de follows
   scope :published, -> { where(published: true) }
 

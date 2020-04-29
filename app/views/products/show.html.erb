@@ -270,7 +270,7 @@
         <div class="col-6">
           
           <% if @product.latitude && @product.longitude %>
-          <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@product.latitude},#{@product.longitude}&markers=#{@product.latitude},#{@product.longitude}&zoom=8&size=640x400&key=#{ENV['google_maps_api_key']}",
+          <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@product.latitude},#{@product.longitude}&markers=#{@product.latitude},#{@product.longitude}&zoom=4&size=640x400&key=#{ENV['google_maps_api_key']}",
               class: 'img-fluid img-rounded', alt: "#{@product.address} en el mapa"%>
           <% end %>
         </div>

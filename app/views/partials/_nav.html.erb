@@ -45,10 +45,10 @@
           <i class="fas fa-concierge-bell"></i> Servicios
         </a>
         <div class="dropdown-menu fade text-center shadow" aria-labelledby="navbarDropdown">
-          <small class="text-light">Servicios varios</small><hr>
+          <small>Servicios varios</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Servicios' %>
-              <%= link_to category.name, category, class:'dropdown-item text-white' %>
+              <%= link_to category.name, category, class:'dropdown-item' %>
             <% end %>
           <% end %>
         </div>
@@ -58,10 +58,10 @@
           <i class="fas fa-truck"></i> Delivery
         </a>
         <div class="dropdown-menu fade text-center shadow" aria-labelledby="navbarDropdown">
-          <small class="text-light">Servicios de delivery</small><hr>
+          <small>Servicios de delivery</small><hr>
           <% @categories.each do |category| %>
             <% if category.dropdown == 'Delivery' %>
-              <%= link_to category.name, category, class:'dropdown-item text-white' %>
+              <%= link_to category.name, category, class:'dropdown-item' %>
             <% end %>
           <% end %>
         </div>

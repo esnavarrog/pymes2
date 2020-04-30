@@ -1,0 +1,26 @@
+<%= form_for([@category]) do |f| %>
+ 
+  <p class="form-group">
+    <%= f.text_field :name, class:'form-control', placeholder:'Ingresa tu Nombre' %>
+    <%- if @category.errors[:name].any? %>
+      <span class="badge badge-pill badge-danger">
+        <%= @category.errors[:name].first %>
+      </span>
+    <% end %>
+  </p>
+  <p class="form-group">
+    <%= f.color_field :color, class:'form-control' %>
+    <%- if @category.errors[:color].any? %>
+      <span class="badge badge-pill badge-danger">
+        <%= @category.errors[:color].first %>
+      </span>
+    <% end %>
+  </p>
+  <p class="form-group">
+    <%= f.select :dropdown, Category::DROPDOWN_LIST, class:'form-control' %>
+    
+  </p>
+  <button type="submit" class="btn btn-dark btn-block">
+    Enviar mensaje <%= fa_icon "paper-plane" %>
+  </button>
+<% end %>

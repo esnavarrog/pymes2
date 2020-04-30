@@ -24,7 +24,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
-    if user_signed_in?
+    if user_signed_in? && current_user == @admin
     else
       redirect_to @category, alert:"No tienes permiso para editar esto."
     end

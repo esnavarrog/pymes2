@@ -1,256 +1,18 @@
 <div class="container-fluid bg-white pt-3 shadow-sm">
   <div class="text-center"> 
-
-
-    
-    <% if user_signed_in? && current_user == @product.user %>
-    <div class="btn-group mb-3" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>"><i class="fas fa-cog"></i><br> Configurar</button>
-      <!-- <%= link_to 'Editar', edit_product_path(@product) %> -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i><br> Agrega Lista</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensaje"><i class="fab fa-readme"></i><br> Leer mensajes</button>
-      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button> -->
-    </div>
-    <% end %>
+    <%= render 'products/config' %>
   </div>
+
   <div class="row">
     <div class="col-12 col-sm-12 col-md-7">
-      <div class="justify-content-center">
-        <%= image_tag @product.img.thumb.url, class:'rounded img-fluid d-block text-center mx-auto shadow-sm' %>
-      </div>
-      <blockquote class="blockquote text-center">
-        <h2 class="text-center shadow-text titulo mt-3"><%= @product.title.upcase %></h2>
-
-
-        <% if @product.info.present? %>
-        <footer class="blockquote-footer">
-          <%= @product.info %>
-        </footer>
-        <% end %>
-
-      </blockquote>
-
-      <div class="row text-center">
-        <div class="col">
-          <span class="badge "><%= @product.visits_count %></span> visitas
-        </div>
-        
-        
-      </div>
-        
-      
-      
-    
-
-
-       <!-- Modal -->
-      <div class="modal fade" id="<%= @product.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Información de la empresa</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <%= render 'form' %>
-          </div>
-        </div>
-      </div>
-
+      <%= render 'products/header' %>
     </div>
     <div class="col-12 col-sm-12 col-md-5">
-      <nav>
-        <div class="nav nav-tabs mb-3 mr-sm-2" id="nav-tab" role="tablist">
-          <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-datos" role="tab" aria-controls="nav-home" aria-selected="true">Datos</a>
-          <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-horarios" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios</a>
-        </div>
-      </nav>
-      <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-home-tab">
-
-
-          <h4 class="text-center">Datos</h4>
-          <hr>
-          <table class="table table-striped">
-            <tbody>
-              <% if @product.telefono.present? %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
-                <td>
-                  +56 <%= @product.telefono %> 
-                </td>
-              </tr>
-              <% end %>
-              <% if @product.mobil1.present? %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fab fa-whatsapp"></i></th>
-                <td>
-                  +56 <%= @product.mobil1 %>
-                </td>
-              </tr>
-              <% end %>
-              <% if @product.mobil2.present? %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-mobile-alt"></i></th>
-                <td>
-                  +56 <%= @product.mobil2 %>
-                </td>
-              </tr>
-              <% end %>
-              <% if @product.email.present? %>
-              <tr>
-                <th scope="row" class="text-right"><i class="far fa-envelope"></i></th>
-                <td><%= @product.email %></td>
-              </tr>
-              <% end %>
-              <% if @product.address.present? %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-map-marked-alt"></i></th>
-                <td><%= @product.address %></td>
-              </tr>
-              <% end %>
-              <% if @product.credito == true %>
-              <tr>
-                <th scope="row" class="text-right"><i class="far fa-credit-card"></i></th>
-                <td><%= image_tag 'mediosPagos.png', class:'img-fluid rounded', style:'max-height: 3rem;' %></td>
-              </tr>
-              <% end %>
-              <% if @product.efectivo == true %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-money-bill-wave"></i></th>
-                <td>Eféctivo</td>
-              </tr>
-              <% end %>
-              <% if @product.transferencia == true %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-money-check"></i></th>
-                <td>Transferencias</td>
-              </tr>
-              <% end %>
-              <% if @product.debito == true %>
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-wallet"></i></th>
-                <td>Débito</td>
-              </tr>
-              <% end %>
-
-              <tr>
-                <th scope="row" class="text-right"><i class="fas fa-hourglass-start"></i></th>
-                <td><%= @product.tiempoEspera %> Minutos espera</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="text-center">
-
-            <% if (Time.now.strftime("%A") === "Sunday") && @product.domingoA.try(:strftime, "%H %M")..@product.domingoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Domingo nos encontramos atendiendo desde las <%= @product.domingoA.try(:strftime, "%H:%M")%> hasta las <%= @product.domingoC.try(:strftime, "%H:%M")%>hrs. </span>
-            <% elsif (Time.now.try(:strftime, "%A") === "Monday") && @product.lunesA.try(:strftime, "%H %M")..@product.lunesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Lunes nos encontramos atendiendo desde las <%= @product.lunesA.try(:strftime, "%H:%M")%> hasta las <%= @product.lunesC.try(:strftime, "%H:%M")%>hrs.</span>
-            <% elsif (Time.now.try(:strftime, "%A") === "Tuesday") && @product.martesA.try(:strftime, "%H %M")..@product.martesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Martes nos encontramos atendiendo desde las <%= @product.martesA.try(:strftime, "%H:%M")%> hasta las <%= @product.martesC.try(:strftime, "%H:%M")%>hrs.</span>
-            <% elsif (Time.now.try(:strftime, "%A") === "Wednesday") && @product.miercolesA.try(:strftime, "%H %M")..@product.miercolesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Miércoles nos encontramos atendiendo desde las <%= @product.miercolesA.try(:strftime, "%H:%M")%> hasta las <%= @product.miercolesC.try(:strftime, "%H:%M")%>hrs.</span>
-            <% elsif (Time.now.try(:strftime, "%A") === "Thursday") && @product.juevesA.try(:strftime, "%H %M")..@product.juevesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Jueves nos encontramos atendiendo desde las <%= @product.juevesA.try(:strftime, "%H:%M")%> hasta las <%= @product.juevesC.try(:strftime, "%H:%M")%>hrs.</span>
-            <% elsif (Time.now.try(:strftime, "%A"  ) === "Friday") && @product.viernesA.try(:strftime, "%H %M")..@product.viernesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Viernes nos encontramos atendiendo desde las <%= @product.viernesA.try(:strftime, "%H:%M")%> hasta las <%= @product.viernesC.try(:strftime, "%H:%M")%>hrs.</span>
-            <% elsif (Time.now.try(:strftime, "%A"  ) === "Saturday") && @product.sabadoA.try(:strftime, "%H %M")..@product.sabadoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Sábado nos encontramos atendiendo desde las <%= @product.sabadoA.try(:strftime, "%H:%M")%> hasta las <%= @product.sabadoC.try(:strftime, "%H:%M")%>hrs.</span>
-            <% else %>
-            <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-danger"></i>Hoy <%= Time.now.strftime("%A") %> tenemos cerrado</span>
-            <% end %>
-          </div>
-            
-          
-        
-        </div>
-        <div class="tab-pane fade" id="nav-horarios" role="tabpanel" aria-labelledby="nav-profile-tab">
-          <h4 class="text-center">Horarios</h4>
-    
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Día</th>
-                <th scope="col">Hora apertura</th>
-                <th scope="col">Hora cierre</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Lunes</td>
-                <td><%= @product.lunesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.lunesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Martes</td>
-                <td><%= @product.martesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.martesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Miercoles</td>
-                <td><%= @product.miercolesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.miercolesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Jueves</td>
-                <td><%= @product.juevesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.juevesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Viernes</td>
-                <td><%= @product.viernesA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.viernesC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Sábado</td>
-                <td><%= @product.sabadoA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.sabadoC.try(:strftime, "%H:%M") %></td>
-              </tr>
-              <tr>
-                <td>Domingo</td>
-                <td><%= @product.domingoA.try(:strftime, "%H:%M") %></td>
-                <td><%= @product.domingoC.try(:strftime, "%H:%M") %></td>
-              </tr>
-            </tbody>
-          </table>
-
-
-        </div>
-        
-      
-
-    </div>
-
+      <%= render 'products/informacion' %>
   </div>
+
   <hr>
-
-
-    <div class="text-center mx-auto">      
-      <% if @product.mobil1.present? %>
-      <a href="https://wa.me/56<%= @product.mobil1 %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
-      <% end %>
-
-      <% if @product.facebook.present? %>
-      <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
-      <% end %>
-
-      <% if @product.twitter.present? %>
-      <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
-      <% end %>
-
-      <% if @product.instagram.present? %>
-      <a href="<%= @product.instagram %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
-      <% end %>
-
-      <% if @product.email.present? %>
-      <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-danger mt-1"><i class="far fa-envelope"></i> Email</a>
-      <% end %>
-      
-    </div>
-
-
-
+    <%= render 'products/redes' %>
 </div>
 
 <!-- Contenido de la empresa -->
@@ -258,36 +20,10 @@
 <div class="container-fluid bg-white py-3">
   <div class="row row-cols-2">
     <div class="col-12 col-sm-12 col-lg-9">
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <% if @product.rich_text_body.present? %>
-            <div class="p-4 mb-3 bg-light text-primary text-justify rounded border shadow-sm lead">
-              <h5 class="text-center">Descripción de servicios.</h5><hr>
-              <%= @product.rich_text_body %>
-            </div>
-            <% end %>
-          </div>
-        <div class="col-12 col-md-6">
-          
-          <% if @product.latitude && @product.longitude %>
-          <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@product.latitude},#{@product.longitude}&markers=#{@product.latitude},#{@product.longitude}&zoom=15&size=640x400&key=#{ENV['google_maps_api_key']}",
-              class: 'img-fluid img-rounded', alt: "#{@product.address} en el mapa"%>
-          <% end %>
-        </div>
-      </div>
-        <!-- Carousel imágenes -->
-          
-   
-        <!-- fin carousel -->
-
-
-
-      <!-- Comienza info -->
+      <%= render 'products/desmap' %>
 
       <div class="tab-content" id="nav-tabContent">
         
-          
-          
           <% if @product.lists.present? %>
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>
@@ -307,8 +43,6 @@
               </h4>
             </div>
             <% end %>
-            
-
 
             <div class="row">
               <% list.pops.each do |pop| %>
@@ -344,7 +78,7 @@
                         <%= image_tag pop.avatar.url, class:'rounded img-fluid' %>
                           <p class="text-secondary my-3">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
                           <p class="card-text"><%= pop.descripcion %></p>
-
+              
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -352,6 +86,7 @@
                     </div>
                   </div>
                 </div>
+               
               </div>
               <% end %>
               
@@ -438,66 +173,9 @@
       </div>
 
 <!-- Modales -->
+<%= render 'products/modals' %>
 
-<!-- Modal -->
-<div class="modal fade" id="categoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
 
-          Añade una lista
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <%= render 'lists/form' %>
-     
-    </div>
-  </div>
-</div>
-
- <!-- Modal -->
-<div class="modal fade" id="modal_carrousel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog  modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Agregar una imagen al carrousel
-        </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <%= render 'articles/form' %>
-      </div>
-    </div>
-  </div>
-
-<!-- Modal -->
-<div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalScrollableTitle">Mensajes directos</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-        <div class="modal-body">
-          <% if @product.messages.present? %>
-          <%= render @messages %>
-          <% else %>
-            No tienes ningún mensaje.
-          <% end %>
-        </div>
-      <div class="modal-footer">
-        <p class="text-left text-info">Responde a tus posibles clientes vía email.</p>
-      </div>
-    </div>
-  </div>
-</div>
 
 
     </div>

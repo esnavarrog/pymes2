@@ -1,0 +1,161 @@
+<nav>
+    <div class="nav nav-tabs mb-3 mr-sm-2 text-center" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-datos" role="tab" aria-controls="nav-home" aria-selected="true">Datos empresa</a>
+      <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-horarios" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios atención</a>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-home-tab">
+
+
+      <h4 class="text-center">Datos</h4>
+      <hr>
+      <table class="table table-striped">
+        <tbody>
+          <% if @product.telefono.present? %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
+            <td>
+              +56 <%= @product.telefono %> 
+            </td>
+          </tr>
+          <% end %>
+          <% if @product.mobil1.present? %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fab fa-whatsapp"></i></th>
+            <td>
+              +56 <%= @product.mobil1 %>
+            </td>
+          </tr>
+          <% end %>
+          <% if @product.mobil2.present? %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-mobile-alt"></i></th>
+            <td>
+              +56 <%= @product.mobil2 %>
+            </td>
+          </tr>
+          <% end %>
+          <% if @product.email.present? %>
+          <tr>
+            <th scope="row" class="text-right"><i class="far fa-envelope"></i></th>
+            <td><%= @product.email %></td>
+          </tr>
+          <% end %>
+          <% if @product.address.present? %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-map-marked-alt"></i></th>
+            <td><%= @product.address %></td>
+          </tr>
+          <% end %>
+          <% if @product.credito == true %>
+          <tr>
+            <th scope="row" class="text-right"><i class="far fa-credit-card"></i></th>
+            <td><%= image_tag 'mediosPagos.png', class:'img-fluid rounded', style:'max-height: 3rem;' %></td>
+          </tr>
+          <% end %>
+          <% if @product.efectivo == true %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-money-bill-wave"></i></th>
+            <td>Eféctivo</td>
+          </tr>
+          <% end %>
+          <% if @product.transferencia == true %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-money-check"></i></th>
+            <td>Transferencias</td>
+          </tr>
+          <% end %>
+          <% if @product.debito == true %>
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-wallet"></i></th>
+            <td>Débito</td>
+          </tr>
+          <% end %>
+
+          <tr>
+            <th scope="row" class="text-right"><i class="fas fa-hourglass-start"></i></th>
+            <td><%= @product.tiempoEspera %> Minutos espera</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center">
+
+        <% if (Time.now.strftime("%A") === "Sunday") && @product.domingoA.try(:strftime, "%H %M")..@product.domingoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Domingo nos encontramos atendiendo desde las <%= @product.domingoA.try(:strftime, "%H:%M")%> hasta las <%= @product.domingoC.try(:strftime, "%H:%M")%>hrs. </span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Monday") && @product.lunesA.try(:strftime, "%H %M")..@product.lunesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Lunes nos encontramos atendiendo desde las <%= @product.lunesA.try(:strftime, "%H:%M")%> hasta las <%= @product.lunesC.try(:strftime, "%H:%M")%>hrs.</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Tuesday") && @product.martesA.try(:strftime, "%H %M")..@product.martesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Martes nos encontramos atendiendo desde las <%= @product.martesA.try(:strftime, "%H:%M")%> hasta las <%= @product.martesC.try(:strftime, "%H:%M")%>hrs.</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Wednesday") && @product.miercolesA.try(:strftime, "%H %M")..@product.miercolesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Miércoles nos encontramos atendiendo desde las <%= @product.miercolesA.try(:strftime, "%H:%M")%> hasta las <%= @product.miercolesC.try(:strftime, "%H:%M")%>hrs.</span>
+        <% elsif (Time.now.try(:strftime, "%A") === "Thursday") && @product.juevesA.try(:strftime, "%H %M")..@product.juevesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Jueves nos encontramos atendiendo desde las <%= @product.juevesA.try(:strftime, "%H:%M")%> hasta las <%= @product.juevesC.try(:strftime, "%H:%M")%>hrs.</span>
+        <% elsif (Time.now.try(:strftime, "%A"  ) === "Friday") && @product.viernesA.try(:strftime, "%H %M")..@product.viernesC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Viernes nos encontramos atendiendo desde las <%= @product.viernesA.try(:strftime, "%H:%M")%> hasta las <%= @product.viernesC.try(:strftime, "%H:%M")%>hrs.</span>
+        <% elsif (Time.now.try(:strftime, "%A"  ) === "Saturday") && @product.sabadoA.try(:strftime, "%H %M")..@product.sabadoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Sábado nos encontramos atendiendo desde las <%= @product.sabadoA.try(:strftime, "%H:%M")%> hasta las <%= @product.sabadoC.try(:strftime, "%H:%M")%>hrs.</span>
+        <% else %>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-danger"></i>Hoy <%= Time.now.strftime("%A") %> tenemos cerrado</span>
+        <% end %>
+      </div>
+        
+      
+    
+    </div>
+    <div class="tab-pane fade" id="nav-horarios" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <h4 class="text-center">Horarios</h4>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Día</th>
+            <th scope="col">Hora apertura</th>
+            <th scope="col">Hora cierre</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lunes</td>
+            <td><%= @product.lunesA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.lunesC.try(:strftime, "%H:%M") %></td>
+          </tr>
+          <tr>
+            <td>Martes</td>
+            <td><%= @product.martesA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.martesC.try(:strftime, "%H:%M") %></td>
+          </tr>
+          <tr>
+            <td>Miercoles</td>
+            <td><%= @product.miercolesA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.miercolesC.try(:strftime, "%H:%M") %></td>
+          </tr>
+          <tr>
+            <td>Jueves</td>
+            <td><%= @product.juevesA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.juevesC.try(:strftime, "%H:%M") %></td>
+          </tr>
+          <tr>
+            <td>Viernes</td>
+            <td><%= @product.viernesA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.viernesC.try(:strftime, "%H:%M") %></td>
+          </tr>
+          <tr>
+            <td>Sábado</td>
+            <td><%= @product.sabadoA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.sabadoC.try(:strftime, "%H:%M") %></td>
+          </tr>
+          <tr>
+            <td>Domingo</td>
+            <td><%= @product.domingoA.try(:strftime, "%H:%M") %></td>
+            <td><%= @product.domingoC.try(:strftime, "%H:%M") %></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+    
+  
+
+</div>

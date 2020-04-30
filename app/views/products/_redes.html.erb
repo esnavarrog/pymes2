@@ -1,0 +1,22 @@
+<div class="text-center mx-auto">      
+    <% if @product.mobil1.present? %>
+    <a href="https://wa.me/56<%= @product.mobil1 %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+    <% end %>
+
+    <% if @product.facebook.present? %>
+    <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
+    <% end %>
+
+    <% if @product.twitter.present? %>
+    <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
+    <% end %>
+
+    <% if @product.instagram.present? %>
+    <a href="<%= @product.instagram %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
+    <% end %>
+
+    <% if @product.email.present? %>
+    <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-danger mt-1"><i class="far fa-envelope"></i> Email</a>
+    <% end %>
+    
+  </div>

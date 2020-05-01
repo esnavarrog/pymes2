@@ -4,10 +4,10 @@
   </div>
 
   <div class="row">
-    <div class="col-12 col-sm-12 col-md-7">
+    <div class="col-12 col-sm-12 col-md-7 pb-2">
       <%= render 'products/header' %>
     </div>
-    <div class="col-12 col-sm-12 col-md-5">
+    <div class="col-12 col-sm-12 col-md-5 pb-2">
       <%= render 'products/informacion' %>
   </div>
 
@@ -22,26 +22,28 @@
     <div class="col-12 col-sm-12 col-lg-9">
       <%= render 'products/desmap' %>
 
-      <div class="tab-content" id="nav-tabContent">
+      <div class="mt-2" id="nav-tabContent">
         
           <% if @product.lists.present? %>
           <% @product.lists.each do |list| %>
             <% if user_signed_in? && current_user == @product.user %>
-            <small>
+            
               <%= link_to list, class:'text-danger float-right', method: :delete, data: { confirm: 'Estás seguro?' } do %>
-              <i class="far fa-trash-alt"></i> Eliminar
+              <i class="far fa-trash-alt"></i>
               <% end %>
-            </small>
+            
             <%= link_to '<i class="fas fa-th"></i> Agregar item'.html_safe, list, class:' text-primary float-left'%>
               <h4 class="mt-3 text-center">
                 <%= link_to list.title, list %>
               </h4>
+              <hr>
             <% else %>
             <div class="inline-block">
               <h4 class="text-center text-dark">
                 <%= list.title %>
               </h4>
             </div>
+            <hr>
             <% end %>
 
             <div class="row">
@@ -99,9 +101,12 @@
           
           <% end %>
           <% else %>
+            <% if user_signed_in? && current_user == @product.user %>
             <div class="alert alert-info text-center">
               <h3>Agrega una lista.</h3>
             </div>
+            <% end %>
+
           <% end %>
     
         
@@ -111,13 +116,13 @@
     <!-- Aside -->
     <div class="col-12 col-md-12 col-lg-3">
       <div class="bg-light border rounded-lg p-3 shadow-sm">
-        <h4>
+        <h4 class="text-center">
           <% if @product.comments.empty? %>
           Sin comentarios
           <% elsif @product.comments.count == 1 %>
-          <%= @product.comments.count %> Comentario
+          <span class="badge badge-primary"><%= @product.comments.count %></span> Comentario
           <% else %>
-          <%= @product.comments.count %> Comentarios
+          <span class="badge badge-primary"><%= @product.comments.count %></span> Comentarios
           <% end %>
            <i class="fas fa-comments"></i></h4>
         <% if @product.comments.empty? %>
@@ -147,7 +152,7 @@
                   <!-- Button trigger modal -->
           <% if user_signed_in? %>
             <%= form_for([@product, @product.comments.build]) do |f| %>
-              <div class="input-group">
+              <div class="input-group mt-3">
                 <%= f.text_field :body, class:'form-control', placeholder:'Escribe tu comentario aquí...' %>
                 <div class="input-group-append">
                   <%= f.submit 'Enviar', class:'btn btn-dark' %>
@@ -156,8 +161,8 @@
             <% end %>
           <% else %>
               <p class="text-info text-center">Para comentar debes:</p>
-            <%= link_to 'Iniciar sesión', new_user_session_path, class:'btn btn-success btn-sm btn-block mt-3' %>
-            <%= link_to 'Registrarse', new_user_registration_path, class:'btn btn-danger btn-sm btn-block mt-3' %>
+            <%= link_to '<i class="fas fa-sign-in-alt"></i> Iniciar sesión'.html_safe, new_user_session_path, class:'btn btn-success btn-sm mt-2' %>
+            <%= link_to '<i class="fas fa-user-plus"></i> Registrarse'.html_safe, new_user_registration_path, class:'btn btn-danger btn-sm mt-2' %>
           <% end %>
 
     

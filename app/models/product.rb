@@ -51,7 +51,7 @@ class Product < ApplicationRecord
 
 
 
-  private
+  # private
 
   # def save_categories
   #   @categories.each do |category_id|

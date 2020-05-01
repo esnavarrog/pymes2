@@ -5,7 +5,6 @@
 
 <div class="py-1 bg-light shadow container-sm container-fluid rounded-bottom">
     
-    <h5 class="p-2 text-center">Publicaciones Destacadas</h5>
     <div class="row justify-content-center">
       <% @products.each do |product| %>
       <% if product.pub_destacada == true %>
@@ -69,7 +68,6 @@
       <% end %>
     </div>
     
-    <h5 class="p-2 text-center">Publicaciones</h5>
     <div class="row justify-content-center">
       <% @products.each do |product| %>
       
@@ -130,7 +128,6 @@
       <% end %>
     </div>
     
-    <h5 class="p-2 text-center">Clasificados</h5>
     <div class="row m-1 row-cols-3 justify-content-center">
       <% @products.each do |product| %>
         <% if product.pub_clasificado == true %>

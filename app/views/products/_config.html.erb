@@ -1,9 +1,10 @@
 <% if user_signed_in? && current_user == @product.user %>
+    <h5>Configuración portal</h5>
     <div class="btn-group mb-3" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= @product.title.delete(' ') %>"><i class="fas fa-cog"></i><br> Configurar</button>
-      <!-- <%= link_to 'Editar', edit_product_path(@product) %> -->
+      <%= link_to '<i class="fas fa-cog"></i><br> Configurar'.html_safe, edit_product_path(@product), class:"btn btn-primary", type:'button' %>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i><br> Agrega Lista</button>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensaje"><i class="fab fa-readme"></i><br> Leer mensajes</button>
       <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button> -->
     </div>
-<% end %>
+    <% end %>
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#config"><i class="fas fa-cog"></i><br> Configurar</button> -->

@@ -96,7 +96,7 @@
         <% elsif (Time.now.try(:strftime, "%A"  ) === "Saturday") && @product.sabadoA.try(:strftime, "%H %M")..@product.sabadoC.try(:strftime, "%H %M") === Time.now.strftime("%H %M") %>
         <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-success"></i> Hoy Sábado nos encontramos atendiendo desde las <%= @product.sabadoA.try(:strftime, "%H:%M")%> hasta las <%= @product.sabadoC.try(:strftime, "%H:%M")%>hrs.</span>
         <% else %>
-        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-danger"></i>Hoy <%= Time.now.strftime("%A") %> tenemos cerrado</span>
+        <span class="badge badge-primary text-wrap shadow-sm bg-dark"><i class="fa fa-circle text-danger"></i>Hoy tenemos cerrado</span>
         <% end %>
       </div>
         

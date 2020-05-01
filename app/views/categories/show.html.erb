@@ -3,13 +3,11 @@
     <h1 class="text-center p-2 text-primary">
       <%= @category.name %>
     </h1>
-    <h5 class="p-2 text-dark text-center">Publicaciones Destacadas</h5>
     <div class="row justify-content-center">
       <% @category.products.each do |product| %>
       <% if product.pub_destacada == true %>
-      <% if product.view == true %>
       <div class="col-sm-12 col-md-6 col-lg-4">
-        <figure class="figure shadow bg-white rounded">
+        <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
             
             <%= link_to (image_tag product.img.thumb.url, class:'card-img-top'), product, class:'stretched-link' %>
@@ -56,16 +54,13 @@
       </div>
       <% end %>
       <% end %>
-      <% end %>
     </div>
     
-    <h5 class="p-2 text-dark text-center">Publicaciones</h5>
     <div class="row justify-content-center">
       <% @category.products.each do |product| %>
       
             
       <% if product.pub_normal == true %>
-      <% if product.view == true %>
       <div class="col-6 col-md-3">
         <figure class="figure shadow-sm bg-white rounded">
           <div class="img-contenedor">
@@ -117,14 +112,11 @@
       </div>
       <% end %>
       <% end %>
-      <% end %>
     </div>
     
-    <h5 class="p-2 text-dark text-center">Clasificados</h5>
     <div class="row justify-content-center">
       <% @category.products.each do |product| %>
       <% if product.pub_clasificado == true %>
-      <% if product.view == true %>
   <div class="col-4 col-sm-4 col-md-2">
     <figure class="figure shadow-sm bg-white rounded">
       <div class="img-contenedor">
@@ -146,7 +138,6 @@
     </figure>
   </div>
         <% end %>
-      <% end %>
       <% end %>
         </div>
       

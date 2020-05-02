@@ -1,6 +1,9 @@
 class Product < ApplicationRecord
   before_update :set_visits_count
   mount_uploader :img, ImageUploader
+  mount_uploader :img1, CarrouselUploader
+  mount_uploader :img2, CarrouselUploader
+  mount_uploader :img3, CarrouselUploader
   # after_create :save_categories
   belongs_to :user
   has_many :has_categories, dependent: :destroy
@@ -14,17 +17,17 @@ class Product < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
   # esto es de los follows
-  # has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
-  # has_many :followers, through: :passive_friendships, source: :follower
-  # def follow(product)
-  #   active_friendships.create(followed_id: product.id)
-  # end
-  # def unfollow(product)
-  #   active_friendships.find_by(followed_id: product.id).destroy
-  # end
-  # def following?(product)
-  #   following.include?(product)
-  # end
+  has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :passive_friendships, source: :follower
+  def follow(product)
+    active_friendships.create(followed_id: product.id)
+  end
+  def unfollow(product)
+    active_friendships.find_by(followed_id: product.id).destroy
+  end
+  def following?(product)
+    following.include?(product)
+  end
   # fin de follows
   scope :published, -> { where(published: true) }
 

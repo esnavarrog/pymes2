@@ -4,15 +4,15 @@
     <% end %>
 
     <% if @product.facebook.present? %>
-    <a href="<%= @product.facebook %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
+    <a href="https://www.facebook.com/<%= @product.facebook.delete('@') %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
     <% end %>
 
     <% if @product.twitter.present? %>
-    <a href="<%= @product.twitter %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
+    <a href="https://www.twitter.com/<%= @product.twitter.delete('@') %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
     <% end %>
 
     <% if @product.instagram.present? %>
-    <a href="<%= @product.instagram %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="https://www.instagram.com/<%= @product.instagram.delete('@') %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
     <% end %>
 
     <% if @product.email.present? %>

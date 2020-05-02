@@ -9,26 +9,28 @@ Rails.application.routes.draw do
   get 'pages/sobrenosotros'
   get 'pages/reglamento'
   get 'pages/sugerencia'
+  get 'pages/politicas_de_privacidad'
   get 'pages/terminosycondiciones'
   
+  
   resources :messages
-
-
+  
+  
   
   devise_for :users, controllers: { 
     sessions: 'users/sessions',
     registrations: 'registrations',
     :omniauth_callbacks => "users/omniauth_callbacks" 
   }
-
   
-
+  
+  
   # resources :products, except: [:index, :show]
   resources :categories
   resources :users, only: [:index, :show]
   
-
-
+  
+  
   resources :products do
     resources :categories
     resources :lists
@@ -39,10 +41,10 @@ Rails.application.routes.draw do
   resources :lists do
     resources :pops
   end
-
-  resources :friendships, only: [:create, :destroy]
- 
-
+  
+  resources :friendships, only: [:create, :destroy, :show, :index]
+  
+  
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

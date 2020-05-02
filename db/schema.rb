@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_090151) do
+ActiveRecord::Schema.define(version: 2020_05_01_212745) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -214,6 +214,10 @@ ActiveRecord::Schema.define(version: 2020_04_28_090151) do
     t.string "mobil1"
     t.string "mobil2"
     t.string "telefono"
+    t.text "box"
+    t.string "img1"
+    t.string "img2"
+    t.string "img3"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 

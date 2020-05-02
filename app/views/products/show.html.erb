@@ -1,11 +1,12 @@
+<div class="text-center fixed-bottom"> 
+  <%= render 'products/config' %>
+</div>
 <div class="container-fluid bg-white pt-3 shadow-sm">
-  <div class="text-center"> 
-    <%= render 'products/config' %>
-  </div>
 
   <div class="row">
     <div class="col-12 col-sm-12 col-md-7 pb-2">
       <%= render 'products/header' %>
+      <%= render 'products/friends' %>
     </div>
     <div class="col-12 col-sm-12 col-md-5 pb-2">
       <%= render 'products/informacion' %>
@@ -13,14 +14,16 @@
 
   <hr>
     <%= render 'products/redes' %>
+  </div>
 </div>
 
 <!-- Contenido de la empresa -->
 <!-- Article -->
-<div class="container-fluid bg-white py-3">
+<div class="container-fluid py-3 bg-white">
   <div class="row row-cols-2">
     <div class="col-12 col-sm-12 col-lg-9">
       <%= render 'products/desmap' %>
+      <%= render 'products/carousel' %>
 
       <div class="mt-2" id="nav-tabContent">
         
@@ -104,6 +107,7 @@
             <% if user_signed_in? && current_user == @product.user %>
             <div class="alert alert-info text-center">
               <h3>Agrega una lista.</h3>
+              <p>En el botón superior.</p>
             </div>
             <% end %>
 
@@ -114,7 +118,12 @@
       </div>
     </div>
     <!-- Aside -->
-    <div class="col-12 col-md-12 col-lg-3">
+    <div class="mx-auto col-12 col-md-12 col-lg-3">
+      <% if @product.box.present? %>
+      <div class="text-center mb-3">
+        <%= raw @product.box %>
+      </div>
+      <% end %>
       <div class="bg-light border rounded-lg p-3 shadow-sm">
         <h4 class="text-center">
           <% if @product.comments.empty? %>

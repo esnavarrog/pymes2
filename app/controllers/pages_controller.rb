@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   
     def reglamento
     end
+    def politicas_de_privacidad
+    end
     
     def sugerencia
     end

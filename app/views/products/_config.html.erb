@@ -1,10 +1,16 @@
 <% if user_signed_in? && current_user == @product.user %>
-    <h5>Configuración portal</h5>
-    <div class="btn-group mb-3" role="group" aria-label="Basic example">
-      <%= link_to '<i class="fas fa-cog"></i><br> Configurar'.html_safe, edit_product_path(@product), class:"btn btn-primary", type:'button' %>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i><br> Agrega Lista</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mensaje"><i class="fab fa-readme"></i><br> Leer mensajes</button>
-      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button> -->
-    </div>
+  <ul class="nav justify-content-center bg-warning text-light ">
+
+    <li class="nav-item">
+      <%= link_to '<i class="fas fa-cog"></i><br> Configurar'.html_safe, edit_product_path(@product), class:"nav-link text-light" %>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#categoria"><i class="fas fa-clipboard-list"></i><br> Añadir lista</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#mensaje"><i class="fab fa-readme"></i><br> Leer mensajes</a>
+    </li>
+  </ul>
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_carrousel"><i class="far fa-images"></i> Carrousel</button> -->
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#config"><i class="fas fa-cog"></i><br> Configurar</button> -->
     <% end %>
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#config"><i class="fas fa-cog"></i><br> Configurar</button> -->

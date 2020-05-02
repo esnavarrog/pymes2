@@ -1,17 +1,22 @@
-<div class="modal-body">
   <div class="form">
-  <%= form_for([@product]) do |form| %>
+    <div class="alert alert-info">
+      <h6>
+        Antes de modificar cualquier dato, refresque esta página nuevamente para que el navegador acepte todos los parámetros.
+      </h6>
+    </div>
+  <%= form_with(model: @product, local: true) do |form| %>
         <div class="form-group">
           <h6><%= form.label 'Nombre Fantasía' %></h6>
           <%= form.text_field :title, class:'form-control', autofocus:'true' %>
         </div>
 
         <div class="form-group">
-          <h6><%= form.label 'Eslogan o descripción breve, máximo 40 letras.' %></h6>
+          <h6><%= form.label 'Eslogan, máximo 40 letras.' %></h6>
           <%= form.text_field :info, class:'form-control' %>
         </div>
 
         <h6>Portada</h6>
+        <div class="text-tiny">Sube una imágen de portada, se mostrará en toda la web.</div>
         <div class="input-group mb-3">
           
           <div class="custom-file">
@@ -24,6 +29,30 @@
           <h6><%= form.label 'Describe tu empresa' %></h6>
           <%= form.rich_text_area :body, class:'form-control', style:'min-height: 12rem;', placeholder:'Escribe una reseña de tu negocio...' %>
         </div>
+
+        <h6>Carousel</h6>
+        <p>Agrega hasta tres imágenes para un carousel. Deben ser cercanas a 900x500 px otro tamaño se redimensionarán automáticamente. </p>
+        <div class="input-group mb-3">
+          
+          <div class="custom-file">
+            <%= form.label 'Imagen 1', class:'custom-file-label' %>
+            <%= form.file_field :img1, class:'custom-file-input', lang:'es' %>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          
+          <div class="custom-file">
+            <%= form.label 'Imágen 2', class:'custom-file-label' %>
+            <%= form.file_field :img2, class:'custom-file-input', lang:'es' %>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          
+          <div class="custom-file">
+            <%= form.label 'Imágen 3', class:'custom-file-label' %>
+            <%= form.file_field :img3, class:'custom-file-input', lang:'es' %>
+          </div>
+        </div>
     
     <div class="row">
       <div class="form-group col-12 col-sm-12 col-md-6">
@@ -33,7 +62,8 @@
 
       <div class="form-group col-12 col-sm-12 col-md-6">
         <h6><%= form.label 'Escribe palabras para el motor de busqueda' %></h6>
-        <%= form.text_field :palabras, class:'form-control', placeholder:'Ej. sushi, café, pasteles, libros, etc.' %>
+        <div class="text-tiny">Escribe palabras para que el motor de busqueda las encuentre solo con sin puntos ni comas</div>
+        <%= form.text_field :palabras, class:'form-control', placeholder:'Ej. sushi café pasteles libros' %>
 
       </div>
     </div>
@@ -91,18 +121,24 @@
   <div class="row">
     <div class="form-group col-12 col-md-4">
       <h6><%= form.label :facebook %></h6>
-      <%= form.text_field :facebook, class:'form-control' %>
+      <%= form.text_field :facebook, class:'form-control', placeholder:'Ejemplo: ConectaBuin' %>
     </div>
   
     <div class="form-group col-12 col-md-4">
       <h6><%= form.label :twitter %></h6>
-      <%= form.text_field :twitter, class:'form-control' %>
+      <%= form.text_field :twitter, class:'form-control', placeholder:'Ejemplo: ConectaBuin' %>
     </div>
 
     <div class="form-group col-12 col-md-4">
       <h6><%= form.label :instagram %></h6>
-      <%= form.text_field :instagram, class:'form-control' %>
+      <%= form.text_field :instagram, class:'form-control', placeholder:'Ejemplo: ConectaBuin' %>
     </div>
+  </div>
+  <h5 class="mt-3">Box redes sociales</h5>
+  <p>Agrega un box de tu red social favorita, ingresa a twitter o facebook developers y copia el "iframe" y lo pegas en la siguiente casilla.</p>
+  <a href="https://developers.facebook.com/docs/plugins/page-plugin">Plugin Facebook</a> o <a href="https://publish.twitter.com">Plugin Twitter</a>
+  <div class="form-group">
+    <%= form.text_area :box, class:"form-control", placeholder:'Pega el iframe aquí...' %>
   </div>
 
 
@@ -186,72 +222,72 @@
       <h5 class="mt-3 text-center">Horarios apertura y cierre</h5>
       <hr>
       <div>
-        <!-- Horarios de apertura local -->
+        <!-- Horarios de <i class="fas fa-lock-open"></i> local -->
         <div class="col-12">
           <h6 class="">Selecciona tus horarios</h6>
-          <table class="table text-right">
+          <table class="table text-right text-dark">
             <tr>
-              <th class='align-middle text-center mw-50'><%= form.label 'Lunes', class:'my-1 mr-2' %></th>
+              <th class='align-middle text-center'><%= form.label 'Lunes' %></th>
               <td class="row">
-                <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :lunesA, {minute_step: 15}, class:'form-control inp' %></div>
+                <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :lunesA, {minute_step: 15}, class:'form-control inp' %></div>
               </td>
               <td class="row">
-                <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :lunesC, {minute_step: 15}, class:'form-control inp' %></div>
+                <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :lunesC, {minute_step: 15}, class:'form-control inp' %></div>
               </td>
             </tr>
             <tr>
-              <th class='align-middle text-center'><%= form.label 'Martes', class:'my-1 mr-2' %></th>
+              <th class='align-middle text-center'><%= form.label 'Martes' %></th>
               <td class="row">
-                <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :martesA, {minute_step: 15}, class:'form-control inp' %></div>
+                <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :martesA, {minute_step: 15}, class:'form-control inp' %></div>
               </td>
               <td class="row">
-                <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :martesC, {minute_step: 15}, class:'form-control inp' %></div>
+                <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :martesC, {minute_step: 15}, class:'form-control inp' %></div>
               </td>
               
             </tr>
             <tr>
-              <th class='align-middle text-center'><%= form.label 'Miercoles', class:'my-1 mr-2' %></th>
+              <th class='align-middle text-center'><%= form.label 'Miercoles' %></th>
               <td class="row">
-                <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :miercolesA, {minute_step: 15}, class:'form-control inp' %></div>
+                <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :miercolesA, {minute_step: 15}, class:'form-control inp' %></div>
               </td>
               <td class="row">
-                <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :miercolesC, {minute_step: 15}, class:'form-control inp' %></div>
+                <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :miercolesC, {minute_step: 15}, class:'form-control inp' %></div>
               </td>
             </tr>
             <tr>
-            <th class='align-middle text-center'><%= form.label 'Jueves', class:'my-1 mr-2' %></th>
+            <th class='align-middle text-center'><%= form.label 'Jueves' %></th>
             <td class="row">
-              <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :juevesA, {minute_step: 15}, class:'form-control inp' %></div>
+              <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :juevesA, {minute_step: 15}, class:'form-control inp' %></div>
             </td>
             <td class="row">
-              <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :juevesC, {minute_step: 15}, class:'form-control inp' %></div>
-            </td>
-            </tr>
-            <tr>
-            <th class='align-middle text-center'><%= form.label 'Viernes', class:'my-1 mr-2' %></th>
-            <td class="row">
-              <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :viernesA, {minute_step: 15}, class:'form-control inp' %></div>
-            </td>
-            <td class="row">
-              <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :viernesC, {minute_step: 15}, class:'form-control inp' %></div>
+              <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :juevesC, {minute_step: 15}, class:'form-control inp' %></div>
             </td>
             </tr>
             <tr>
-            <th class='align-middle text-center'><%= form.label 'Sábado', class:'my-1 mr-2' %></th>
+            <th class='align-middle text-center'><%= form.label 'Viernes' %></th>
             <td class="row">
-              <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :sabadoA, {minute_step: 15}, class:'form-control inp' %></div>
+              <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :viernesA, {minute_step: 15}, class:'form-control inp' %></div>
             </td>
             <td class="row">
-              <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :sabadoC, {minute_step: 15}, class:'form-control inp' %></div>
+              <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :viernesC, {minute_step: 15}, class:'form-control inp' %></div>
             </td>
             </tr>
             <tr>
-            <th class='align-middle text-center'><%= form.label 'Domingo', class:'my-1 mr-2' %></th>
+            <th class='align-middle text-center'><%= form.label 'Sábado' %></th>
             <td class="row">
-              <div class="col">Apertura</div><div class="form-inline"><%= form.time_select :domingoA, {minute_step: 15}, class:'form-control inp' %></div>
+              <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :sabadoA, {minute_step: 15}, class:'form-control inp' %></div>
             </td>
             <td class="row">
-              <div class="col">Cierre</div><div class="form-inline"><%= form.time_select :domingoC, {minute_step: 15}, class:'form-control inp' %></div>
+              <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :sabadoC, {minute_step: 15}, class:'form-control inp' %></div>
+            </td>
+            </tr>
+            <tr>
+            <th class='align-middle text-center'><%= form.label 'Domingo' %></th>
+            <td class="row">
+              <div class="col"><i class="fas fa-lock-open"></i></div><div class="form-inline"><%= form.time_select :domingoA, {minute_step: 15}, class:'form-control inp' %></div>
+            </td>
+            <td class="row">
+              <div class="col"><i class="fas fa-lock"></i></div><div class="form-inline"><%= form.time_select :domingoC, {minute_step: 15}, class:'form-control inp' %></div>
             </td>
             </tr>
           </table>
@@ -259,6 +295,5 @@
       </div>
 
   </div>
-</div>
     <%= form.submit 'Publicar', class:'btn btn-dark btn-block my-1' %>
 <% end %>

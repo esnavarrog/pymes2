@@ -61,11 +61,7 @@
           </button>
         </div>
           <div class="modal-body">
-            <% if @product.messages.present? %>
             <%= render @messages %>
-            <% else %>
-              No tienes ningún mensaje.
-            <% end %>
           </div>
         <div class="modal-footer">
           <p class="text-left text-info">Responde a tus posibles clientes vía email.</p>

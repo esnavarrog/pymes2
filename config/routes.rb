@@ -27,7 +27,9 @@ Rails.application.routes.draw do
   
   # resources :products, except: [:index, :show]
   resources :categories
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    resources :friendships, only: [:create, :destroy]
+  end
   
   
   
@@ -41,8 +43,8 @@ Rails.application.routes.draw do
   resources :lists do
     resources :pops
   end
+  resources :friendships, only: [:create, :destroy]
   
-  resources :friendships, only: [:create, :destroy, :show, :index]
   
   
   

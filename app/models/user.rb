@@ -30,19 +30,19 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_rich_text :biografia
-  has_many :active_friendships, class_name: "Friendship", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
-  has_many :following, through: :active_friendships, source: :followed
+  # has_many :active_friendships, class_name: "Friendship", foreign_key: "follower_id", dependent: :destroy
+  # has_many :passive_friendships, class_name: "Friendship", foreign_key: "followed_id", dependent: :destroy
+  # has_many :following, through: :active_friendships, source: :followed
   
-  def follow(product)
-    active_friendships.create(followed_id: product.id)
-  end
-  def unfollow(product)
-    active_friendships.find_by(followed_id: product.id).destroy
-  end
-  def following?(user)
-    following.include?(user)
-  end
+  # def follow(product)
+  #   active_friendships.create(followed_id: product.id)
+  # end
+  # def unfollow(product)
+  #   active_friendships.find_by(followed_id: product.id).destroy
+  # end
+  # def following?(user)
+  #   following.include?(user)
+  # end
 
   def online?
     update_at > 3.minutes.ago

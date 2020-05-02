@@ -27,9 +27,7 @@ Rails.application.routes.draw do
   
   # resources :products, except: [:index, :show]
   resources :categories
-  resources :users, only: [:index, :show] do
-    resources :friendships, only: [:create, :destroy]
-  end
+  resources :users, only: [:index, :show]
   
   
   

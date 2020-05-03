@@ -22,11 +22,11 @@
         <%= image_tag @product.img2.url(:thumb), class:"d-block w-100" %>
         <% end %>        
     </div>
-    <div class="carousel-item">
-        <% if @product.img3.present? %>
+    <% if @product.img3.present? %>
+      <div class="carousel-item">
         <%= image_tag @product.img3.url(:thumb), class:"d-block w-100" %>
-        <% end %>
       </div>
+    <% end %>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

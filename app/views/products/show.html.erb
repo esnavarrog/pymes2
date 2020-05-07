@@ -1,10 +1,16 @@
 <div class="text-center fixed-bottom"> 
   <%= render 'products/config' %>
 </div>
+
 <div class="container-fluid bg-white pt-3 shadow-sm">
+  <% if user_signed_in? && current_user == @product.user %>
+  <div class="alert alert-info">
+    Bienvenido a tu empresa, edita tu contenido en cada sección.
+  </div>
+  <% end %>
 
   <div class="row">
-    <div class="col-12 col-sm-12 col-md-7 pb-2">
+    <div class="col-12 col-sm-12 col-md-7">
       <%= render 'products/header' %>
     </div>
     <div class="col-12 col-sm-12 col-md-5 pb-2">
@@ -35,70 +41,76 @@
               <% end %>
             
             <%= link_to '<i class="fas fa-th"></i> Agregar item'.html_safe, list, class:' text-primary float-left'%>
-              <h4 class="mt-3 text-center">
+              <h5 class="mt-3 text-center">
                 <%= link_to list.title, list %>
-              </h4>
+              </h5>
               <hr>
             <% else %>
             <div class="inline-block">
-              <h4 class="text-center text-dark">
+              <h5 class="text-center text-dark">
                 <%= list.title %>
-              </h4>
+              </h5>
             </div>
             <hr>
             <% end %>
 
             <div class="row">
               <% list.pops.each do |pop| %>
-              <div class="col-6 col-sm-4 col-md-4 col-lg-3 mt-1 pr-1 pl-1">
-                <div class="card text-dark shadow-sm mb-3">
-                  <a data-toggle="modal" data-target="#<%= pop.title.delete(' ') %>">
-                    <%= image_tag pop.avatar.thumb.url, class:'card-img-top' %>
-                  </a>
-                      <% if pop.destacado == true %>
-                      <div class="notify-badge">
-                        <i class="fas fa-star estrellita"></i>
-                      </div>
-                      <% end %>
-                      <div class="card-body text-center">
-                        <h6 class="card-title">
-                          <%= pop.title %>
-                        </h6>
-                        <p class="card-subtitle text-secondary">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
-                        <small class="card-text"><%= pop.descripcion.truncate_words(15) %></small>
-                      </div>
-                      
-                </div>
-                <div class="modal fade" id="<%= pop.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle"><%= pop.title %></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <%= image_tag pop.avatar.url, class:'rounded img-fluid' %>
-                          <p class="text-secondary my-3">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
-                          <p class="card-text"><%= pop.descripcion %></p>
               
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      </div>
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="row no-gutters border rounded">
+                  <div class="col-4 col-md-4">
+                    <a data-toggle="modal" data-target="#<%= pop.title.delete(' ') %>">
+                      <%= image_tag pop.avatar.url(:thumb), class:'img-fluid mx-auto' %>
+                      <div class="btn btn-light textoCentrado text-primary opa"><i class="far fa-eye"></i></div>
+                    </a>
+                  </div>
+                  <div class="col-7 col-md-7">
+                    <div class="p-2">
+                      <p class="font-weight-bold">
+                        <% if pop.destacado == true %>
+                        <i class="fas fa-star" style="color: yellow;"></i>
+                        <% end %>
+                        <%= pop.title %>
+                      </p>
+                      <p class="mb-2 text-muted text-tiny">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
+                    <small><p class="text-tiny"><%= pop.descripcion.truncate_words(30) %></p></small>
+                  </div>
+                </div>
+                <% if user_signed_in? && current_user == @list.user %>
+                <div class="col-1 col-md-1 bg-light text-center text-middle">
+                      
+                      <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, [pop.list, pop], class:'h5',
+                                              method: :delete,
+                                              data: { confirm: 'Estás seguro de eliminar en post?' } %>
+                    </div>
+                    <% end %>
+              </div>
+            </div>
+              <div class="modal fade" id="<%= pop.title.delete(' ') %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle"><%= pop.title %></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <%= image_tag pop.avatar.url, class:'rounded img-fluid' %>
+                        <p class="text-secondary my-3">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
+                        <p class="card-text"><%= pop.descripcion %></p>
+            
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                   </div>
                 </div>
-               
               </div>
               <% end %>
               
             </div>
-
-            
-             
-          
               <br>
           
           <% end %>
@@ -118,11 +130,15 @@
     </div>
     <!-- Aside -->
     <div class="mx-auto col-12 col-md-12 col-lg-3">
-      <% if @product.box.present? %>
+      <% if @product.twitter.present? %>
+      <a href="https://twitter.com/<%= @product.twitter.delete('@') %>?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @<%= @product.twitter.delete('@') %></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <% end %>
+      <% if @product.facebook.present? %>
       <div class="text-center mb-3">
-        <%= raw @product.box %>
+        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F<%= @product.facebook.delete('@') %>%2F&tabs=timeline&width=340&height=286&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=102814067069740" width="340" height="286" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
       </div>
       <% end %>
+      
       <div class="bg-light border rounded-lg p-3 shadow-sm">
         <h4 class="text-center">
           <% if @product.comments.empty? %>
@@ -168,25 +184,37 @@
               </div>
             <% end %>
           <% else %>
-              <p class="text-info text-center">Para comentar debes:</p>
-            <%= link_to '<i class="fas fa-sign-in-alt"></i> Iniciar sesión'.html_safe, new_user_session_path, class:'btn btn-success btn-sm mt-2' %>
-            <%= link_to '<i class="fas fa-user-plus"></i> Registrarse'.html_safe, new_user_registration_path, class:'btn btn-danger btn-sm mt-2' %>
-          <% end %>
+              <p class="alert alert-info">Debes estar registrado para comentar:</p>
+              <div class="text-center">
+                <%= link_to '<i class="fas fa-sign-in-alt"></i> Iniciar sesión'.html_safe, new_user_session_path, class:'btn btn-link btn-sm mt-2' %>
+                <%= link_to '<i class="fas fa-user-plus"></i> Regístrate'.html_safe, new_user_registration_path, class:'btn btn-link btn-sm mt-2' %>
+              </div>
+            <% end %>
+            
+            
+            
+          </div>
+          
+          <div class="bg-light p-3 mt-3 shadow-sm border rounded-lg">
+            <h4 class="text-dark">Envía un mensaje directo</h4>
+            <small class="text-muted font-italic">Este mensaje solo será recibido por la empresa.</small>
+            <% if user_signed_in? %>
+            
+            <%= render 'messages/form'%>
+            
+            <% else %>
+            <p class="alert alert-info">Para enviar mensaje debes estar registrado.</p>
 
-    
- 
+            <div class="text-center">
+
+              <%= link_to '<i class="fas fa-sign-in-alt"></i> Iniciar sesión'.html_safe, new_user_session_path, class:'btn btn-link btn-sm mt-2' %>
+              <%= link_to '<i class="fas fa-user-plus"></i> Regístrate'.html_safe, new_user_registration_path, class:'btn btn-link btn-sm mt-2' %>
+            </div>
+            <% end %>
+
       </div>
 
-      <div class="bg-light p-3 mt-3 shadow-sm border rounded-lg">
-        <h4 class="text-dark">Envía un mensaje directo</h4>
-        <small class="text-muted font-italic">Este mensaje solo será recibido por la empresa.</small>
 
-        <%= render 'messages/form'%>
-
-      </div>
-
-<!-- Modales -->
-<%= render 'products/modals' %>
 
 
 
@@ -200,4 +228,79 @@
 
 </div>
 
+  <!-- Modal -->
+  <div class="modal fade" id="mensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Mensajes directos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <div class="modal-body">
+            <%= render @messages %>
+          </div>
+        <div class="modal-footer">
+          <p class="text-left text-info">Responde a tus posibles clientes vía email.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Modal Header -->
+  <div class="modal fade" id="modal_header" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Header
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <%= render 'products/form_header' %>
+
+        </div>
+      </div>
+    </div>
+  <!-- Modal redes -->
+  <div class="modal fade" id="modal_redes" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Editando redes
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <%= render 'products/form_redes' %>
+
+        </div>
+      </div>
+    </div>
+  <!-- Modal carousel -->
+  <div class="modal fade" id="modal_carousel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Editando
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <%= render 'products/form_carousel' %>
+
+        </div>
+      </div>
+    </div>
+
+
+<!-- Modales -->
+<%= render 'products/modals' %>
+<!-- fin modals -->

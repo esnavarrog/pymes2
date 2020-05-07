@@ -4,6 +4,6 @@ class HomeController < ApplicationController
     end
     def search
         word = "%#{params[:search]}"
-        @products = Product.where("title LIKE ? OR body LIKE ? OR info LIKE ? OR address LIKE ? OR palabras LIKE ?", word, word, word, word, word)
+        @products = Product.where("title ILIKE ? OR palabras ILIKE ?", word, word)
     end
 end

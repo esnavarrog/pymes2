@@ -1,0 +1,45 @@
+
+<div class="modal-body">
+
+    <%= form_with(model: @product, local: true) do |form| %>
+    
+    <div class="form-group">
+        <h6><%= form.label 'Describe tu empresa' %></h6>
+        <%= form.rich_text_area :body, class:'form-control', style:'min-height: 12rem;', placeholder:'Escribe una reseña de tu negocio...' %>
+    </div>
+    <div class="form-group">
+        <h6><%= form.label 'Escribe palabras para el motor de busqueda' %></h6>
+        <div class="text-tiny">Escribe palabras para que el motor de busqueda las encuentre solo con sin puntos ni comas</div>
+        <%= form.text_field :palabras, class:'form-control', placeholder:'Ej. sushi café pasteles libros' %>
+    </div>
+    
+    <h6>Carousel</h6>
+    <p>Agrega hasta tres imágenes para un carousel. Deben ser cercanas a 900x500 px otro tamaño se redimensionarán automáticamente. </p>
+    <div class="input-group mb-3">
+        
+        <div class="custom-file">
+            <%= form.label 'Imagen 1', class:'custom-file-label' %>
+            <%= form.file_field :img1, class:'custom-file-input', lang:'es' %>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        
+        <div class="custom-file">
+            <%= form.label 'Imágen 2', class:'custom-file-label' %>
+            <%= form.file_field :img2, class:'custom-file-input', lang:'es' %>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        
+        <div class="custom-file">
+            <%= form.label 'Imágen 3', class:'custom-file-label' %>
+        <%= form.file_field :img3, class:'custom-file-input', lang:'es' %>
+    </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <%= form.submit 'Actualizar',  class:'btn btn-dark btn-block my-1' %>
+</div>
+
+    <% end %>

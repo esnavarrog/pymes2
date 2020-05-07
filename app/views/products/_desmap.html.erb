@@ -1,8 +1,15 @@
+<div class="text-center py-2 bg-white">
+  <% if user_signed_in? && current_user == @product.user %>
+    <a class="btn btn-outline-primary" data-toggle="modal" data-target="#modal_carousel">
+      <i class="fas fa-edit"></i> Editar Descripción
+    </a>
+  <% end %>
+</div>
 <div class="row">
     <div class="col-12 col-md-6">
       <% if @product.rich_text_body.present? %>
-        <div class="p-3 bg-light text-primary text-justify rounded border shadow-sm lead">
-          <h5 class="text-center">Descripción de servicios.</h5><hr>
+        <div class="p-3 bg-light text-primary text-justify rounded border shadow-sm ">
+          <h6 class="text-center">Descripción de servicios.</h6><hr>
           <%= @product.rich_text_body %>
         </div>
         <% end %>
@@ -11,7 +18,7 @@
       
       <% if @product.latitude && @product.longitude %>
       <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@product.latitude},#{@product.longitude}&markers=#{@product.latitude},#{@product.longitude}&zoom=15&size=640x400&key=#{ENV['google_maps_api_key']}",
-          class: 'img-fluid img-rounded', alt: "#{@product.address} en el mapa"%>
+          class: 'img-fluid rounded py-2', alt: "#{@product.address} en el mapa"%>
       <% end %>
     </div>
   </div>

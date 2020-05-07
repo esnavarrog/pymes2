@@ -1,22 +1,29 @@
-<div class="text-center mx-auto">      
+<div class="text-center mx-auto border rounded-sm bg-light p-2">
+  <% if user_signed_in? && current_user == @product.user %>
+    <div class="text-center py-2 bg-white">
+      <a class="btn btn-outline-primary" data-toggle="modal" data-target="#modal_redes">
+        <i class="fas fa-edit"></i> Editar Redes
+      </a>
+    </div>
+    <% end %>
     <% if @product.mobil1.present? %>
-    <a href="https://wa.me/56<%= @product.mobil1 %>?text=Hola <%= @product.title.capitalize %>, los vi en BuinPymes<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp mt-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
+    <a href="https://wa.me/56<%= @product.mobil1 %>?text=Hola <%= @product.title.capitalize %>, los vi en ConectaBuin<% if user_signed_in? %> soy <%= current_user.name %><%end%>, quería saber" target="_blank" class="shadow-sm btn redes btn-whatsapp my-1"><i class="fab fa-whatsapp"></i> Whatsapp</a>
     <% end %>
 
     <% if @product.facebook.present? %>
-    <a href="https://www.facebook.com/<%= @product.facebook.delete('@') %>" title="Facebook" class="shadow-sm btn redes btn-facebook mt-1"><i class="fab fa-facebook-f"></i> Facebook</a>
+    <a href="https://www.facebook.com/<%= @product.facebook.delete('@') %>" title="Facebook" class="shadow-sm btn redes btn-facebook my-1"><i class="fab fa-facebook"></i> Facebook</a>
     <% end %>
 
     <% if @product.twitter.present? %>
-    <a href="https://www.twitter.com/<%= @product.twitter.delete('@') %>" class="shadow-sm btn redes btn-twitter mt-1"><i class="fab fa-twitter"></i> Twitter</a>
+    <a href="https://www.twitter.com/<%= @product.twitter.delete('@') %>" class="shadow-sm btn redes btn-twitter my-1"><i class="fab fa-twitter"></i> Twitter</a>
     <% end %>
 
     <% if @product.instagram.present? %>
-    <a href="https://www.instagram.com/<%= @product.instagram.delete('@') %>" class="shadow-sm btn redes btn-instagram mt-1"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="https://www.instagram.com/<%= @product.instagram.delete('@') %>" class="shadow-sm btn redes btn-instagram my-1"><i class="fab fa-instagram"></i> Instagram</a>
     <% end %>
 
     <% if @product.email.present? %>
-    <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-danger mt-1"><i class="far fa-envelope"></i> Email</a>
+    <a href="mailto:<%= @product.email %>" class="shadow-sm btn redes btn-danger my-1"><i class="far fa-envelope"></i> Email</a>
     <% end %>
     
   </div>

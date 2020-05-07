@@ -47,10 +47,7 @@ body::-webkit-scrollbar-thumb{
   background: $dark;
   border-radius: 5px;
 }
-a{
-  text-decoration: $light;
-  color: $danger;
-}
+
 
 .nav-lg{
   min-width: 50%;
@@ -71,6 +68,15 @@ a{
 }
 h5, h6, h1, h2, h3, h4{
   color: $dark;
+}
+.textoCentrado{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.opa{
+  opacity: 70%;
 }
 .min{
   min-height: 20rem;

@@ -1,0 +1,29 @@
+<div class="modal-body">
+
+    <%= form_with(model: @product, local: true) do |form| %>
+    
+    <h6>Portada</h6>
+    <div class="text-tiny">Sube una imágen de portada, se mostrará en toda la web.</div>
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <%= form.label 'Elige una imágen', class:'custom-file-label' %>
+                <%= form.file_field :img, class:'custom-file-input', lang:'es' %>
+            </div>
+        </div>
+    <div class="form-group">
+        <h6><%= form.label 'Nombre Fantasía' %></h6>
+        <%= form.text_field :title, class:'form-control', autofocus:'true' %>
+    </div>
+    
+    <div class="form-group">
+        <h6><%= form.label 'Eslogan, máximo 40 letras.' %></h6>
+        <%= form.text_field :info, class:'form-control' %>
+    </div>
+    
+</div>
+
+<div class="modal-footer">
+    <%= form.submit 'Actualizar',  class:'btn btn-dark btn-block my-1' %>
+</div>
+    
+    <% end %>

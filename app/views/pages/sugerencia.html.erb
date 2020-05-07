@@ -34,6 +34,10 @@
 
 </div>
 
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@product.latitude},#{@product.longitude}&markers=#{@product.latitude},#{@product.longitude}&zoom=15&size=640x400&key=#{ENV['google_maps_api_key']}",
+class: 'img-fluid img-rounded', alt: "#{@product.address} en el mapa"%>
+<% end %>
+
 <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@place.latitude},#{@place.longitude}&markers=#{@place.latitude},#{@place.longitude}&zoom=7&size=640x400&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8",
               class: 'img-fluid img-rounded', alt: "#{@place.title} on the map"%>
 

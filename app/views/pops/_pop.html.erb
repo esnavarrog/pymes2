@@ -1,25 +1,32 @@
-<div class="col-6 col-md-4 col-lg-3 mt-3">
-    <div class="card mb-3 shadow-sm">
-        <div class="row no-gutters">
 
-                <%= image_tag pop.avatar.thumb.url, class:'card-img' %>
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <% if pop.destacado == true %>
-                    <i class="fas fa-star" style="color: yellow;"></i>
-                    <% end %>
-                    <%= pop.title %>
-                  </h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></h6>
-                  <p class="card-text"><%= pop.descripcion.truncate_words(30) %></p>
-                    <% if user_signed_in? && current_user == @list.user %>
-                    <small><%= link_to '<i class="fas fa-trash-alt"></i> Eliminar'.html_safe, [pop.list, pop],
-                                            method: :delete,
-                                            data: { confirm: 'Estás seguro de eliminar en post?' } %>
-                    </small>
-                   <% end %>
-                </div>
-            
+
+
+    <div class="col-12 col-sm-6 col-md-4">
+      <div class="row no-gutters border-bottom">
+        <div class="col-4 col-md-4">
+          <%= image_tag pop.avatar.url(:thumb), class:'card-img' %>
         </div>
+        <div class="col-7 col-md-7">
+          <div class="p-2">
+            <p class="font-weight-bold">
+              <% if pop.destacado == true %>
+              <i class="fas fa-star" style="color: yellow;"></i>
+              <% end %>
+              <%= pop.title %>
+            </p>
+            <p class="mb-2 text-muted text-tiny">Precio $<%= number_with_delimiter(pop.precio, :delimiter => ".") %></p>
+          <small><p class="text-tiny"><%= pop.descripcion.truncate_words(30) %></p></small>
+        </div>
+      </div>
+      <div class="col-1 col-md-1 bg-light text-center text-middle">
+              <% if user_signed_in? && current_user == @list.user %>
+            
+            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, [pop.list, pop], class:'h5',
+                                    method: :delete,
+                                    data: { confirm: 'Estás seguro de eliminar en post?' } %>
+            
+            <% end %>
+        
+      </div>
     </div>
   </div>

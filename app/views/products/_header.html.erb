@@ -1,3 +1,11 @@
+
+<div class="text-center bg-white">
+  <% if user_signed_in? && current_user == @product.user %>
+    <a class="btn btn-outline-primary" data-toggle="modal" data-target="#modal_header">
+      <i class="fas fa-edit"></i> Editar header
+    </a>
+  <% end %>
+</div>
 <div class="justify-content-center">
     <%= image_tag @product.img.thumb.url, class:'rounded img-fluid d-block text-center mx-auto shadow-sm' %>
   </div>
@@ -15,7 +23,6 @@
 
   <div class="row text-center">
     <div class="col">
-      <hr>
         <span class="badge badge-success"><%= @product.visits_count %></span> Visitas
       <hr>
     </div>

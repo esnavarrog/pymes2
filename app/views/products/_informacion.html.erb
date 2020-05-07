@@ -1,80 +1,90 @@
+<div class="text-center py-2 bg-white">
+  <% if user_signed_in? && current_user == @product.user %>
+    <a class="btn btn-outline-primary" data-toggle="modal" data-target="#modal_informacion">
+      <i class="fas fa-edit"></i> Editar información
+    </a>
+  <% end %>
+</div>
 <nav>
     <div class="nav nav-tabs mb-3 mr-sm-2 text-center" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-datos" role="tab" aria-controls="nav-home" aria-selected="true">Datos empresa</a>
-      <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-horarios" role="tab" aria-controls="nav-profile" aria-selected="false">Horarios atención</a>
+      <a class="nav-item nav-link text-dark nav-lg active" id="nav-home-tab" data-toggle="tab" href="#nav-datos" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-info-circle"></i> Datos empresa</a>
+      <a class="nav-item nav-link text-dark nav-lg" id="nav-profile-tab" data-toggle="tab" href="#nav-horarios" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-clock"></i> Horarios atención</a>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-datos" role="tabpanel" aria-labelledby="nav-home-tab">
 
 
-      <h4 class="text-center">Datos</h4>
+      <h4 class="text-center">
+        Datos
+      </h4>
+
       <hr>
-      <table class="table table-striped">
+  <table class="table table-striped" style="font-size:0.8rem;">
         <tbody>
           <% if @product.telefono.present? %>
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-phone"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fas fa-phone"></i></h6></th>
             <td>
-              +56 <%= @product.telefono %> 
+              <a href="tel:+56<%= @product.telefono %>" class="btn btn-light btn-sm">+56 <%= @product.telefono %></a> 
             </td>
           </tr>
           <% end %>
           <% if @product.mobil1.present? %>
           <tr>
-            <th scope="row" class="text-right"><i class="fab fa-whatsapp"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fab fa-whatsapp"></i></h6></th>
             <td>
-              +56 <%= @product.mobil1 %>
+              <a href="tel:+56<%= @product.mobil1 %>" class="btn btn-light btn-sm">+56 <%= @product.mobil1 %></a>
             </td>
           </tr>
           <% end %>
           <% if @product.mobil2.present? %>
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-mobile-alt"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fas fa-mobile-alt"></i></h6></th>
             <td>
-              +56 <%= @product.mobil2 %>
+              <a href="tel:+56<%= @product.mobil2 %>" class="btn btn-light btn-sm"></a>+56 <%= @product.mobil2 %>
             </td>
           </tr>
           <% end %>
           <% if @product.email.present? %>
           <tr>
-            <th scope="row" class="text-right"><i class="far fa-envelope"></i></th>
+            <th scope="row" class="text-center"><h6><i class="far fa-envelope"></i></h6></th>
             <td><%= @product.email %></td>
           </tr>
           <% end %>
           <% if @product.address.present? %>
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-map-marked-alt"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fas fa-map-marked-alt"></i></h6></th>
             <td><%= @product.address %></td>
           </tr>
           <% end %>
           <% if @product.credito == true %>
           <tr>
-            <th scope="row" class="text-right"><i class="far fa-credit-card"></i></th>
+            <th scope="row" class="text-center"><h6><i class="far fa-credit-card"></i></h6></th>
             <td><%= image_tag 'mediosPagos.png', class:'img-fluid rounded', style:'max-height: 3rem;' %></td>
           </tr>
           <% end %>
           <% if @product.efectivo == true %>
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-money-bill-wave"></i></th>
-            <td>Eféctivo</td>
+            <th scope="row" class="text-center"><h6><i class="fas fa-money-bill-wave"></i></h6></th>
+            <td>Efectivo</td>
           </tr>
           <% end %>
           <% if @product.transferencia == true %>
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-money-check"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fas fa-money-check"></i></h6></th>
             <td>Transferencias</td>
           </tr>
           <% end %>
           <% if @product.debito == true %>
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-wallet"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fas fa-wallet"></i></h6></th>
             <td>Débito</td>
           </tr>
           <% end %>
 
           <tr>
-            <th scope="row" class="text-right"><i class="fas fa-hourglass-start"></i></th>
+            <th scope="row" class="text-center"><h6><i class="fas fa-hourglass-start"></i></h6></th>
             <td><%= @product.tiempoEspera %> Minutos espera</td>
           </tr>
         </tbody>
@@ -104,9 +114,11 @@
     
     </div>
     <div class="tab-pane fade" id="nav-horarios" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <h4 class="text-center">Horarios</h4>
+      <h4 class="text-center">
+        Horarios
+      </h4>
 
-      <table class="table table-striped">
+      <table class="table table-striped" style="font-size:0.8rem;">
         <thead>
           <tr>
             <th scope="col">Día</th>

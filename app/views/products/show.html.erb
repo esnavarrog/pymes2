@@ -4,7 +4,7 @@
 
 <div class="container-fluid bg-white pt-3 shadow-sm">
   <% if user_signed_in? && current_user == @product.user %>
-  <div class="alert alert-info">
+  <div class="alert alert-info text-center">
     Bienvenido a tu empresa, edita tu contenido en cada sección.
   </div>
   <% end %>
@@ -118,7 +118,7 @@
             <% if user_signed_in? && current_user == @product.user %>
             <div class="alert alert-info text-center">
               <h3>Agrega una lista.</h3>
-              <p>En el botón superior.</p>
+              <p>En el menú inferior.</p>
             </div>
             <% end %>
 
